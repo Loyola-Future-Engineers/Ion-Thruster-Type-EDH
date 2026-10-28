@@ -1,0 +1,9 @@
+[project]
+name = "ehd-thruster"
+version = "0.1.0"
+description = "Reduced-order models of a multi-stage electrohydrodynamic (ionic wind) thruster"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
