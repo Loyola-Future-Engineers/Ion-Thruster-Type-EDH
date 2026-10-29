@@ -1,8 +1,9 @@
 # Engineering recommendations
 
-**Read this first:** every quantitative statement here comes from reduced-order models that
-have **not been validated against experiment**. Absolute thrust predictions carry roughly a
-×3 uncertainty (Phase G). Rankings and trends are more reliable than numbers. Each answer is
+**Read this first:** every quantitative statement here comes from models that
+have **not been validated against experiment**. The self-consistent space-charge solver (Phase H,
+[spacecharge.md](results/spacecharge.md)) shows the reduced-order model's absolute thrust is
+about **3× optimistic**. It also raises the spacing rule from s ≥ 2d to **s ≥ 3d**. Rankings and trends are more reliable than numbers. Each answer is
 tagged with its evidence class:
 **[Lit]** published literature, **[Sim]** this project's numerical simulation,
 **[Ana]** analytical calculation, **[Qual]** qualitative engineering assessment.
@@ -26,7 +27,7 @@ There is no exact optimal design. There is a promising starting point and a list
 | 12 | Serrated copper emitters | Many small tips give low onset, but teeth shield each other like pins, are hard to make evenly, and copper teeth blunt. A commercial needle ring or a thin tungsten wire is more repeatable. | [Sim] + [Qual] |
 | 13 | Effect of a third stage | +23 to +40 % thrust at the maximum safe voltage, for about +60 % power and +75 mm length. | [Sim] |
 | 14 | Does a third stage improve efficiency? | **No. It mainly increases power consumption.** At equal power, thrust per watt falls slightly with each stage (100 % of Monte-Carlo samples). | [Sim] |
-| 15 | Field interaction between stages | **Back-flow:** ions from emitter k+1 drift to collector k, producing *negative* thrust over a lever arm of length s. That is about 50 % of the current at s = d and about 9 % at s = 2d. Keep **s ≥ 2d**. Shielding between neighbouring pins is the other interaction. | [Sim] |
+| 15 | Field interaction between stages | **Back-flow:** ions from emitter k+1 drift to collector k, producing *negative* thrust over a lever arm of length s. That is about 49 % of the current at s = d, 16 % at s = 2d and 6 % at s = 3d (space-charge solver). Keep **s ≥ 3d**. Shielding between neighbouring pins is the other interaction. | [Sim] |
 | 16 | Best trade-off overall | See the configurations below. | [Sim] + [Qual] |
 
 ## Recommended starting configurations
@@ -35,10 +36,10 @@ There is no exact optimal design. There is a promising starting point and a list
 - **Emitter:** 12–16 stainless steel needles (about 50 µm tip), 6 mm long, axial, on a 30 mm
   mounting ring. Alternatively, a 0.1 mm tungsten wire ring.
 - **Collector:** aluminium tube, 30 mm diameter, 10 mm long, 0.5 mm wall, rounded edges.
-- **Gaps:** d1 = d2 = 25–30 mm. **Spacing s = 50–60 mm (≥ 2d).**
-- **Bore:** 40 mm (wider if radial pins are used). Length about 110–120 mm.
+- **Gaps:** d1 = d2 = 25 mm. **Spacing s = 75 mm (3d).**
+- **Bore:** 40 mm insulating tube (wider if radial pins are used). Length about 130 mm.
 - **Supply:** one 30 kV current-limited supply. Operate at ≤ 85 % of measured sparkover.
-- **Model expectation:** about 10–15 mN at 3–4 W (×3 uncertainty).
+- **Model expectation (space-charge solver):** about 3 mN net thrust at about 1.3 W and 19.5 kV. Treat this as an order of magnitude.
 
 ### Two-stage, per-stage supplies (best use of the d1 > d2 idea)
 - As above, but **d1 ≈ 32 mm, d2 ≈ 18 mm**, with each stage's voltage set from its own
@@ -48,7 +49,7 @@ There is no exact optimal design. There is a promising starting point and a list
 
 ### Three-stage
 - Only worthwhile if **thrust or airflow at fixed voltage** matters more than efficiency or length.
-- Identical stages, d = 25–30 mm, s = 50–60 mm, tube collectors. Length about 180–200 mm.
+- Identical stages, d = 25 mm, s = 75 mm, tube collectors. Length about 230 mm.
 - Per-stage supplies with decreasing gaps, for example 32/18/12 mm, if the electrical complexity is acceptable.
 
 ## Manufacturing notes [Qual]
@@ -70,7 +71,7 @@ See [`safety.md`](safety.md). Ozone and NOx ventilation, interlocked enclosure,
 current-limited commercial supply, and no energised adjustments.
 
 ## What must be tested before choosing a final design
-1. **Back-flow fraction vs s/d**, using separate collector currents. This decides the stage count and spacing.
+1. **Back-flow fraction vs s/d**, using separate collector currents. This decides the stage count and spacing. Prediction to test: 49 / 27 / 16 / 6 % at s/d = 1 / 1.5 / 2 / 3.
 2. **Sparkover voltage vs clearance** for the real electrodes and humidity. This decides the gap.
 3. **I–V curves per emitter type** (onset and current scale). This calibrates the current closure.
 4. **Pin count** 8 / 12 / 16 / 24 at fixed geometry.

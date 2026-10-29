@@ -122,7 +122,7 @@ idea, in much greater depth, by [Gomez-Vega et al. 2023](https://doi.org/10.2514
 
 | Simplification | Consequence | Direction of error |
 |---|---|---|
-| Laplace field (no space charge) for ion paths | Paths in the real discharge are pushed outward by space charge. The current split between collectors is approximate. | Unknown sign; largest at high current |
+| Laplace field (no space charge) for ion paths, in the reduced model | Checked with the space-charge solver (Phase H). The reduced model under-predicts back-flow (9 % vs 16 % at s = 2d) and over-predicts current about 2.2× | Now quantified |
 | Coaxial-equivalent Townsend closure for non-coaxial shapes | Current magnitude uncertain to roughly a factor of 2 | Treated as uncertainty band `k_scale` |
 | Peek onset with `m = 1` | Rough or oxidised electrodes start corona earlier | Onset overestimated for real parts |
 | Mean-field sparkover `E_sp = 1 MV/m` | Real sparkover depends on geometry, humidity and supply | ±40 % band in sensitivity runs |

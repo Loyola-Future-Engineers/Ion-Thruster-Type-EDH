@@ -11,7 +11,7 @@ and validation status. The physics and closures are in [`physics.md`](physics.md
 | 1 | Axisymmetric Laplace field of all electrodes (CSM, ring charges) | `src/ehd/csm.py` | Verified against exact capacitances |
 | 2 | Ion-path tracing, per-tube Townsend current, drift-limit thrust, 1-D duct flow | `src/ehd/device.py` | Reduced-order. Unvalidated. |
 | 3 | 3-D CSM of discrete pins (spheroid line charges + ring charges, N-fold symmetry) | `src/ehd/pins.py` | Verified against exact spheroid capacitance. Current closure heuristic. |
-| — | Self-consistent space-charge (Poisson + charge transport) | not implemented | Future work |
+| 4 | Self-consistent axisymmetric space charge (Poisson + upwind drift, Kaptsov injection) | `src/ehd/spacecharge.py` | Verified against the exact coaxial solution (≤ 1.8 %). Unvalidated. |
 | — | Navier–Stokes flow with EHD body force | not implemented | Future work |
 
 **Nothing in this repository is a complete EHD airflow simulation.** Level 2 couples an
@@ -84,7 +84,7 @@ digitised or fitted.
 | Electrostatic solver | **Verified** (exact solutions) |
 | Corona onset (Peek) | Literature closure. Not checked against this geometry. |
 | Current magnitude | **Unvalidated.** Factor-of-2 band assumed. |
-| Back-flow fraction | **Unvalidated.** The most important open question. |
+| Back-flow fraction | Space-charge solver gives higher values than the reduced model (16 % vs 9 % at s = 2d). **Unvalidated.** The most important open question. |
 | Thrust and flow | **Unvalidated.** Qualitative trend agreement only. |
 | Pin model | Verified kernel. Current closure is heuristic. |
 

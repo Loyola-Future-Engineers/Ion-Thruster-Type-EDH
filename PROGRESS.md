@@ -24,17 +24,19 @@ Read this first when resuming. Last updated 2026-10-28.
 10. Verification and convergence (V1). Trend check against Masuyama & Barrett 2013.
 11. Experimental test plan, CSV templates, GUM reduction script. HV safety document.
 12. Engineering diagrams, recommendations, README.
+13. Phase H: self-consistent axisymmetric space-charge solver. Verified vs exact coax. Back-flow, stage count, housing, charge-density map. Corrected the spacing rule to s ≥ 3d and absolute numbers (about 3× lower).
 
 ## Important findings (model-based, unvalidated)
-- Back-flow from emitter k+1 to collector k dominates multi-stage behaviour. Keep s ≥ 2d.
+- Back-flow from emitter k+1 to collector k dominates multi-stage behaviour. Keep s ≥ 3d (space-charge result).
 - More stages = more thrust at fixed voltage, but lower thrust per watt at equal power.
 - d1 > d2 > d3 helps only with per-stage supplies.
 - Optimum gap is set by supply voltage / sparkover field (about 30–35 mm at 30 kV).
 - Pins: about 12–16 on a 30 mm ring. Axial for thrust, radial for thrust/W.
-- Absolute thrust uncertain by about ×3. Rankings robust to parameter uncertainty.
+- Space-charge solver: single 25 mm stage at 19.5 kV gives about 1.9 mN and 34 µA (reduced model about 3× higher).
+- An insulating housing helps slightly. A grounded metal housing would arc.
 
 ## Known problems / limitations
-- No space charge in ion paths (affects the back-flow fraction).
+- Reduced model (Phases B–G) has no space charge. Phase H corrects it for selected cases only.
 - Current closure is heuristic (k_scale band 0.5–2). The pin model uses a different closure,
   so do not compare pin and ring absolute numbers.
 - Flow-loss coefficients are assumed. They decide the collector ranking.
@@ -45,8 +47,7 @@ Read this first when resuming. Last updated 2026-10-28.
 1. Owner: create a GitHub remote and push.
 2. Read Rickard et al. 2006, Rickard & Dunn-Rankin 2007, Kim et al. 2010 and Gomez-Vega et al. 2023
    in full. Compare their staging results with Phase F.
-3. Implement a self-consistent 2-D axisymmetric space-charge solver (Poisson + charge transport with
-   the Kaptsov condition) to check the back-flow fraction. This is where GPU or sparse solvers become useful.
+3. Extend the space-charge solver to 3-D discrete pins (GPU-worthy). Optionally re-run the Phase B–G sweeps with it.
 4. Add the housing wall (dielectric) to the pin model.
 5. Build the common-supply two-stage rig per `experiments/test_plan.md` under supervision. Measure
    back-flow and sparkover first.
