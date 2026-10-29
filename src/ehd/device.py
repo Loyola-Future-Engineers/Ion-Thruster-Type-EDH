@@ -135,20 +135,20 @@ def evaluate(geo: Geometry, voltage, air: Air = STANDARD_AIR, k_scale=1.0, itera
             per_len = townsend_coax_current_per_length(V, V0, st.emitter_wire, Lc, air)
             dI = k_scale * 2 * np.pi * st.emitter_radius * ln["weight"] * per_len
             E_mean = V / np.maximum(L, 1e-4)
-            mu_eff = mu * (1 + u / np.maximum(mu * E_mean, 1e-9))
+            mu_eff = mu * (1 + abs(u) / np.maximum(mu * E_mean, 1e-9))
             T = float(np.sum(dI * ln["dz"] / mu_eff))
             I = float(dI.sum())
             stages.append({"I": I, "T_ehd": T, "P": I * V, "V0": V0, "V": V})
             F += T; I_tot += I; P += I * V
-        u_new = np.sqrt(max(F, 0) / (air.density * area * (1 + K / 2)))
+        u_new = np.sign(F) * np.sqrt(abs(F) / (air.density * area * (1 + K / 2)))
         if abs(u_new - u) < 1e-6:
             u = u_new
             break
         u = u_new
-    thrust = air.density * area * u**2
+    thrust = np.sign(u) * air.density * area * u**2      # negative if back-flow dominates
     res.update(stages=stages, F_ehd=F, I=I_tot, P=P, u=u, Q=area * u, thrust=thrust,
                T_per_P=thrust / P if P > 0 else 0.0, K=K,
-               jet_eff=0.5 * air.density * area * u**3 / P if P > 0 else 0.0)
+               jet_eff=0.5 * air.density * area * abs(u) ** 3 / P if P > 0 else 0.0)
     return res
 
 
