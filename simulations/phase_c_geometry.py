@@ -11,7 +11,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from ehd import csm, device as D, reference as ref, study  # noqa: E402
+from ehd import device as D, reference as ref, study  # noqa: E402
 from ehd.plotting import COLORS, DATA, save  # noqa: E402
 
 A = ref.ASSUMPTIONS

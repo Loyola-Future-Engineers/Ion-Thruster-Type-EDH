@@ -45,8 +45,8 @@ printed housing. A thinner wall or lighter print settings would reduce it.
   in the recommendations. If surface tracking or charging shows up, add ribs or grooves to the bore
   between carriers.
 - **Collector section:** the simulations used a 4 mm-thick rounded collector. The CAD tube has a
-  1 mm wall, which is lighter and lower-loss, but its sharper edges could start a reverse corona at
-  high voltage. Round the edges well (polish to at least 0.5 mm radius).
+  1 mm wall, which is lighter and blocks less air, but its sharper edges could start a reverse corona at
+  high voltage. Round the edges to at least 0.5 mm radius.
 - **HV wiring:** the terminal pin does not reach the emitter ring. Run a short silicone-insulated
   HV wire through the spoke channel (Ø1.4 mm) and solder or crimp it to the brass ring.
 - **Needle retention:** the holes are modelled 0.04 mm oversize. Fix the needles with a drop of

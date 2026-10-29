@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from ehd import csm, device as D, reference as ref  # noqa: E402
-from ehd.constants import EPS0, STANDARD_AIR  # noqa: E402
+from ehd.constants import EPS0  # noqa: E402
 from ehd.plotting import CHARTS, COLORS, DATA, save  # noqa: E402
 
 
@@ -47,7 +47,6 @@ def trend_checks():
     """Masuyama & Barrett (2013) abstract: increasing gap -> higher onset, less thrust per volt,
     more thrust per current, more thrust per power (single stage, same voltage)."""
     out = []
-    prev = None
     for g in (0.02, 0.03, 0.04):
         dev = ref.device(1, gaps=[g])
         geo = D.analyse_geometry(dev, n_lines=48)

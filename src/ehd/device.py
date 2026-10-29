@@ -160,7 +160,6 @@ def loss_coefficient(dev: Device):
     aligned with the flow). Mesh across the bore: K = (1 - f) / f^2 with open-area
     fraction f = 0.7 (order-of-magnitude screen correlation).
     """
-    A = np.pi * dev.duct_radius**2
     cd = {"emitter": 1.2, "torus": 1.2, "flat": 2.0, "tube": 0.1}
     K = 0.0
     for el, st in zip(build_electrodes(dev), [s for s in dev.stages for _ in (0, 1)]):

@@ -1,54 +1,40 @@
 # Progress log
 
-Read this first when resuming. Last updated 2026-10-28.
+Read this first when resuming work. Last updated 2026-10-28.
 
 ## Status
-- All planned research phases have a first complete pass: models, studies, charts, docs, tests.
-- **No experiments have been done and no measured data exists.** All results are numerical
-  simulation or analytical/qualitative, and labelled as such.
-- The Claude Code session was **not** inside tmux/screen, so it does not survive a terminal or SSH disconnect.
-- **No GitHub remote is configured.** All commits are local. Pushing needs the owner to create or
-  authorise a repository (for example `gh repo create <name> --private --source . --push`).
-- Host was a local WSL2 workstation, not Vast.ai (`docs/environment.md`).
+- Modelling, design and documentation are complete for a first full pass.
+- **No experiments have been done. No measured data exists.**
+- Repository: https://github.com/roosterbrown14/Ion-Thruster-Type-EDH (private).
 
-## Completed milestones
-1. Framework, isolated environment, environment record.
-2. Physics and governing-equation document. Literature review (24 Crossref-verified DOIs).
-3. Axisymmetric CSM solver plus multi-stage device model, verified (`tests/`, 13 tests).
-4. Phase B spacing: single-stage sweep, d–s heatmap, gap patterns (common vs per-stage supply), 3-stage gap search.
-5. Phase C geometry: diameters, ratio, collector cross-section and type, field map.
-6. Phase D materials: resistive loss and mass (analytical), qualitative durability matrix.
-7. Phase E pins: 3-D CSM, pin count/shielding, orientation, tip radius.
-8. Phase F stages: 1/2/3 stages at equal geometry, equal length, low-loss collectors.
-9. Phase G: tornado sensitivity, paired Monte-Carlo, Pareto search, interactive explorer.
-10. Verification and convergence (V1). Trend check against Masuyama & Barrett 2013.
-11. Experimental test plan, CSV templates, GUM reduction script. HV safety document.
-12. Engineering diagrams, recommendations, README.
-13. Phase H: self-consistent axisymmetric space-charge solver. Verified vs exact coax. Back-flow, stage count, housing, charge-density map. Corrected the spacing rule to s ≥ 3d and absolute numbers (about 3× lower).
-14. 3-D CAD (`cad/build.py`): 13 unique parts as STL, 2- and 3-stage assemblies, viewers, BOM, interference check (none).
+## Completed
+| Area | Where |
+|---|---|
+| Physics, governing equations, literature review (24 DOI-checked sources) | `docs/physics.md`, `docs/literature_review.md` |
+| Axisymmetric field solver, reduced-order multi-stage model, 3-D pin model | `src/ehd/` |
+| Parameter studies: spacing, geometry, materials, pins, stage count, sensitivity, Pareto | `docs/results/` |
+| Self-consistent space-charge solver, verified against the exact coaxial solution | `src/ehd/spacecharge.py`, `docs/results/spacecharge.md` |
+| Recommendations answering all 16 research questions | `docs/recommendations.md` |
+| 3-D models of every part, assemblies, bill of materials | `cad/` |
+| Test plan, CSV templates, uncertainty script, high-voltage safety | `experiments/`, `docs/safety.md` |
+| 14 automated verification tests | `tests/` |
 
-## Important findings (model-based, unvalidated)
-- Back-flow from emitter k+1 to collector k dominates multi-stage behaviour. Keep s ≥ 3d (space-charge result).
-- More stages = more thrust at fixed voltage, but lower thrust per watt at equal power.
-- d1 > d2 > d3 helps only with per-stage supplies.
-- Optimum gap is set by supply voltage / sparkover field (about 30–35 mm at 30 kV).
-- Pins: about 12–16 on a 30 mm ring. Axial for thrust, radial for thrust/W.
-- Space-charge solver: single 25 mm stage at 19.5 kV gives about 1.9 mN and 34 µA (reduced model about 3× higher).
+## Main findings (model-based, unvalidated)
+- Back-flow from each later emitter to the previous collector dominates multi-stage behaviour. Keep stage spacing ≥ 3× the gap.
+- More stages give more thrust at a fixed voltage, but less thrust per watt.
+- The best gap is set by supply voltage ÷ sparkover field (about 30–35 mm at 30 kV).
+- Pins: 12–16 on a 30 mm ring. Axial for thrust, radial for efficiency.
+- Single 25 mm stage at 19.5 kV (space-charge solver): about 34 µA, 1.9 mN. The reduced model is about 3× higher.
 - An insulating housing helps slightly. A grounded metal housing would arc.
 
-## Known problems / limitations
-- Reduced model (Phases B–G) has no space charge. Phase H corrects it for selected cases only.
-- Current closure is heuristic (k_scale band 0.5–2). The pin model uses a different closure,
-  so do not compare pin and ring absolute numbers.
-- Flow-loss coefficients are assumed. They decide the collector ranking.
-- The pin model has no housing wall. Radial-out pins as modelled do not fit a 40 mm bore.
-- Three multistage papers (Rickard 2006/2007, Kim 2010) were not read in full. Only their metadata is used.
+## Known limitations
+- The parameter sweeps (spacing, geometry, stages, sensitivity) use the reduced model. The space-charge solver corrects the key cases only.
+- The space-charge solver is axisymmetric: emitters are continuous rings, not discrete needles.
+- Electrode flow-loss coefficients are assumed. They decide the collector-shape ranking.
+- Three multistage papers (Rickard 2006/2007, Kim 2010) were used from their metadata only.
 
-## Next recommended actions
-1. Owner: create a GitHub remote and push.
-2. Read Rickard et al. 2006, Rickard & Dunn-Rankin 2007, Kim et al. 2010 and Gomez-Vega et al. 2023
-   in full. Compare their staging results with Phase F.
-3. Extend the space-charge solver to 3-D discrete pins (GPU-worthy). Optionally re-run the Phase B–G sweeps with it.
-4. Add the housing wall (dielectric) to the pin model.
-5. Build the common-supply two-stage rig per `experiments/test_plan.md` under supervision. Measure
-   back-flow and sparkover first.
+## Next actions
+1. Build the two-stage common-supply rig per `experiments/test_plan.md`, under supervision. Measure back-flow (current to each collector) and sparkover first.
+2. Calibrate the current closure and sparkover field against those measurements.
+3. Read Rickard 2006/2007, Kim 2010 and Gomez-Vega 2023 in full and compare with the stage-count results.
+4. Extend the space-charge solver to 3-D discrete needles (a good use of a GPU).

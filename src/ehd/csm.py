@@ -59,7 +59,6 @@ class Electrode:
     def contour(self, n):
         """n points evenly spaced in arc length on the boundary, with outward normals."""
         w, h, c = self.half_w - self.corner, self.half_h - self.corner, self.corner
-        segs = []  # straight segments and arcs, counter-clockwise from +r side
         L_str = [2 * h, 2 * w, 2 * h, 2 * w]
         L_arc = np.pi * c / 2
         total = sum(L_str) + 4 * L_arc

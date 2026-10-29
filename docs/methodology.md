@@ -47,6 +47,13 @@ electrostatic field (no space charge) to a 1-D momentum balance.
 - **Thrust:** `sum(dI_i dz_i) / mu_eff`, with the ion-slip-corrected mobility. Flow: fixed-point
   iteration (≤ 8 passes, tolerance 10⁻⁶ m/s) on `u = sqrt(F / (rho A (1 + K/2)))`.
 
+## 3b. Space-charge solver (level 4)
+
+Graded structured (r, z) grid, node-centred finite volumes, sparse LU for Poisson (factorised once)
+and an upwind sparse solve for ion transport, coupled by under-relaxed iteration until both the
+emitter-charge (Kaptsov) error and the density change fall below 10⁻³. Verification, grid and boundary
+studies: [results/spacecharge.md](results/spacecharge.md).
+
 ## 4. Convergence (`simulations/verification.py`, chart V1)
 
 ![convergence](../charts/V1_numerical_convergence.png)

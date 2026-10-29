@@ -3,6 +3,10 @@
 **Result type: numerical simulation (reduced-order model, not validated against experiment).**
 Script: `simulations/phase_g_sensitivity_pareto.py`. Data: `data/phase_g_*.csv`.
 
+> **Read with Phase H.** These results come from the reduced-order model, which has no space charge.
+> The space-charge solver ([spacecharge.md](spacecharge.md)) shows its absolute thrust and current are
+> about 2–3× too high. Trends and rankings held.
+
 ## G1: one-at-a-time sensitivity (2-stage reference, d = 25 mm, s = 50 mm)
 
 Base values at the maximum safe voltage: thrust 9.8 mN, T/P 2.96 mN/W, flow 6.8 CFM, power 3.3 W.

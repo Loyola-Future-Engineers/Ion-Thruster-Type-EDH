@@ -41,7 +41,7 @@ def section(n, gaps, spacings, name, title):
             ax.add_patch(Circle((zc, sgn * ring_r), 2, color=COLL, zorder=3))
             ax.plot([zc, zc], [sgn * (ring_r + 2), sgn * bore_r], color=COLL, lw=0.8)
             if sgn == 1:
-                ax.text(ze, ring_r + 7, f"E{k+1}\n+V{'' if n == 1 else f'{k+1}'}", ha="center", fontsize=8, color=EMIT)
+                ax.text(ze, ring_r + 7, f"E{k+1}\n+V", ha="center", fontsize=8, color=EMIT)
                 ax.text(zc, ring_r + 7, f"C{k+1}\n0 V", ha="center", fontsize=8, color=COLL)
     ax.axhline(0, color="#999", ls="-.", lw=0.7)
     for k, (ze, zc) in enumerate(zs):
@@ -103,8 +103,8 @@ def pin_ring_front():
 
 
 if __name__ == "__main__":
-    section(2, [32, 18], [50], "two_stage_section", "Two-stage reference (per-stage supplies): d1 > d2, s ≈ 1.5-3 d")
-    section(3, [25, 25, 25], [50, 50], "three_stage_section", "Three identical stages, s = 2d (common supply)")
+    section(2, [25, 25], [75], "two_stage_section", "Recommended two-stage build: d = 25 mm, s = 75 mm (3d), one supply")
+    section(3, [25, 25, 25], [75, 75], "three_stage_section", "Three-stage variant: d = 25 mm, s = 75 mm (3d), one supply")
     pin_orientations()
     pin_ring_front()
     print("done")

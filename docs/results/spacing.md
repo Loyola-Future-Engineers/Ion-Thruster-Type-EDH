@@ -1,6 +1,11 @@
 # Phase B: electrode spacing
 
 **Result type: numerical simulation (reduced-order model, not validated against experiment).**
+
+> **Read with Phase H.** These results come from the reduced-order model, which has no space charge.
+> The space-charge solver ([spacecharge.md](spacecharge.md)) shows its absolute thrust and current are
+> about 2–3× too high, and back-flow is larger, so the spacing rule below becomes **s ≥ 3d**. Trends and rankings held.
+
 Script: `simulations/phase_b_spacing.py`. Data: `data/phase_b_*.csv`. Charts: `charts/B*.png`.
 
 Common conditions: reference ring geometry (30 mm diameter emitter ring with a 0.1 mm
@@ -55,7 +60,7 @@ draw power.
 - Back-flow is roughly a function of `d/s` alone. It falls below about 10 % only when
   `s ≥ 2d`.
 - **Design rule from this model:** inter-stage spacing at least 1.5–2 times the stage
-  gap. Equal `d = s` wastes about half of every later stage's current.
+  gap. *(Superseded: with space charge, back-flow is 16 % at s = 2d and 6 % at s = 3d, so use s ≥ 3d.)* Equal `d = s` wastes about half of every later stage's current.
 
 ## Equal vs unequal gaps (testing the d1 > d2 > d3 hypothesis)
 

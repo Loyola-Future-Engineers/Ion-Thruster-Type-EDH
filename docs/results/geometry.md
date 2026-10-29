@@ -4,6 +4,10 @@
 Scripts: `simulations/phase_c_geometry.py` (axisymmetric ring model) and
 `simulations/phase_e_pins.py` (3-D pin model). Data: `data/phase_c_*.csv`, `data/phase_e_*.csv`.
 
+> **Read with Phase H.** These results come from the reduced-order model, which has no space charge.
+> The space-charge solver ([spacecharge.md](spacecharge.md)) shows its absolute thrust and current are
+> about 2–3× too high (ring-model sections C1–C2). Trends and rankings held.
+
 ## C1: ring diameters (40 mm bore, gap 25 mm, two-stage spacing 50 mm)
 
 ![diameters](../../charts/C1_ring_diameter_and_ratio.png)

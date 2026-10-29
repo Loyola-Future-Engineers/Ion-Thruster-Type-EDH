@@ -1,10 +1,9 @@
 # Engineering recommendations
 
-**Read this first:** every quantitative statement here comes from models that
-have **not been validated against experiment**. The self-consistent space-charge solver (Phase H,
-[spacecharge.md](results/spacecharge.md)) shows the reduced-order model's absolute thrust is
-about **3× optimistic**. It also raises the spacing rule from s ≥ 2d to **s ≥ 3d**. Rankings and trends are more reliable than numbers. Each answer is
-tagged with its evidence class:
+**Read this first:** every number here comes from models that have **not been validated against
+experiment**. Where the self-consistent space-charge solver ([spacecharge.md](results/spacecharge.md))
+was run, its numbers are used. It shows the faster reduced-order model's absolute thrust is about 3×
+too high, while trends and rankings hold. Each answer is tagged with its evidence class:
 **[Lit]** published literature, **[Sim]** this project's numerical simulation,
 **[Ana]** analytical calculation, **[Qual]** qualitative engineering assessment.
 There is no exact optimal design. There is a promising starting point and a list of tests.
@@ -25,7 +24,7 @@ There is no exact optimal design. There is a promising starting point and a list
 | 10 | Copper vs stainless emitters | **No performance difference can be claimed.** Conductivity is irrelevant (losses about 10⁻⁸ of input). Stainless keeps its tip and resists ozone/NOx better. | [Ana] + [Qual] |
 | 11 | Smooth copper rings vs copper mesh | Electrically similar. The mesh adds flow loss that depends on open area. **A thin tube collector beats both** in the model because of its low frontal area. | [Sim], loss model ASSUMED |
 | 12 | Serrated copper emitters | Many small tips give low onset, but teeth shield each other like pins, are hard to make evenly, and copper teeth blunt. A commercial needle ring or a thin tungsten wire is more repeatable. | [Sim] + [Qual] |
-| 13 | Effect of a third stage | +23 to +40 % thrust at the maximum safe voltage, for about +60 % power and +75 mm length. | [Sim] |
+| 13 | Effect of a third stage | About +20 % thrust for +53 % power at the same voltage (space-charge solver), plus about 100 mm more length. | [Sim] |
 | 14 | Does a third stage improve efficiency? | **No. It mainly increases power consumption.** At equal power, thrust per watt falls slightly with each stage (100 % of Monte-Carlo samples). | [Sim] |
 | 15 | Field interaction between stages | **Back-flow:** ions from emitter k+1 drift to collector k, producing *negative* thrust over a lever arm of length s. That is about 49 % of the current at s = d, 16 % at s = 2d and 6 % at s = 3d (space-charge solver). Keep **s ≥ 3d**. Shielding between neighbouring pins is the other interaction. | [Sim] |
 | 16 | Best trade-off overall | See the configurations below. | [Sim] + [Qual] |
@@ -35,9 +34,10 @@ There is no exact optimal design. There is a promising starting point and a list
 ### Two-stage, common supply (simplest electrically)
 - **Emitter:** 12–16 stainless steel needles (about 50 µm tip), 6 mm long, axial, on a 30 mm
   mounting ring. Alternatively, a 0.1 mm tungsten wire ring.
-- **Collector:** aluminium tube, 30 mm diameter, 10 mm long, 0.5 mm wall, rounded edges.
+- **Collector:** aluminium tube, 30 mm diameter, 10 mm long, 1 mm wall, edges rounded to at least 0.5 mm.
 - **Gaps:** d1 = d2 = 25 mm. **Spacing s = 75 mm (3d).**
-- **Bore:** 40 mm insulating tube (wider if radial pins are used). Length about 130 mm.
+- **Bore:** 40 mm insulating tube (wider if radial pins are used). Length 148 mm including inlet and exit rings.
+- **Parts:** every part is modelled in [`cad/`](../cad/README.md).
 - **Supply:** one 30 kV current-limited supply. Operate at ≤ 85 % of measured sparkover.
 - **Model expectation (space-charge solver):** about 3 mN net thrust at about 1.3 W and 19.5 kV. Treat this as an order of magnitude.
 
@@ -49,7 +49,7 @@ There is no exact optimal design. There is a promising starting point and a list
 
 ### Three-stage
 - Only worthwhile if **thrust or airflow at fixed voltage** matters more than efficiency or length.
-- Identical stages, d = 25 mm, s = 75 mm, tube collectors. Length about 230 mm.
+- Identical stages, d = 25 mm, s = 75 mm, tube collectors. Length 248 mm.
 - Per-stage supplies with decreasing gaps, for example 32/18/12 mm, if the electrical complexity is acceptable.
 
 ## Manufacturing notes [Qual]

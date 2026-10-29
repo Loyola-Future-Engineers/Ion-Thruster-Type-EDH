@@ -4,7 +4,7 @@ Recorded on 2026-10-28 at the start of the project.
 
 | Item | Value |
 |---|---|
-| Host | WSL2 on Windows (kernel 6.18.54.1-microsoft-standard-WSL2). The brief described a Vast.ai instance; this run was on a local workstation instead. |
+| Host | Local workstation, WSL2 on Windows (kernel 6.18.54.1-microsoft-standard-WSL2) |
 | OS | Ubuntu 26.04.1 LTS |
 | CPU | 8 logical cores |
 | RAM | 11 GiB |

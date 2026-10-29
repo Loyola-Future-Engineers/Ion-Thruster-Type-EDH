@@ -187,7 +187,6 @@ class SpaceChargeSolver:
         """voltages: {electrode_idx: V} for every electrode; onset: {emitter_idx: device-level V0 in volts
         at which that emitter starts corona, expressed in that emitter's own potential}.
         """
-        unit = {i: (1.0 if i in onset else 0.0) for i in range(len(self.els))}
         # Laplacian charge per volt of each emitter with all emitters at their own potential pattern
         phi_L = self.potential(voltages, np.zeros(self.N))
         q_target = {}

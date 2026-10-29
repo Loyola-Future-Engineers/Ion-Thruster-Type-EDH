@@ -4,6 +4,10 @@
 Script: `simulations/phase_f_stages.py`. Data: `data/phase_f_stage_curves.csv`,
 `data/phase_f_equal_power_table.csv`.
 
+> **Read with Phase H.** These results come from the reduced-order model, which has no space charge.
+> The space-charge solver ([spacecharge.md](spacecharge.md)) shows its absolute thrust and current are
+> about 2–3× too high. Trends and rankings held.
+
 Each configuration's voltage was swept from onset to the maximum safe voltage (the lower of
 30 kV and 85 % of sparkover). This gives a thrust-versus-power curve, from which equal-power
 values are read off.

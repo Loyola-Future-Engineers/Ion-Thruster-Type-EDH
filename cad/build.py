@@ -14,7 +14,6 @@ The parts are a design proposal. They have not been printed, machined or tested.
 Run: .venv/bin/python cad/build.py
 """
 import csv
-import sys
 from dataclasses import dataclass
 from pathlib import Path
 
