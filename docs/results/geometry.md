@@ -111,6 +111,10 @@ are not comparable with the tables above, only trends within the pin study are**
 - **Radial pins give the best thrust per watt.** Their tips stay in the ring plane, which keeps
   the full axial lever arm `T/P = dz/(mu V)`. At a fixed mechanical gap they draw less current.
 - Inward-pointing pins are shielded by the ring itself (onset +30 % to +65 %). Avoid them.
+- **Packaging check:** with 6 mm pins on a 30 mm ring, a radial-outward tip sits at r = 21 mm,
+  *outside* the 40 mm bore, and a 45° outward tip sits 0.8 mm from the wall. The pin model has
+  no wall, so these two rows describe a wider bore (at least 46 mm) or shorter pins. In the
+  40 mm reference bore, only axial and inward orientations physically fit.
 - Outward-radial pins aim their corona at the bore wall. On a dielectric tube this
   **charges the wall**, which can distort the field over time. The model cannot capture
   this.
