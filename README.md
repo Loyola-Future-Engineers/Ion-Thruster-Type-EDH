@@ -38,7 +38,7 @@ you wasting power on top of it.
 | 2 | **Electrode gap** | The **largest gap your supply can drive to about 85 % of sparkover**. About 30–35 mm for a 30 kV supply. | A longer gap gives more thrust per watt. Beyond what the supply can drive, thrust collapses. | High for the trend; the exact value depends on the measured sparkover |
 | 3 | **Operating voltage** | Lower voltage for efficiency, up to the 85 %-of-sparkover limit for thrust | Sets where you sit on the thrust/efficiency trade-off | Physics |
 | 4 | **Number of stages** | **1 stage** for best efficiency. **2 stages** for the best balance. **3 only if thrust matters more than power and length.** | Extra stages add thrust at the same voltage, but each costs more power than it returns (third stage: +20 % thrust for +53 % power) | High in the models |
-| 5 | **Emitter sharpness** | Fine tips or wire (about 50 µm radius or less) | Sharper tips start the corona at lower voltage, which widens the usable voltage window | High (Peek's law) |
+| 5 | **Emitter sharpness** | Fine tips or wire (about 0.05 mm radius or less) | Sharper tips start the corona at lower voltage, which widens the usable voltage window | High (Peek's law) |
 | 6 | **Pin count** | Pin spacing about equal to pin length. That is **12–16 pins on a 30 mm ring**. | More pins add current until neighbouring pins shield each other. Beyond that, more pins make it worse. | Medium (trend robust, optimum approximate) |
 | 7 | **Pin direction** | **Axial** (pointing downstream) for thrust. **Radial** for about 30 % better thrust per watt, but outward pins need a wider bore. Never pointing inward. | Radial tips keep the full axial travel distance. Axial tips are closer to the collector, so they draw more current. | Medium |
 | 8 | **Collector shape** | A **thin, smooth tube aligned with the flow**, edges well rounded | Electrically, collector types differ by only about 12 %. What matters is how much they block the air. A mesh gains nothing electrically. | Medium (flow-loss values assumed) |
@@ -113,7 +113,7 @@ Navier–Stokes airflow is not simulated. Details: [physics](docs/physics.md) an
 | [results/spacing.md](docs/results/spacing.md) · [geometry.md](docs/results/geometry.md) · [materials.md](docs/results/materials.md) · [stages.md](docs/results/stages.md) · [sensitivity_optimisation.md](docs/results/sensitivity_optimisation.md) | Detailed parameter studies |
 | [physics.md](docs/physics.md) · [methodology.md](docs/methodology.md) | Equations, assumptions, numerical methods, verification |
 | [literature_review.md](docs/literature_review.md) | 24 published sources, each checked against its DOI |
-| [prototypes/README.md](prototypes/README.md) | Prototype P1: drawings, parts, materials, assembly steps |
+| [prototypes/README.md](prototypes/README.md) | Prototype P1 drawings, parts, materials and assembly steps; P1x3 triangular cluster and merge joint |
 | [experiments/test_plan.md](experiments/test_plan.md) | How to test a prototype, with CSV templates and an uncertainty script |
 | [safety.md](docs/safety.md) | **Read before any high-voltage work** |
 
@@ -124,7 +124,7 @@ Navier–Stokes airflow is not simulated. Details: [physics](docs/physics.md) an
 | `src/ehd/` | Model code: corona laws, field solver, device model, 3-D pin model, space-charge solver |
 | `simulations/` | One script per study, plus verification and diagrams |
 | `cad/` | Part models, assemblies, viewers, bill of materials |
-| `prototypes/` | Prototype P1 build package: dimensioned assembled and exploded drawings, parts and materials, cost estimate, assembly steps, blank results sheet |
+| `prototypes/` | Prototype P1 build package (dimensioned assembled and exploded drawings, parts and materials, cost estimate, assembly steps, blank results sheet), plus P1x3: three thrusters in a triangle with a 3-into-1 merge joint |
 | `data/`, `charts/`, `diagrams/` | Generated results and figures |
 | `docs/`, `experiments/`, `references/` | Write-ups, test plan, bibliography |
 | `tests/` | 14 automated verification tests |
@@ -140,6 +140,7 @@ for s in phase_b_spacing phase_c_geometry phase_d_materials phase_e_pins phase_f
 done
 .venv/bin/python cad/build.py
 .venv/bin/python prototypes/build_drawings.py
+.venv/bin/python prototypes/build_cluster.py
 .venv/bin/python docs/report/build_report.py
 ```
 About 25 minutes on an 8-core CPU. No GPU needed.
@@ -149,7 +150,7 @@ About 25 minutes on an 8-core CPU. No GPU needed.
   back-flow (measure each collector's current separately) and sparkover voltage.
 - The space-charge solver treats emitters as continuous rings. Discrete needles are modelled
   only without space charge.
-- Sparkover uses a simple average-field limit (0.7–1.4 MV/m), and it dominates the absolute numbers.
+- Sparkover uses a simple average-field limit (0.7–1.4 kV/mm), and it dominates the absolute numbers.
 - Airflow losses from electrodes use rough engineering correlations. These decide which collector shape ranks best.
 - Humidity is covered only through the uncertainty ranges.
 

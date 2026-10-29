@@ -11,7 +11,7 @@ model's **structural assumptions**, in priority order:
 | # | Model claim | Measurement that tests it | Why it matters |
 |---|---|---|---|
 | 1 | About 49 / 16 / 6 % of a later stage's current flows back to the previous collector at s/d = 1 / 2 / 3 (space-charge solver) | Current to **each collector measured separately**, at several d/s ratios. Energise emitter 2 alone (emitter 1 at ground through a 10 MΩ resistor) so C1 current is purely stage-2 back-flow, then repeat with both energised | Drives every multi-stage conclusion |
-| 2 | Maximum safe operating voltage is set by mean-field sparkover of about 1 MV/m | Sparkover voltage vs clearance for the real electrodes (`sparkover_test.csv`) | Sets the optimum gap (about 35 mm at 30 kV) |
+| 2 | Maximum safe operating voltage is set by mean-field sparkover of about 1 kV/mm | Sparkover voltage vs clearance for the real electrodes (`sparkover_test.csv`) | Sets the optimum gap (about 35 mm at 30 kV) |
 | 3 | Onset follows Peek's law with the CSM field | Onset voltage per emitter type (I–V knee) | Sets the operating window |
 | 4 | Current follows I ∝ V(V − V0) with a closure factor in 0.5–2 | Full I–V sweep | Absolute thrust scale |
 | 5 | Thrust = I·⟨dz⟩/μ minus flow losses | Thrust vs current at fixed geometry. The slope gives an effective `<dz>/mu` | Tests the drift identity and the mobility |

@@ -20,14 +20,14 @@ from ehd.plotting import COLORS, DATA, save  # noqa: E402
 from ehd.reference import ASSUMPTIONS  # noqa: E402
 
 V = 20e3
-A = ASSUMPTIONS + f" Pins: 6 mm long, 50 um tip radius, 30 mm ring, gap 25 mm (ring->collector), V={V/1e3:.0f} kV."
+A = ASSUMPTIONS + f" Pins: 6 mm long, 0.05 mm tip radius, 30 mm ring, gap 25 mm (ring->collector), V={V/1e3:.0f} kV."
 ORIENT = ["axial", "angled_in", "angled_out", "radial_out", "radial_in"]
 OCOL = dict(zip(ORIENT, ["#2563eb", "#059669", "#d97706", "#dc2626", "#7c3aed"]))
 
 
 def row(pr, **meta):
     r = pins.performance(pr, V)
-    return {**meta, "n_pins": pr.n_pins, "orientation": pr.orientation, "tip_um": pr.tip_radius * 1e6,
+    return {**meta, "n_pins": pr.n_pins, "orientation": pr.orientation, "tip_mm": pr.tip_radius * 1e3,
             "E_tip_per_V": r["E_tip_per_V"], "V0_kV": r["V0"] / 1e3, "I_uA": r["I"] * 1e6,
             "I_pins_uA": r["I_pins_uncapped"] * 1e6, "I_cap_uA": r["I_ring_cap"] * 1e6,
             "T_mN": r["T_ehd"] * 1e3, "P_W": r["P"], "TP_mNW": r["T_ehd"] / r["P"] * 1e3 if r["P"] else np.nan,
@@ -84,22 +84,22 @@ def sharpness():
             rows.append(row(pins.PinRing(n_pins=n, tip_radius=rt * 1e-6), study="tip"))
     df = pd.DataFrame(rows)
     gap = pins.PinRing().tip_to_collector()
-    df["V0_hyperboloid_kV"] = [corona.onset_voltage_needle(t * 1e-6, gap) / 1e3 for t in df.tip_um]
-    df["E_peek_MVm"] = [corona.peek_field_sphere(t * 1e-6) / 1e6 for t in df.tip_um]
+    df["V0_hyperboloid_kV"] = [corona.onset_voltage_needle(t * 1e-3, gap) / 1e3 for t in df.tip_mm]
+    df["E_peek_kV_per_mm"] = [corona.peek_field_sphere(t * 1e-3) / 1e6 for t in df.tip_mm]
     df.to_csv(DATA / "phase_e_tip_radius.csv", index=False)
     fig, axs = plt.subplots(1, 2, figsize=(12, 4.3))
     for n, col in ((1, COLORS["1-stage"]), (16, COLORS["2-stage"])):
         s = df[df.n_pins == n]
-        axs[0].plot(s.tip_um, s.V0_kV, "o-", color=col, label=f"3-D CSM, {n} pin(s)")
-        axs[1].plot(s.tip_um, s.T_mN, "o-", color=col, label=f"{n} pin(s)")
+        axs[0].plot(s.tip_mm, s.V0_kV, "o-", color=col, label=f"3-D CSM, {n} pin(s)")
+        axs[1].plot(s.tip_mm, s.T_mN, "o-", color=col, label=f"{n} pin(s)")
     s = df[df.n_pins == 1]
-    axs[0].plot(s.tip_um, s.V0_hyperboloid_kV, "k--", label="Hyperboloid point-plane formula (1 pin)")
+    axs[0].plot(s.tip_mm, s.V0_hyperboloid_kV, "k--", label="Hyperboloid point-plane formula (1 pin)")
     axs[0].set_ylabel("Corona onset voltage (kV)"); axs[0].set_title("Tip sharpness vs onset")
     axs[1].set_ylabel(f"Thrust at {V/1e3:.0f} kV (mN)"); axs[1].set_title("Tip sharpness vs thrust")
     for ax in axs:
-        ax.set_xscale("log"); ax.set_xlabel("Tip radius of curvature (um)"); ax.legend(fontsize=8)
-    ax2 = axs[0].twinx(); ax2.plot(s.tip_um, s.E_peek_MVm, ":", color=COLORS["efficiency"]); ax2.grid(False)
-    ax2.set_ylabel("Peek onset field at tip (MV/m)", color=COLORS["efficiency"])
+        ax.set_xscale("log"); ax.set_xlabel("Tip radius of curvature (mm)"); ax.legend(fontsize=8)
+    ax2 = axs[0].twinx(); ax2.plot(s.tip_mm, s.E_peek_kV_per_mm, ":", color=COLORS["efficiency"]); ax2.grid(False)
+    ax2.set_ylabel("Peek onset field at tip (kV/mm)", color=COLORS["efficiency"])
     fig.tight_layout()
     save(fig, "E3_tip_sharpness", assumptions=A + " Peek sphere law, m=1. Real tips blunt with use (erosion), "
          "raising onset over time.")
@@ -112,4 +112,4 @@ if __name__ == "__main__":
     pd.set_option("display.width", 200)
     print(c[c.n_pins.isin([1, 8, 16, 32, 64])][["orientation", "n_pins", "E_tip_per_V", "V0_kV", "I_uA",
                                                    "I_pins_uA", "I_cap_uA", "T_mN", "TP_mNW", "csm_residual"]].round(3))
-    print(t[["n_pins", "tip_um", "V0_kV", "V0_hyperboloid_kV", "T_mN"]].round(2))
+    print(t[["n_pins", "tip_mm", "V0_kV", "V0_hyperboloid_kV", "T_mN"]].round(2))

@@ -25,7 +25,7 @@ inter-stage spacing s = 75 mm (3d, from the space-charge results).
 | `inlet_bellmouth` | 1 / 1 | PETG or ASA (printed) | Rounded inlet, which reduces entry loss. Carries the bottom tie-rod lugs. |
 | `emitter_carrier` | 2 / 3 | PETG or ASA | Bore ring with 3 spokes holding the emitter ring. HV wire channel through the 0° spoke to a boss. |
 | `emitter_mount_ring` | 2 / 3 | Brass | 30 mm ring, 2.5 × 3 mm section, 16 × Ø0.82 mm needle holes |
-| `needle` | 32 / 48 | Stainless 304 (bought) | Ø0.8 mm, 6 mm exposed, about 50 µm tip, pointing downstream |
+| `needle` | 32 / 48 | Stainless 304 (bought) | Ø0.8 mm, 6 mm exposed, about 0.05 mm tip, pointing downstream |
 | `collector_carrier` | 2 / 3 | PETG or ASA | Bore ring with 3 spokes gripping the collector tube. Spokes are rotated 60° from the emitter spokes to lengthen surface creepage paths. |
 | `collector_tube` | 2 / 3 | Aluminium 6061 | Ø30 mm mean, 1 mm wall, 10 mm long, rounded edges |
 | `spacer_gap` | 2 / 3 | PETG or ASA | 24 mm bore spacer that sets d. Print several lengths to test other gaps. |

@@ -38,13 +38,13 @@ power supply**.
 
    | Check | Result | Limit |
    |---|---|---|
-   | Guard surface field | 3.1–3.2 MV/m | Peek onset 5.2 MV/m: no corona |
-   | Guard-to-collector-1 field, s = 50 | 0.57 MV/m | Sparkover ≈ 1 MV/m: OK |
-   | Guard-to-collector-1 field, s = 37.5 | 0.83 MV/m | 83 % of sparkover: tight against the 85 % margin rule |
+   | Guard surface field | 3.1–3.2 kV/mm | Peek onset 5.2 kV/mm: no corona |
+   | Guard-to-collector-1 field, s = 50 | 0.57 kV/mm | Sparkover ≈ 1 kV/mm: OK |
+   | Guard-to-collector-1 field, s = 37.5 | 0.83 kV/mm | 83 % of sparkover: tight against the 85 % margin rule |
 
 ## Caveats
 - Simulation only. The guard's added flow loss is an assumed K = 0.3.
-- The guard must be **smooth and well rounded**. Any burr would start a corona at about 3 MV/m.
+- The guard must be **smooth and well rounded**. Any burr would start a corona at about 3 kV/mm.
 - The guard-to-collector-1 gap becomes the critical sparkover gap, so measure it.
 - This is not yet in the CAD model. It is the suggested change for a second prototype (P2),
   once P1 has confirmed the back-flow model.

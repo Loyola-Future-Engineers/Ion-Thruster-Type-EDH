@@ -13,7 +13,7 @@ COLLECTOR_MINOR = 0.002  # m (4 mm diameter rounded collector)
 GAP = 0.025              # m
 SPACING = 0.025          # m, collector -> next emitter
 
-ASSUMPTIONS = (f"Assumptions: positive corona, mu=2.0e-4 m2/Vs, sparkover 1.0 MV/m mean field, "
+ASSUMPTIONS = (f"Assumptions: positive corona, mu = 200 mm2/(V s), sparkover 1.0 kV/mm mean field, "
                f"Peek m=1, {BORE_RADIUS*2e3:.0f} mm bore, emitter edge r={EMITTER_EDGE*1e3:.1f} mm, "
                f"20 C / 101.3 kPa, no space charge in ion paths.")
 

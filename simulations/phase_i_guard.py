@@ -45,9 +45,9 @@ def guard_checks(dev, g, frac):
     clear_c1 = dev.spacing[0] - g - GUARD_MINOR - dev.stages[0].collector_minor
     clear_e2 = g - GUARD_MINOR - dev.stages[1].emitter_wire
     v_c1, v_e2 = frac * V, (1 - frac) * V
-    return {"guard_peak_field_MVm": e_guard / 1e6, "guard_onset_field_MVm": e_onset / 1e6,
+    return {"guard_peak_field_kV_per_mm": e_guard / 1e6, "guard_onset_field_kV_per_mm": e_onset / 1e6,
             "guard_corona_free": e_guard < e_onset,
-            "field_guard_C1_MVm": v_c1 / clear_c1 / 1e6, "field_guard_E2_MVm": v_e2 / clear_e2 / 1e6}
+            "field_guard_C1_kV_per_mm": v_c1 / clear_c1 / 1e6, "field_guard_E2_kV_per_mm": v_e2 / clear_e2 / 1e6}
 
 
 def case(args):

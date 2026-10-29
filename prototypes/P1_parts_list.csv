@@ -2,7 +2,7 @@ part,file,qty,material,key_dimensions_mm,envelope_mm,mass_each_g,mass_total_g,pr
 Inlet bellmouth,cad/stl/inlet_bellmouth.stl,1,PETG or ASA,"Ø40 bore, Ø62 lip, 16 tall, 3 wall",74.8 x 73.5 x 16.0,11.39,11.39,3-D print
 Emitter carrier,cad/stl/emitter_carrier.stl,2,PETG or ASA,"Ø40 / Ø46 ring, 6 thick, 3 spokes 2.4 wide, Ø1.4 wire channel",74.8 x 66.0 x 6.0,6.05,12.11,3-D print
 Emitter mounting ring,cad/stl/emitter_mount_ring.stl,2,Brass,"Ø30 mean, 2.5 × 3 section, 16 holes Ø0.82",32.5 x 32.5 x 3.0,5.67,11.33,Machine or bend + solder
-Emitter needle,cad/stl/needle.stl,32,Stainless steel 304,"Ø0.8 × 9 (6 exposed), tip radius ≈ 0.05",0.8 x 0.8 x 9.0,0.03,1.03,"Buy (0.8 mm needle, ~50 um tip)"
+Emitter needle,cad/stl/needle.stl,32,Stainless steel 304,"Ø0.8 × 9 (6 exposed), tip radius ≈ 0.05",0.8 x 0.8 x 9.0,0.03,1.03,"Buy (0.8 mm needle, ~0.05 mm tip)"
 Gap spacer,cad/stl/spacer_gap.stl,2,PETG or ASA,"Ø40 / Ø46 tube, 24 long",46.0 x 46.0 x 24.0,12.34,24.69,3-D print
 Collector carrier,cad/stl/collector_carrier.stl,2,PETG or ASA,"Ø40 / Ø46 ring, 6 thick, 3 spokes (60° offset)",74.8 x 66.0 x 6.0,6.09,12.18,3-D print
 Collector tube,cad/stl/collector_tube.stl,2,Aluminium 6061,"Ø30 mean, 1 wall, 10 long, edges R0.5",31.0 x 31.0 x 10.0,2.49,4.97,"Cut from tube, deburr, round edges"

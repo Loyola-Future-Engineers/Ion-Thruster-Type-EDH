@@ -32,7 +32,7 @@ For the drift region with ion mobility `mu`, neglecting ion diffusion:
 | Neutral momentum (incompressible) | `rho (u . grad) u = -grad p + mu_air lap u + rho_q E` |
 | Mass | `div(u) = 0` |
 
-The ion-drift term `mu E` (around 100 m/s at 0.5 MV/m) is much larger than
+The ion-drift term `mu E` (around 100 m/s at 0.5 kV/mm) is much larger than
 typical ionic-wind speeds (1–5 m/s). The ion transport is therefore close to
 one-way coupled to the flow, and the electric problem can be solved first.
 
@@ -49,8 +49,10 @@ Boundary conditions used in the literature (for example [Adamiak & Atten 2004](h
 Peek's laws ([Peek 1929]), with `delta` the relative air density and `m` the
 surface-irregularity factor:
 
-- wire, radius `r` in cm: `E_on = 31 m delta (1 + 0.308 / sqrt(delta r))` kV/cm
-- sphere / needle tip: `E_on = 27.2 m delta (1 + 0.54 / sqrt(delta r))` kV/cm
+- wire, radius `r` in mm: `E_on = 3.1 m delta (1 + 0.974 / sqrt(delta r))` kV/mm
+- sphere / needle tip: `E_on = 2.72 m delta (1 + 1.708 / sqrt(delta r))` kV/mm
+
+(Peek's original form uses r in cm and kV/cm. The constants above are the same law rewritten for mm.)
 
 ### 3.2 Current-voltage law [literature]
 Townsend's coaxial result ([Townsend 1914](https://doi.org/10.1080/14786440708635186)):
@@ -125,7 +127,7 @@ idea, in much greater depth, by [Gomez-Vega et al. 2023](https://doi.org/10.2514
 | Laplace field (no space charge) for ion paths, in the reduced model | Checked with the space-charge solver (Phase H). The reduced model under-predicts back-flow (9 % vs 16 % at s = 2d) and over-predicts current about 2.2× | Now quantified |
 | Coaxial-equivalent Townsend closure for non-coaxial shapes | Current magnitude uncertain to roughly a factor of 2 | Treated as uncertainty band `k_scale` |
 | Peek onset with `m = 1` | Rough or oxidised electrodes start corona earlier | Onset overestimated for real parts |
-| Mean-field sparkover `E_sp = 1 MV/m` | Real sparkover depends on geometry, humidity and supply | ±40 % band in sensitivity runs |
+| Mean-field sparkover `E_sp = 1 kV/mm` | Real sparkover depends on geometry, humidity and supply | ±40 % band in sensitivity runs |
 | Axisymmetric emitter (wire ring) | Discrete pins are handled by a separate 3-D model | See `docs/results/pins.md` |
 | 1-D duct flow, fully mixed | Real ionic wind is an annular jet near the ring | Volumetric flow probably overestimated |
 | Negative corona, back-corona, streamers, ozone chemistry | Not modelled | — |

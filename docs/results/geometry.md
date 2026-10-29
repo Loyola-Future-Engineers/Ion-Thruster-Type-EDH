@@ -66,14 +66,14 @@ Scripts: `simulations/phase_c_geometry.py` (axisymmetric ring model) and
 
 ![field](../../charts/C3_electric_field_map.png)
 
-The Laplace field is concentrated at the emitter edges (above 3 MV/m at 20 kV in the
-small corona zone). The drift-region field is 0.1–0.5 MV/m. Ion-path chords show the
+The Laplace field is concentrated at the emitter edges (above 3 kV/mm at 20 kV in the
+small corona zone). The drift-region field is 0.1–0.5 kV/mm. Ion-path chords show the
 second emitter's back-flow toward C1 (red). **No charge-density distribution is
 plotted.** The model has no space charge, and plotting one would be unsupported.
 
 ## E1–E3: discrete pins (3-D model)
 
-The pin model represents each needle as a prolate spheroid with a 50 µm tip radius, 6 mm long,
+The pin model represents each needle as a prolate spheroid with a 0.05 mm tip radius, 6 mm long,
 on a 30 mm ring. It is a separate closure from the ring model, so **absolute numbers
 are not comparable with the tables above, only trends within the pin study are**.
 
@@ -125,8 +125,8 @@ are not comparable with the tables above, only trends within the pin study are**
 
 ![tip](../../charts/E3_tip_sharpness.png)
 
-**Tip sharpness:** onset voltage roughly halves from a 250 µm to a 20 µm tip radius
-(16 pins: 11.8 → 4.4 kV). Thrust at a fixed 20 kV changes little below about 100 µm, because
+**Tip sharpness:** onset voltage roughly halves from a 0.25 mm to a 0.02 mm tip radius
+(16 pins: 11.8 → 4.4 kV). Thrust at a fixed 20 kV changes little below about 0.1 mm, because
 the current is then near the ring ceiling. Sharper tips mainly **widen the operating
 window** (onset to sparkover). The 3-D model and the textbook hyperboloid formula agree
 within 2–35 % for a single pin (closest for blunt tips). In practice, sharp tips erode and blunt with use, so

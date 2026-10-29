@@ -15,16 +15,16 @@ Base values at the maximum safe voltage: thrust 9.8 mN, T/P 2.96 mN/W, flow 6.8 
 
 | Factor (range) | Thrust change | T/P change |
 |---|---|---|
-| Sparkover field 0.7–1.4 MV/m | −66 % / +136 % | +43 % / −29 % |
+| Sparkover field 0.7–1.4 kV/mm | −66 % / +136 % | +43 % / −29 % |
 | Current closure factor 0.5–2 | −50 % / +99 % | ≈0 |
 | Air pressure 90–103 kPa | −24 % / +4 % | ≈0 |
 | Stage gap 20–30 mm | −21 % / +14 % | +9 % / −8 % |
 | Air temperature 0–40 °C | +17 % / −14 % | ≈0 |
-| Emitter edge radius 50–200 µm | +7 % / −17 % | ≈0 |
+| Emitter edge radius 0.05–0.2 mm | +7 % / −17 % | ≈0 |
 | Peek factor 0.8 (rough) vs 1.0 | +14 % / 0 | ≈0 |
 | Inter-stage spacing 37.5–62.5 mm | −10 % / +4 % | −15 % / +7 % |
 | Ring diameter 26–34 mm | −7 % / +4 % | +12 % / −10 % |
-| Ion mobility 1.8–2.2 ×10⁻⁴ | ≈0 | +11 % / −9 % |
+| Ion mobility 180–220 mm²/(V·s) | ≈0 | +11 % / −9 % |
 
 Reading: **the two least-known inputs, sparkover field and current closure, dominate
 the absolute thrust.** Sparkover matters because the operating voltage is set as a
@@ -37,7 +37,7 @@ represented only through the mobility and sparkover ranges.
 ## G2: Monte-Carlo uncertainty
 
 600 paired samples per design (common random numbers). Priors are ASSUMED uniform:
-mobility 1.8–2.2 ×10⁻⁴ m²/Vs, sparkover 0.7–1.4 MV/m, Peek m 0.8–1.0, current factor 0.5–2
+mobility 180–220 mm²/(V·s), sparkover 0.7–1.4 kV/mm, Peek m 0.8–1.0, current factor 0.5–2
 (log-uniform), 15–30 °C, 99–103 kPa.
 
 ![mc](../../charts/G2_monte_carlo_uncertainty.png)

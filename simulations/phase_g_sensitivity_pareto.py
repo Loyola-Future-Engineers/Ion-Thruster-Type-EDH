@@ -39,12 +39,12 @@ def metrics(dev, air=STANDARD_AIR, k_scale=1.0, geo=None):
 FACTORS = {  # name: (low, high, how to apply, label)
     "gap": (0.020, 0.030, "geom", "Stage gap 20-30 mm"),
     "spacing": (0.0375, 0.0625, "geom", "Inter-stage spacing 37.5-62.5 mm"),
-    "emitter_wire": (5e-5, 2e-4, "geom", "Emitter edge radius 50-200 um"),
+    "emitter_wire": (5e-5, 2e-4, "geom", "Emitter edge radius 0.05-0.2 mm"),
     "ring_dia": (0.026, 0.034, "geom", "Ring diameter 26-34 mm"),
     "temperature_K": (273.15, 313.15, "air", "Air temperature 0-40 C"),
     "pressure_Pa": (90e3, 103e3, "air", "Air pressure 90-103 kPa (~1 km altitude to sea level)"),
-    "mobility_ref": (1.8e-4, 2.2e-4, "air", "Ion mobility 1.8-2.2e-4 m2/Vs (humidity proxy)"),
-    "e_spark_ref": (0.7e6, 1.4e6, "air", "Sparkover field 0.7-1.4 MV/m"),
+    "mobility_ref": (1.8e-4, 2.2e-4, "air", "Ion mobility 180-220 mm2/(V s) (humidity proxy)"),
+    "e_spark_ref": (0.7e6, 1.4e6, "air", "Sparkover field 0.7-1.4 kV/mm"),
     "peek_m": (0.8, 1.0, "air", "Peek surface factor 0.8-1.0"),
     "k_scale": (0.5, 2.0, "model", "Current closure factor 0.5-2"),
 }
@@ -140,7 +140,7 @@ def monte_carlo(n_samples=600, seed=1):
     fig.suptitle(f"Monte-Carlo spread at max safe voltage ({n_samples} samples per design; lines = median, 5th/95th pct)",
                  fontweight="bold")
     fig.tight_layout()
-    save(fig, "G2_monte_carlo_uncertainty", assumptions=A + " Sampled: mobility 1.8-2.2e-4, sparkover 0.7-1.4 MV/m, "
+    save(fig, "G2_monte_carlo_uncertainty", assumptions=A + " Sampled: mobility 180-220 mm2/(V s), sparkover 0.7-1.4 kV/mm, "
          "Peek m 0.8-1, current factor 0.5-2 (log-uniform), 15-30 C, 99-103 kPa. Uniform priors are ASSUMED.")
     return summ
 

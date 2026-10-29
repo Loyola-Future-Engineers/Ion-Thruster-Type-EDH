@@ -156,7 +156,7 @@ def build():
         ["Stage spacing", "≥ 3× the gap, or a guard ring at emitter voltage upstream of each later emitter"],
         ["Electrode gap", "Largest the supply can drive to 85 % of sparkover (≈ 30–35 mm at 30 kV)"],
         ["Number of stages", "1 for efficiency, 2 for balance, 3 only for maximum thrust"],
-        ["Emitter", "12–16 stainless needles (tip ≈ 50 µm) on a Ø30 ring; axial for thrust, radial for efficiency"],
+        ["Emitter", "12–16 stainless needles (tip ≈ 0.05 mm) on a Ø30 ring; axial for thrust, radial for efficiency"],
         ["Collector", "Thin aluminium tube, same diameter as the emitter ring, edges rounded"],
         ["Housing", "Insulating tube (PETG/ASA). Never metal: it would arc."],
         ["Supply", "One current-limited supply, unless per-stage gaps differ"],
@@ -187,7 +187,7 @@ def build():
         ["Tie rods", "3", "Nylon", "M3 × 156"],
         ["Standoffs / base plate", "3 / 1", "PTFE or acetal / polycarbonate", "Ø12 × 100 / 140 × 140 × 6"],
     ], [50 * mm, 12 * mm, 50 * mm, W - 112 * mm])]))
-    s += [Spacer(1, 4), P("Thruster mass about 121 g. Indicative parts cost £45–125; test equipment is "
+    s += [Spacer(1, 4), P("Thruster mass about 121 g. Indicative parts cost CAD $80–230; test equipment is "
                           "normally available in a university lab.", BODY), Spacer(1, 8)]
 
     s += [P("7. Testing plan and safety", H1),
@@ -207,7 +207,7 @@ def build():
           P("8. Limitations", H1),
           P("• Nothing is validated against measurements yet.<br/>"
             "• The space-charge solver treats needle rings as continuous rings.<br/>"
-            "• Sparkover uses a simple average-field limit (0.7–1.4 MV/m), which dominates the absolute numbers.<br/>"
+            "• Sparkover uses a simple average-field limit (0.7–1.4 kV/mm), which dominates the absolute numbers.<br/>"
             "• Electrode flow-loss coefficients are engineering estimates.<br/>"
             "• Airflow is a 1-D duct model; no CFD."),
           P("9. Key references", H1),

@@ -52,20 +52,20 @@ Regenerate everything in this folder with `.venv/bin/python prototypes/build_dra
 
 **Thruster mass (without stand): about 121 g.** Full list with envelopes and processes: [`P1_parts_list.csv`](P1_parts_list.csv).
 
-**Also needed (not modelled):** silicone-insulated HV wire (rated above 30 kV, about 0.5 m),
+**Also needed (not modelled):** silicone-insulated HV wire (rated above 30 kV, about 500 mm),
 6 × M3 nylon nuts, a cyanoacrylate or epoxy adhesive for the needles, and fine abrasive paper to
 round the collector edges. Test equipment (HV supply, enclosure, balance, meters): see
 [`experiments/test_plan.md`](../experiments/test_plan.md).
 
 ## Cost estimate
 
-Indicative 2026 prices in GBP. These are rough ranges to plan with, not quotes; check suppliers.
+Indicative 2026 prices in Canadian dollars (CAD). These are rough ranges to plan with, not quotes; check Canadian suppliers.
 Itemised list: [`P1_cost_estimate.csv`](P1_cost_estimate.csv).
 
 | Category | Indicative cost |
 |---|---|
-| Prototype parts (everything in the parts table, plus wire, adhesive, nuts) | **£45–125** |
-| Test equipment (HV supply, balance, ozone monitor, enclosure, meters) | £490–2,370, usually available in a university lab |
+| Prototype parts (everything in the parts table, plus wire, adhesive, nuts) | **CAD $80–230** |
+| Test equipment (HV supply, balance, ozone monitor, enclosure, meters) | CAD $910–4,390, usually available in a university lab |
 
 ## Assembly sequence (all with no power connected)
 1. Print the PETG/ASA parts with at least 3 perimeters, so the walls are solid and leak-free. Check the bore is Ø40 ± 0.2.
@@ -98,9 +98,49 @@ predictions treat each needle ring as a continuous ring, so expect differences. 
 
 | Quantity | Model prediction | Measured |
 |---|---|---|
-| Sparkover voltage, stage gap | ≈ 23–24 kV (assumes 1 MV/m mean field) | |
+| Sparkover voltage, stage gap | ≈ 23–24 kV (assumes 1 kV/mm mean field) | |
 | Corona onset voltage | ≈ 6 kV (3-D needle model) | |
 | Current at 19.5 kV | ≈ 65 µA, both stages (space-charge solver) | |
 | Back-flow, stage 2 → collector 1 | ≈ 6 % (space-charge solver) | |
 | Thrust at 19.5 kV | ≈ 3 mN | |
 | Thrust/power at 19.5 kV | ≈ 2.3 mN/W | |
+
+## P1x3: triangular cluster with a 3-into-1 merge joint
+
+Three identical P1 thrusters stand side by side with their axes on the corners of an
+equilateral triangle, on one shared base plate. A printed **merge joint** bolts onto all three
+exit rings through the existing tie rods and blends the three jets into a single outlet.
+Design only: not built or tested. Regenerate with `.venv/bin/python prototypes/build_cluster.py`.
+
+| Cluster | With merge joint | Merge joint on its own |
+|---|---|---|
+| ![](P1x3_exterior_cluster.png) | ![](P1x3_exterior_with_joint.png) | ![](P1x3_merge_joint.png) |
+
+![P1x3 drawing](P1x3_drawing.png)
+
+| Key dimension | Value (mm) |
+|---|---|
+| Distance between thruster axes | 92 (triangle circumradius 53.1) |
+| Joint inlets | 3 × Ø40, matching each thruster bore |
+| Joint outlet | Ø69.3, the same area as the three Ø40 bores combined, so the air neither speeds up nor slows down |
+| Joint height (flange + merge section + outlet) | 5 + 90 + 25 = 120 |
+| Joint wall | 2.5 |
+| Shared base plate | rounded triangle, 6 thick, three Ø64 air holes |
+
+| Part | Qty | Material | Notes |
+|---|---|---|---|
+| P1 thruster (complete, without its own base plate) | 3 | as P1 | Each has its own supply connection and current measurement |
+| Merge joint | 1 | PETG or ASA (printed) | About 204 g. Print upright, with supports under the three flanges. |
+| Cluster base plate | 1 | Polycarbonate or acetal | Replaces the three single P1 base plates |
+| Tie rods | 9 | Nylon M3 | 7.4 mm longer than for a single P1, to pass through the joint flange |
+| Nuts | 9 | Nylon M3 | On top of the joint flange |
+
+Files: [`P1x3_cluster.stl`](P1x3_cluster.stl), [`P1x3_merge_joint.stl`](P1x3_merge_joint.stl),
+[`P1x3_cluster_with_joint.stl`](P1x3_cluster_with_joint.stl), interactive [`P1x3_viewer.html`](P1x3_viewer.html).
+Interference check: [`P1x3_interference.txt`](P1x3_interference.txt) (none found).
+
+**What to expect (not modelled).** Merging adds the three mass flows into one jet, but the
+joint's walls and the mixing of the three streams cost some thrust. The combined thrust will be
+somewhat **less than three times** a single P1. Use the joint when a single jet is needed, for
+example to feed a duct, rather than to gain thrust. Test each thruster alone first, then the
+cluster without the joint, then with it, so the joint's loss can be measured directly.

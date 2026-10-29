@@ -1,4 +1,4 @@
-label,s_mm,guard_g_mm,guard_frac,backflow_s2,to_guard_s2,F_mN,F_s2_mN,I_uA,length_mm,iterations,P_W,thrust_mN,TP_mNW,guard_peak_field_MVm,guard_onset_field_MVm,guard_corona_free,field_guard_C1_MVm,field_guard_E2_MVm
+label,s_mm,guard_g_mm,guard_frac,backflow_s2,to_guard_s2,F_mN,F_s2_mN,I_uA,length_mm,iterations,P_W,thrust_mN,TP_mNW,guard_peak_field_kV_per_mm,guard_onset_field_kV_per_mm,guard_corona_free,field_guard_C1_kV_per_mm,field_guard_E2_kV_per_mm
 "no guard, s=50",50.0,,,0.15900995725177758,0.0,4.534904150570767,2.3419908323843868,69.6941092283854,104.00000000000001,31,1.3569443066766638,2.5865756652341356,1.90617673290439,,,,,
 "no guard, s=75",75.0,,,0.058193487299275135,0.0,5.196712102933647,2.9809258457376444,65.45527519078993,129.0,31,1.2744142079646799,2.9640514150633366,2.3258147912499454,,,,,
 "no guard, s=37.5",37.5,,,0.2718583422255192,0.0,3.94908763391199,1.7842645819792944,79.49467338982593,91.5,31,1.5477612908999108,2.252443190550827,1.4552910734969957,,,,,

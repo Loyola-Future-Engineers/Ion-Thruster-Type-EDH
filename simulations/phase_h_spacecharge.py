@@ -31,9 +31,9 @@ def coax_validation():
         els = [csm.Electrode("W", a / 2, L / 2, a / 2, L, 0, 1.0, "emitter"),
                csm.Electrode("O", R + 0.5 * (r[-1] - R), L / 2, 0.5 * (r[-1] - R) + 1e-9, L, 0, 0.0, "collector")]
         res = S.SpaceChargeSolver(g, els, neumann_z=True).solve({0: V, 1: 0.0}, {0: v0})
-        rows.append({"V_kV": V / 1e3, "solver_mA_m": res["currents"][("emit", 0)] / L * 1e3,
-                     "exact_mA_m": S.coax_reference(V, a, R, E_on) * 1e3,
-                     "townsend_mA_m": float(corona.townsend_coax_current_per_length(V, v0, a, R)) * 1e3})
+        rows.append({"V_kV": V / 1e3, "solver_uA_per_mm": res["currents"][("emit", 0)] / L * 1e3,
+                     "exact_uA_per_mm": S.coax_reference(V, a, R, E_on) * 1e3,
+                     "townsend_uA_per_mm": float(corona.townsend_coax_current_per_length(V, v0, a, R)) * 1e3})
     df = pd.DataFrame(rows)
     df.to_csv(DATA / "phase_h_coax_validation.csv", index=False)
     return df
@@ -107,10 +107,10 @@ def main():
 def plots(cv, df):
     fig, axs = plt.subplots(1, 3, figsize=(15, 4.3))
     ax = axs[0]
-    ax.plot(cv.V_kV, cv.exact_mA_m, "k-", lw=2, label="exact 1-D solution")
-    ax.plot(cv.V_kV, cv.solver_mA_m, "o", color=COLORS["thrust"], label="2-D space-charge solver")
-    ax.plot(cv.V_kV, cv.townsend_mA_m, "--", color=COLORS["power"], label="Townsend formula")
-    ax.set_xlabel("Voltage (kV)"); ax.set_ylabel("Current per length (mA/m)")
+    ax.plot(cv.V_kV, cv.exact_uA_per_mm, "k-", lw=2, label="exact 1-D solution")
+    ax.plot(cv.V_kV, cv.solver_uA_per_mm, "o", color=COLORS["thrust"], label="2-D space-charge solver")
+    ax.plot(cv.V_kV, cv.townsend_uA_per_mm, "--", color=COLORS["power"], label="Townsend formula")
+    ax.set_xlabel("Voltage (kV)"); ax.set_ylabel("Current per length (uA/mm)")
     ax.set_title("Validation: coaxial wire-cylinder (0.2 mm / 20 mm)"); ax.legend(fontsize=8)
     iv = df[df.label.str.startswith("iv_") | (df.label == "stages_1")].drop_duplicates("V_kV").sort_values("V_kV")
     ax = axs[1]

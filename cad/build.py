@@ -168,7 +168,7 @@ PART_INFO = {  # name: (material, density g/mm3, process, notes)
     "spacer_stage": ("PETG or ASA", 1.27e-3, "3-D print", "Sets inter-stage spacing s"),
     "exit_ring": ("PETG or ASA", 1.27e-3, "3-D print", ""),
     "emitter_mount_ring": ("Brass", 8.5e-3, "Machine or bend + solder", "16 x 0.82 mm needle holes"),
-    "needle": ("Stainless steel 304", 8.0e-3, "Buy (0.8 mm needle, ~50 um tip)", "Press-fit or clamp; do not solder"),
+    "needle": ("Stainless steel 304", 8.0e-3, "Buy (0.8 mm needle, ~0.05 mm tip)", "Press-fit or clamp; do not solder"),
     "collector_tube": ("Aluminium 6061", 2.7e-3, "Cut from tube, deburr, round edges", "Simulations used a 4 mm-thick rounded section; 1 mm wall is lighter"),
     "terminal_pin": ("Brass", 8.5e-3, "Buy/turn", "HV feed (emitters) and ground return (collectors)"),
     "tie_rod": ("Nylon M3", 1.15e-3, "Buy, cut to length", "Insulating; holds the stack together"),

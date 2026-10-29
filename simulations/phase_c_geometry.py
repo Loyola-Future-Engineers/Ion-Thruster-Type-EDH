@@ -110,15 +110,15 @@ def field_map():
     r = np.linspace(0.0005, 0.04, 220); z = np.linspace(-0.02, 0.12, 600)
     R, Z = np.meshgrid(r, z)
     er, ez = geo.sol.field(R.ravel(), Z.ravel())
-    E = np.hypot(er, ez).reshape(R.shape) * V
+    E = np.hypot(er, ez).reshape(R.shape) * V / 1e6          # kV/mm
     inside = np.zeros_like(E, bool)
     for el in geo.sol.electrodes:
         inside |= el.sdf(R, Z) <= 0
     E[inside] = np.nan
     fig, ax = plt.subplots(figsize=(11, 4.6))
-    im = ax.pcolormesh(Z * 1e3, R * 1e3, np.log10(E), cmap="inferno", shading="auto", vmin=4.5, vmax=6.5)
-    cb = fig.colorbar(im, ax=ax, pad=0.01); cb.set_label("log10 |E| (V/m), Laplace field at 20 kV")
-    ax.contour(Z * 1e3, R * 1e3, np.log10(np.nan_to_num(E, nan=1e7)), levels=[np.log10(1e6)], colors="cyan",
+    im = ax.pcolormesh(Z * 1e3, R * 1e3, np.log10(E), cmap="inferno", shading="auto", vmin=-1.5, vmax=0.5)
+    cb = fig.colorbar(im, ax=ax, pad=0.01); cb.set_label("log10 |E| (kV/mm), Laplace field at 20 kV")
+    ax.contour(Z * 1e3, R * 1e3, np.log10(np.nan_to_num(E, nan=10.0)), levels=[0.0], colors="cyan",
                linewidths=0.8)
     for k, ln in enumerate(geo.lines):
         for i in range(len(ln["end"])):
@@ -134,7 +134,7 @@ def field_map():
     ax.set_xlim(z[0] * 1e3, z[-1] * 1e3); ax.set_ylim(0, r[-1] * 1e3)
     ax.set_xlabel("Axial position z (mm), flow left to right"); ax.set_ylabel("Radius r (mm)")
     ax.set_title("Electric field magnitude, 2-stage reference (d = 25 mm, s = 50 mm, 20 kV)")
-    ax.text(0.01, 0.03, "ion-path chords: green = own collector, red = back-flow; cyan = 1 MV/m contour",
+    ax.text(0.01, 0.03, "ion-path chords: green = own collector, red = back-flow; cyan = 1 kV/mm contour",
             transform=ax.transAxes, color="w", fontsize=7.5, zorder=7)
     save(fig, "C3_electric_field_map", assumptions=A + " Laplace field only: space charge would lower the field near "
          "the emitter and raise it near the collector.")

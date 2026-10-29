@@ -12,7 +12,7 @@ There is no exact optimal design. There is a promising starting point and a list
 
 | # | Question | Answer | Evidence |
 |---|---|---|---|
-| 1 | Most promising emitter–collector spacing | The largest gap the supply can drive to about 85 % of sparkover: `d ≈ V_supply / (0.85 E_sp)`, about **30–35 mm for a 30 kV supply** if E_sp ≈ 1 MV/m. Longer gaps raise thrust per watt but lose thrust once supply-limited. **Measure sparkover on your electrodes first.** | [Lit] trend + [Sim] |
+| 1 | Most promising emitter–collector spacing | The largest gap the supply can drive to about 85 % of sparkover: `d ≈ V_supply / (0.85 E_sp)`, about **30–35 mm for a 30 kV supply** if E_sp ≈ 1 kV/mm. Longer gaps raise thrust per watt but lose thrust once supply-limited. **Measure sparkover on your electrodes first.** | [Lit] trend + [Sim] |
 | 2 | Different separation per stage? | Only with **per-stage voltage control**. With one common supply, the smallest gap limits every stage, so use equal gaps. | [Sim] |
 | 3 | First stage larger than later stages? | **Yes, conditionally.** With per-stage supplies the best three-stage triple was 32/18/12 mm (at 2 W). The reason is that stage 1 has no upstream collector to lose current to. It is not about changing airflow (ion-slip effect about 2–3 %). | [Sim] |
 | 4 | Emitter ring diameter | As large as the bore allows while leaving wall clearance (about 30–36 mm in a 40 mm bore). Thrust scales with emitter perimeter. | [Sim] |
@@ -20,7 +20,7 @@ There is no exact optimal design. There is a promising starting point and a list
 | 6 | Collector larger than emitter? | **No benefit found.** It draws a little more current but blocks more flow near the wall. | [Sim] |
 | 7 | Pins outward or parallel to flow? | **Axial (parallel, pointing downstream): most thrust. Radial: best thrust/W** (about +30 %) but about 33 % less thrust at the same gap, and outward pins aim at the housing wall. Avoid inward-pointing pins. Prefer axial in a tight bore. | [Sim] 3-D model |
 | 8 | Pin count | Diminishing returns, then loss. Mutual shielding sets in once pin spacing is below about the pin length. **About 12–16 pins on a 30 mm ring** (spacing ≈ pin length ≈ 6 mm). | [Sim] heuristic ceiling |
-| 9 | Pin sharpness | Sharper tips lower onset (250 → 20 µm: 11.8 → 4.4 kV for 16 pins) and widen the operating window. Little thrust change below about 100 µm at fixed voltage. Sharp tips blunt over time. | [Sim] + [Lit] (Peek) |
+| 9 | Pin sharpness | Sharper tips lower onset (250 → 0.02 mm: 11.8 → 4.4 kV for 16 pins) and widen the operating window. Little thrust change below about 0.1 mm at fixed voltage. Sharp tips blunt over time. | [Sim] + [Lit] (Peek) |
 | 10 | Copper vs stainless emitters | **No performance difference can be claimed.** Conductivity is irrelevant (losses about 10⁻⁸ of input). Stainless keeps its tip and resists ozone/NOx better. | [Ana] + [Qual] |
 | 11 | Smooth copper rings vs copper mesh | Electrically similar. The mesh adds flow loss that depends on open area. **A thin tube collector beats both** in the model because of its low frontal area. | [Sim], loss model ASSUMED |
 | 12 | Serrated copper emitters | Many small tips give low onset, but teeth shield each other like pins, are hard to make evenly, and copper teeth blunt. A commercial needle ring or a thin tungsten wire is more repeatable. | [Sim] + [Qual] |
@@ -32,7 +32,7 @@ There is no exact optimal design. There is a promising starting point and a list
 ## Recommended starting configurations
 
 ### Two-stage, common supply (simplest electrically)
-- **Emitter:** 12–16 stainless steel needles (about 50 µm tip), 6 mm long, axial, on a 30 mm
+- **Emitter:** 12–16 stainless steel needles (about 0.05 mm tip), 6 mm long, axial, on a 30 mm
   mounting ring. Alternatively, a 0.1 mm tungsten wire ring.
 - **Collector:** aluminium tube, 30 mm diameter, 10 mm long, 1 mm wall, edges rounded to at least 0.5 mm.
 - **Gaps:** d1 = d2 = 25 mm. **Spacing s = 75 mm (3d).**

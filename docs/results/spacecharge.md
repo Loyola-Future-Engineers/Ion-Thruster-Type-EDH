@@ -16,7 +16,7 @@ It solves Poisson's equation and steady ion drift together on a graded axisymmet
 - Because transport is linear in the sources for a fixed field, the converged ion cloud
   splits exactly by emitter. That gives the back-flow fraction directly.
 - Thrust is the volume integral of `rho E_z`.
-- The 40 mm bore can be modelled as **no housing** (open rings in a grounded box 0.3 m away),
+- The 40 mm bore can be modelled as **no housing** (open rings in a grounded box 300 mm away),
   an **insulating tube** (the steady state of a charged-up dielectric: zero normal field and
   zero ion flux at the wall), or a grounded metal tube.
 
@@ -25,7 +25,7 @@ It solves Poisson's equation and steady ion drift together on a graded axisymmet
 |---|---|
 | Coaxial wire–cylinder vs exact 1-D solution, 12–30 kV | Within 0.1–1.8 % (Townsend's formula is 17–25 % low) |
 | Grid refinement (3 → 8 cells across emitter edge, ×1.9 nodes) | Current ±3 %, force ±3 % |
-| Outer boundary 0.3 m → 0.5 m (insulating bore) | Force unchanged (2.59 mN). Escaping current 6.5 → 4.0 µA |
+| Outer boundary 300 mm → 500 mm (insulating bore) | Force unchanged (2.59 mN). Escaping current 6.5 → 4.0 µA |
 | Under-relaxation 0.12 vs 0.3 | Identical to 4 significant figures |
 | Charge conservation | Emitted = collected + escaped (to 10⁻⁶) |
 
@@ -78,9 +78,9 @@ The third stage adds 20 % thrust for 53 % more power.
 ### 4. Housing (your "tube around it" question)
 | Housing | EHD force (mN, 2 stages) | Notes |
 |---|---|---|
-| None (open rings, lab 0.3 m away) | 4.2 | About 19 % of stage-1 current drifts far upstream, so stage 1's net force comes out negative (−0.6 mN). The result depends on what is nearby. |
+| None (open rings, lab 300 mm away) | 4.2 | About 19 % of stage-1 current drifts far upstream, so stage 1's net force comes out negative (−0.6 mN). The result depends on what is nearby. |
 | Insulating tube (charged-up) | 4.5 | About 7 % more force, and **predictable**: stage-1 force +2.2 mN, insensitive to surroundings |
-| Grounded metal tube | Not operable | The emitter is 4.9 mm from the wall. At 19.5 kV that is about 4 MV/m, four times the sparkover field. A metal tube would need about 5 kV or less, which is below corona onset. |
+| Grounded metal tube | Not operable | The emitter is 4.9 mm from the wall. At 19.5 kV that is about 4 kV/mm, four times the sparkover field. A metal tube would need about 5 kV or less, which is below corona onset. |
 
 So an **insulating** tube helps a little and makes the device behave consistently. It does **not**
 fix back-flow, which happens inside the bore. A metal tube does not work at this bore size.

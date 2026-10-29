@@ -39,8 +39,8 @@ electrostatic field (no space charge) to a 1-D momentum balance.
 - Field lines start just outside each emitter at `n_lines` points spaced evenly around its
   cross-section. Each carries a weight equal to its electric flux (`E_n × dA`).
 - **Integration:** vectorised fixed-step RK4 along the unit field direction. The step is
-  0.25 × distance to the nearest electrode, clipped to [2 µm, 1.5 mm]. Integration stops on entering
-  any electrode (signed-distance test) or leaving a 0.3 m × 0.8 m box (counted as "escaped").
+  0.25 × distance to the nearest electrode, clipped to [0.002 mm, 1.5 mm]. Integration stops on entering
+  any electrode (signed-distance test) or leaving a 300 mm × 800 mm box (counted as "escaped").
 - **Current:** each tube carries `f_i × I_coax(L_i)`, using Townsend's coaxial law with the
   outer radius replaced by the tube length. This weights short paths heavily. It is a heuristic,
   and its magnitude uncertainty is carried as the factor `k_scale` ∈ [0.5, 2].

@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-10-28T21:32:45.327185</dc:date>
+    <dc:date>2026-10-28T22:14:39.665165</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -48,7 +48,7 @@ C 133.307007 102.679126 133.093308 103.195039 133.093308 103.73291
 C 133.093308 104.27078 133.307007 104.786693 133.687339 105.167025 
 C 134.06767 105.547357 134.583583 105.761055 135.121454 105.761055 
 z
-" clip-path="url(#p965305b360)" style="fill: #2563eb; stroke: #2563eb; stroke-linejoin: miter"/>
+" clip-path="url(#p57d79cd9e1)" style="fill: #2563eb; stroke: #2563eb; stroke-linejoin: miter"/>
    </g>
    <g id="patch_4">
     <path d="M 219.627512 110.493394 
@@ -61,24 +61,24 @@ C 213.579354 100.220298 212.867027 101.940008 212.867027 103.73291
 C 212.867027 105.525811 213.579354 107.245521 214.847127 108.513294 
 C 216.1149 109.781067 217.83461 110.493394 219.627512 110.493394 
 z
-" clip-path="url(#p965305b360)" style="fill: #b45309; stroke: #b45309; stroke-linejoin: miter"/>
+" clip-path="url(#p57d79cd9e1)" style="fill: #b45309; stroke: #b45309; stroke-linejoin: miter"/>
    </g>
    <g id="matplotlib.axis_1"/>
    <g id="matplotlib.axis_2"/>
    <g id="line2d_1">
     <path d="M 135.121454 103.73291 
 L 155.402908 103.73291 
-" clip-path="url(#p965305b360)" style="fill: none; stroke: #2563eb; stroke-width: 2.5; stroke-linecap: round"/>
+" clip-path="url(#p57d79cd9e1)" style="fill: none; stroke: #2563eb; stroke-width: 2.5; stroke-linecap: round"/>
    </g>
    <g id="line2d_2">
     <path d="M 114.84 154.436544 
 L 239.908966 154.436544 
-" clip-path="url(#p965305b360)" style="fill: none; stroke-dasharray: 4.48,1.12,0.7,1.12; stroke-dashoffset: 0; stroke: #999999; stroke-width: 0.7"/>
+" clip-path="url(#p57d79cd9e1)" style="fill: none; stroke-dasharray: 4.48,1.12,0.7,1.12; stroke-dashoffset: 0; stroke: #999999; stroke-width: 0.7"/>
    </g>
    <g id="line2d_3">
     <path d="M 114.84 86.831698 
 L 239.908966 86.831698 
-" clip-path="url(#p965305b360)" style="fill: none; stroke: #d1d5db; stroke-width: 4; stroke-linecap: square"/>
+" clip-path="url(#p57d79cd9e1)" style="fill: none; stroke: #d1d5db; stroke-width: 4; stroke-linecap: square"/>
    </g>
    <g id="patch_5">
     <path d="M 114.84 161.197029 
@@ -200,7 +200,7 @@ C 283.389765 102.679126 283.176067 103.195039 283.176067 103.73291
 C 283.176067 104.27078 283.389765 104.786693 283.770097 105.167025 
 C 284.150429 105.547357 284.666342 105.761055 285.204212 105.761055 
 z
-" clip-path="url(#p80726107d1)" style="fill: #2563eb; stroke: #2563eb; stroke-linejoin: miter"/>
+" clip-path="url(#p8234f0ca40)" style="fill: #2563eb; stroke: #2563eb; stroke-linejoin: miter"/>
    </g>
    <g id="patch_10">
     <path d="M 369.71027 110.493394 
@@ -213,24 +213,24 @@ C 363.662113 100.220298 362.949786 101.940008 362.949786 103.73291
 C 362.949786 105.525811 363.662113 107.245521 364.929886 108.513294 
 C 366.197659 109.781067 367.917369 110.493394 369.71027 110.493394 
 z
-" clip-path="url(#p80726107d1)" style="fill: #b45309; stroke: #b45309; stroke-linejoin: miter"/>
+" clip-path="url(#p8234f0ca40)" style="fill: #b45309; stroke: #b45309; stroke-linejoin: miter"/>
    </g>
    <g id="matplotlib.axis_3"/>
    <g id="matplotlib.axis_4"/>
    <g id="line2d_4">
     <path d="M 285.204212 103.73291 
 L 299.545366 118.074063 
-" clip-path="url(#p80726107d1)" style="fill: none; stroke: #2563eb; stroke-width: 2.5; stroke-linecap: round"/>
+" clip-path="url(#p8234f0ca40)" style="fill: none; stroke: #2563eb; stroke-width: 2.5; stroke-linecap: round"/>
    </g>
    <g id="line2d_5">
     <path d="M 264.922759 154.436544 
 L 389.991724 154.436544 
-" clip-path="url(#p80726107d1)" style="fill: none; stroke-dasharray: 4.48,1.12,0.7,1.12; stroke-dashoffset: 0; stroke: #999999; stroke-width: 0.7"/>
+" clip-path="url(#p8234f0ca40)" style="fill: none; stroke-dasharray: 4.48,1.12,0.7,1.12; stroke-dashoffset: 0; stroke: #999999; stroke-width: 0.7"/>
    </g>
    <g id="line2d_6">
     <path d="M 264.922759 86.831698 
 L 389.991724 86.831698 
-" clip-path="url(#p80726107d1)" style="fill: none; stroke: #d1d5db; stroke-width: 4; stroke-linecap: square"/>
+" clip-path="url(#p8234f0ca40)" style="fill: none; stroke: #d1d5db; stroke-width: 4; stroke-linecap: square"/>
    </g>
    <g id="patch_11">
     <path d="M 264.922759 161.197029 
@@ -396,7 +396,7 @@ C 433.472524 102.679126 433.258826 103.195039 433.258826 103.73291
 C 433.258826 104.27078 433.472524 104.786693 433.852856 105.167025 
 C 434.233188 105.547357 434.749101 105.761055 435.286971 105.761055 
 z
-" clip-path="url(#p3ee85c45cb)" style="fill: #2563eb; stroke: #2563eb; stroke-linejoin: miter"/>
+" clip-path="url(#pa1ff1fbf6e)" style="fill: #2563eb; stroke: #2563eb; stroke-linejoin: miter"/>
    </g>
    <g id="patch_16">
     <path d="M 519.793029 110.493394 
@@ -409,24 +409,24 @@ C 513.744872 100.220298 513.032544 101.940008 513.032544 103.73291
 C 513.032544 105.525811 513.744872 107.245521 515.012644 108.513294 
 C 516.280417 109.781067 518.000127 110.493394 519.793029 110.493394 
 z
-" clip-path="url(#p3ee85c45cb)" style="fill: #b45309; stroke: #b45309; stroke-linejoin: miter"/>
+" clip-path="url(#pa1ff1fbf6e)" style="fill: #b45309; stroke: #b45309; stroke-linejoin: miter"/>
    </g>
    <g id="matplotlib.axis_5"/>
    <g id="matplotlib.axis_6"/>
    <g id="line2d_7">
     <path d="M 435.286971 103.73291 
 L 449.628125 89.391756 
-" clip-path="url(#p3ee85c45cb)" style="fill: none; stroke: #2563eb; stroke-width: 2.5; stroke-linecap: round"/>
+" clip-path="url(#pa1ff1fbf6e)" style="fill: none; stroke: #2563eb; stroke-width: 2.5; stroke-linecap: round"/>
    </g>
    <g id="line2d_8">
     <path d="M 415.005517 154.436544 
 L 540.074483 154.436544 
-" clip-path="url(#p3ee85c45cb)" style="fill: none; stroke-dasharray: 4.48,1.12,0.7,1.12; stroke-dashoffset: 0; stroke: #999999; stroke-width: 0.7"/>
+" clip-path="url(#pa1ff1fbf6e)" style="fill: none; stroke-dasharray: 4.48,1.12,0.7,1.12; stroke-dashoffset: 0; stroke: #999999; stroke-width: 0.7"/>
    </g>
    <g id="line2d_9">
     <path d="M 415.005517 86.831698 
 L 540.074483 86.831698 
-" clip-path="url(#p3ee85c45cb)" style="fill: none; stroke: #d1d5db; stroke-width: 4; stroke-linecap: square"/>
+" clip-path="url(#pa1ff1fbf6e)" style="fill: none; stroke: #d1d5db; stroke-width: 4; stroke-linecap: square"/>
    </g>
    <g id="patch_17">
     <path d="M 415.005517 161.197029 
@@ -550,7 +550,7 @@ C 583.555283 102.679126 583.341584 103.195039 583.341584 103.73291
 C 583.341584 104.27078 583.555283 104.786693 583.935614 105.167025 
 C 584.315946 105.547357 584.831859 105.761055 585.36973 105.761055 
 z
-" clip-path="url(#p4171d3c1f0)" style="fill: #2563eb; stroke: #2563eb; stroke-linejoin: miter"/>
+" clip-path="url(#p1848ece308)" style="fill: #2563eb; stroke: #2563eb; stroke-linejoin: miter"/>
    </g>
    <g id="patch_22">
     <path d="M 669.875788 110.493394 
@@ -563,24 +563,24 @@ C 663.82763 100.220298 663.115303 101.940008 663.115303 103.73291
 C 663.115303 105.525811 663.82763 107.245521 665.095403 108.513294 
 C 666.363176 109.781067 668.082886 110.493394 669.875788 110.493394 
 z
-" clip-path="url(#p4171d3c1f0)" style="fill: #b45309; stroke: #b45309; stroke-linejoin: miter"/>
+" clip-path="url(#p1848ece308)" style="fill: #b45309; stroke: #b45309; stroke-linejoin: miter"/>
    </g>
    <g id="matplotlib.axis_7"/>
    <g id="matplotlib.axis_8"/>
    <g id="line2d_10">
     <path d="M 585.36973 103.73291 
 L 585.36973 83.451456 
-" clip-path="url(#p4171d3c1f0)" style="fill: none; stroke: #2563eb; stroke-width: 2.5; stroke-linecap: round"/>
+" clip-path="url(#p1848ece308)" style="fill: none; stroke: #2563eb; stroke-width: 2.5; stroke-linecap: round"/>
    </g>
    <g id="line2d_11">
     <path d="M 565.088276 154.436544 
 L 690.157241 154.436544 
-" clip-path="url(#p4171d3c1f0)" style="fill: none; stroke-dasharray: 4.48,1.12,0.7,1.12; stroke-dashoffset: 0; stroke: #999999; stroke-width: 0.7"/>
+" clip-path="url(#p1848ece308)" style="fill: none; stroke-dasharray: 4.48,1.12,0.7,1.12; stroke-dashoffset: 0; stroke: #999999; stroke-width: 0.7"/>
    </g>
    <g id="line2d_12">
     <path d="M 565.088276 86.831698 
 L 690.157241 86.831698 
-" clip-path="url(#p4171d3c1f0)" style="fill: none; stroke: #d1d5db; stroke-width: 4; stroke-linecap: square"/>
+" clip-path="url(#p1848ece308)" style="fill: none; stroke: #d1d5db; stroke-width: 4; stroke-linecap: square"/>
    </g>
    <g id="patch_23">
     <path d="M 565.088276 161.197029 
@@ -656,7 +656,7 @@ C 733.638041 102.679126 733.424343 103.195039 733.424343 103.73291
 C 733.424343 104.27078 733.638041 104.786693 734.018373 105.167025 
 C 734.398705 105.547357 734.914618 105.761055 735.452488 105.761055 
 z
-" clip-path="url(#pfc9d605c73)" style="fill: #2563eb; stroke: #2563eb; stroke-linejoin: miter"/>
+" clip-path="url(#p14322d4a31)" style="fill: #2563eb; stroke: #2563eb; stroke-linejoin: miter"/>
    </g>
    <g id="patch_28">
     <path d="M 819.958546 110.493394 
@@ -669,24 +669,24 @@ C 813.910389 100.220298 813.198062 101.940008 813.198062 103.73291
 C 813.198062 105.525811 813.910389 107.245521 815.178162 108.513294 
 C 816.445934 109.781067 818.165645 110.493394 819.958546 110.493394 
 z
-" clip-path="url(#pfc9d605c73)" style="fill: #b45309; stroke: #b45309; stroke-linejoin: miter"/>
+" clip-path="url(#p14322d4a31)" style="fill: #b45309; stroke: #b45309; stroke-linejoin: miter"/>
    </g>
    <g id="matplotlib.axis_9"/>
    <g id="matplotlib.axis_10"/>
    <g id="line2d_13">
     <path d="M 735.452488 103.73291 
 L 735.452488 124.014363 
-" clip-path="url(#pfc9d605c73)" style="fill: none; stroke: #2563eb; stroke-width: 2.5; stroke-linecap: round"/>
+" clip-path="url(#p14322d4a31)" style="fill: none; stroke: #2563eb; stroke-width: 2.5; stroke-linecap: round"/>
    </g>
    <g id="line2d_14">
     <path d="M 715.171034 154.436544 
 L 840.24 154.436544 
-" clip-path="url(#pfc9d605c73)" style="fill: none; stroke-dasharray: 4.48,1.12,0.7,1.12; stroke-dashoffset: 0; stroke: #999999; stroke-width: 0.7"/>
+" clip-path="url(#p14322d4a31)" style="fill: none; stroke-dasharray: 4.48,1.12,0.7,1.12; stroke-dashoffset: 0; stroke: #999999; stroke-width: 0.7"/>
    </g>
    <g id="line2d_15">
     <path d="M 715.171034 86.831698 
 L 840.24 86.831698 
-" clip-path="url(#pfc9d605c73)" style="fill: none; stroke: #d1d5db; stroke-width: 4; stroke-linecap: square"/>
+" clip-path="url(#p14322d4a31)" style="fill: none; stroke: #d1d5db; stroke-width: 4; stroke-linecap: square"/>
    </g>
    <g id="patch_29">
     <path d="M 715.171034 161.197029 
@@ -1920,19 +1920,19 @@ z
   </g>
  </g>
  <defs>
-  <clipPath id="p965305b360">
+  <clipPath id="p57d79cd9e1">
    <rect x="114.84" y="76.690971" width="125.068966" height="84.506058"/>
   </clipPath>
-  <clipPath id="p80726107d1">
+  <clipPath id="p8234f0ca40">
    <rect x="264.922759" y="76.690971" width="125.068966" height="84.506058"/>
   </clipPath>
-  <clipPath id="p3ee85c45cb">
+  <clipPath id="pa1ff1fbf6e">
    <rect x="415.005517" y="76.690971" width="125.068966" height="84.506058"/>
   </clipPath>
-  <clipPath id="p4171d3c1f0">
+  <clipPath id="p1848ece308">
    <rect x="565.088276" y="76.690971" width="125.068966" height="84.506058"/>
   </clipPath>
-  <clipPath id="pfc9d605c73">
+  <clipPath id="p14322d4a31">
    <rect x="715.171034" y="76.690971" width="125.068966" height="84.506058"/>
   </clipPath>
  </defs>

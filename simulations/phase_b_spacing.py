@@ -67,9 +67,9 @@ def plot_single(df, fx):
 
     fig, ax = plt.subplots(figsize=(7, 4.5))
     ax.plot(df.gap_mm, df.V_onset_kV, color=COLORS["power"], label="Corona onset (Peek, CSM field)")
-    ax.plot(df.gap_mm, df.V_spark_kV, color=COLORS["efficiency"], label="Sparkover estimate (1.0 MV/m)")
+    ax.plot(df.gap_mm, df.V_spark_kV, color=COLORS["efficiency"], label="Sparkover estimate (1.0 kV/mm)")
     ax.fill_between(df.gap_mm, df.V_spark_kV * 0.7, df.V_spark_kV * 1.4, color=COLORS["efficiency"], alpha=0.12,
-                    label="Sparkover uncertainty band (0.7-1.4 MV/m)")
+                    label="Sparkover uncertainty band (0.7-1.4 kV/mm)")
     ax.plot(df.gap_mm, df.op_V_kV, "k-", lw=2, label="Chosen operating voltage")
     ax.axhline(ref.V_SUPPLY_MAX / 1e3, color="#666", ls=":", label="Assumed supply limit")
     ax.set_xscale("log"); ax.set_xlabel("Gap (mm)"); ax.set_ylabel("Voltage (kV)")
