@@ -41,8 +41,8 @@ mobility 1.8–2.2 ×10⁻⁴ m²/Vs, sparkover 0.7–1.4 MV/m, Peek m 0.8–1.0
 | Design (d = 25, s = 50 mm) | Thrust 5 / 50 / 95 % (mN) | T/P 5 / 50 / 95 % (mN/W) |
 |---|---|---|
 | 1 stage | 2.3 / 7.1 / 20.7 | 3.1 / 4.2 / 6.0 |
-| 2 stages | 3.4 / 11.3 / 33.4 | 2.1 / 2.8 / 4.0 |
-| 3 stages | 4.2 / 14.3 / 37.5 | 1.6 / 2.2 / 3.2 |
+| 2 stages | 3.4 / 10.9 / 31.9 | 2.1 / 2.9 / 4.1 |
+| 3 stages | 4.2 / 13.5 / 39.4 | 1.7 / 2.2 / 3.2 |
 
 - **Absolute thrust is uncertain by roughly ×3 either way.** No single predicted thrust
   number in this repository should be quoted without that band.
@@ -54,7 +54,7 @@ mobility 1.8–2.2 ×10⁻⁴ m²/Vs, sparkover 0.7–1.4 MV/m, Peek m 0.8–1.0
 
 ## G3: Pareto fronts
 
-234 geometries (1–3 stages, gaps 15–35 mm, s/d 1.5–3, ring 24–36 mm, torus or tube
+210 geometries (1–3 stages, gaps 15–35 mm, s/d 1.5–3, ring 24–36 mm, torus or tube
 collectors) × 10 voltages from onset to the maximum safe value.
 
 ![pareto](../../charts/G3_pareto_fronts.png)

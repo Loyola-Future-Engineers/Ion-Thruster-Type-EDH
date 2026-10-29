@@ -1,0 +1,12 @@
+combo,emitter,collector,E_oxidation,E_erosion,E_manufacture,E_cost,E_stability,C_oxidation,C_erosion,C_manufacture,C_cost,C_stability
+A,Copper ring/wire,Smooth copper ring,2,2,5,5,3,3,4,4,4,4
+B,Stainless needles,Smooth copper ring,4,4,4,5,4,3,4,4,4,4
+C,Sharpened copper needles,Smooth copper ring,2,1,2,4,2,3,4,4,4,4
+D,Serrated copper ring,Smooth copper ring,2,2,2,4,2,3,4,4,4,4
+E,Stainless needles,Copper mesh,4,4,4,5,4,2,3,3,4,3
+F,Copper needles,Copper mesh,2,2,3,4,3,2,3,3,4,3
+G,Stainless needles,Aluminium ring,4,4,4,5,4,4,4,4,5,4
+H,Copper ring/wire,Aluminium ring,2,2,5,5,3,4,4,4,5,4
+I,Stainless needles,Stainless ring,4,4,4,5,4,5,5,3,4,4
+J1,Tungsten wire ring,Aluminium tube,3,5,3,3,4,4,4,5,5,4
+J2,Stainless needles,Aluminium tube,4,4,4,5,4,4,4,5,5,4

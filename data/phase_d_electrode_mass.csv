@@ -1,0 +1,13 @@
+part,material,mass_g
+emitter wire ring,copper,0.6632374157532048
+emitter wire ring,aluminium,0.19985948912205953
+emitter wire ring,stainless_304,0.5921762640653615
+emitter wire ring,tungsten,1.4286252370576846
+collector torus 4 mm (solid),copper,10.611798652051277
+collector torus 4 mm (solid),aluminium,3.1977518259529525
+collector torus 4 mm (solid),stainless_304,9.474820225045784
+collector torus 4 mm (solid),tungsten,22.858003792922954
+collector tube 10 mm x 0.5 mm wall,copper,4.222300526424681
+collector tube 10 mm x 0.5 mm wall,aluminium,1.2723450247038661
+collector tube 10 mm x 0.5 mm wall,stainless_304,3.7699111843077517
+collector tube 10 mm x 0.5 mm wall,tungsten,9.09491073214245

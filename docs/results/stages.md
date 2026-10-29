@@ -61,8 +61,8 @@ The same comparison with low-loss tube collectors (K about 0.08 per stage):
 
 ## Recommendation from this phase
 
-- If the goal is **thrust or airflow from a fixed supply voltage**, two stages roughly
-  double the output. A third stage adds about another 25–40 % for about 60 % more power and
+- If the goal is **thrust or airflow from a fixed supply voltage**, two stages raise
+  output by 50–75 %. A third stage adds about another 23–40 % for about 60 % more power and
   75 mm more length.
 - If the goal is **efficiency (thrust per watt)**, use one stage, or two with generous spacing.
 - These conclusions depend on the modelled back-flow fraction, which rests on the
