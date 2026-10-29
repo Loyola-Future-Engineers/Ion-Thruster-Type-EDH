@@ -1,4 +1,6 @@
-# Multi-stage EHD ionic-wind thruster
+# Ion Thruster - Type EDH
+
+*Multi-stage electrohydrodynamic (EHD) ionic-wind thruster: design study, models and 3-D parts.*
 
 Design study and reduced-order modelling of a compact **cylindrical, multi-stage
 electrohydrodynamic (EHD) thruster**. Each stage is a ring emitter (pins, wire or serrated
