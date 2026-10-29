@@ -36,7 +36,7 @@ There is no exact optimal design. There is a promising starting point and a list
   mounting ring. Alternatively, a 0.1 mm tungsten wire ring.
 - **Collector:** aluminium tube, 30 mm diameter, 10 mm long, 1 mm wall, edges rounded to at least 0.5 mm.
 - **Gaps:** d1 = d2 = 25 mm. **Spacing s = 75 mm (3d).**
-- **Bore:** 40 mm insulating tube (wider if radial pins are used). Length 148 mm including inlet and exit rings.
+- **Bore:** 40 mm insulating tube (wider if radial pins are used). Length 158 mm overall, including the inlet flare and exit ring.
 - **Parts:** every part is modelled in [`cad/`](../cad/README.md).
 - **Supply:** one 30 kV current-limited supply. Operate at ≤ 85 % of measured sparkover.
 - **Model expectation (space-charge solver):** about 3 mN net thrust at about 1.3 W and 19.5 kV. Treat this as an order of magnitude.
@@ -49,7 +49,7 @@ There is no exact optimal design. There is a promising starting point and a list
 
 ### Three-stage
 - Only worthwhile if **thrust or airflow at fixed voltage** matters more than efficiency or length.
-- Identical stages, d = 25 mm, s = 75 mm, tube collectors. Length 248 mm.
+- Identical stages, d = 25 mm, s = 75 mm, tube collectors. Length 258 mm overall.
 - Per-stage supplies with decreasing gaps, for example 32/18/12 mm, if the electrical complexity is acceptable.
 
 ## Manufacturing notes [Qual]

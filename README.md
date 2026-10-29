@@ -60,7 +60,7 @@ Every part of the recommended build is modelled in [`cad/`](cad/README.md): prin
 sections, electrode carriers, a brass emitter ring, stainless needles, aluminium collector tubes,
 terminals, tie rods and an insulating test stand. Each part is a watertight STL. There are 2- and 3-stage
 assemblies, interactive 3-D viewers (`cad/viewer_2stage.html`), a bill of materials, and an
-interference check (no clashes). The two-stage thruster is 148 mm long and weighs about 121 g.
+interference check (no clashes). The two-stage thruster is 158 mm long overall (including the inlet flare) and weighs about 121 g.
 
 | Section through the axis | Exterior on the test stand |
 |---|---|
@@ -105,6 +105,7 @@ Navier–Stokes airflow is not simulated. Details: [physics](docs/physics.md) an
 | [results/spacing.md](docs/results/spacing.md) · [geometry.md](docs/results/geometry.md) · [materials.md](docs/results/materials.md) · [stages.md](docs/results/stages.md) · [sensitivity_optimisation.md](docs/results/sensitivity_optimisation.md) | Detailed parameter studies |
 | [physics.md](docs/physics.md) · [methodology.md](docs/methodology.md) | Equations, assumptions, numerical methods, verification |
 | [literature_review.md](docs/literature_review.md) | 24 published sources, each checked against its DOI |
+| [prototypes/README.md](prototypes/README.md) | Prototype P1: drawings, parts, materials, assembly steps |
 | [experiments/test_plan.md](experiments/test_plan.md) | How to test a prototype, with CSV templates and an uncertainty script |
 | [safety.md](docs/safety.md) | **Read before any high-voltage work** |
 
@@ -115,6 +116,7 @@ Navier–Stokes airflow is not simulated. Details: [physics](docs/physics.md) an
 | `src/ehd/` | Model code: corona laws, field solver, device model, 3-D pin model, space-charge solver |
 | `simulations/` | One script per study, plus verification and diagrams |
 | `cad/` | Part models, assemblies, viewers, bill of materials |
+| `prototypes/` | Prototype P1 build package: dimensioned assembled and exploded drawings, parts and materials, assembly steps, blank results sheet |
 | `data/`, `charts/`, `diagrams/` | Generated results and figures |
 | `docs/`, `experiments/`, `references/` | Write-ups, test plan, bibliography |
 | `tests/` | 14 automated verification tests |
