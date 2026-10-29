@@ -121,5 +121,5 @@ are not comparable with the tables above, only trends within the pin study are**
 (16 pins: 11.8 → 4.4 kV). Thrust at a fixed 20 kV changes little below about 100 µm, because
 the current is then near the ring ceiling. Sharper tips mainly **widen the operating
 window** (onset to sparkover). The 3-D model and the textbook hyperboloid formula agree
-within 10–35 % for a single pin. In practice, sharp tips erode and blunt with use, so
+within 2–35 % for a single pin (closest for blunt tips). In practice, sharp tips erode and blunt with use, so
 tip radius should be measured before and after test campaigns.
