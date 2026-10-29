@@ -57,6 +57,16 @@ Regenerate everything in this folder with `.venv/bin/python prototypes/build_dra
 round the collector edges. Test equipment (HV supply, enclosure, balance, meters): see
 [`experiments/test_plan.md`](../experiments/test_plan.md).
 
+## Cost estimate
+
+Indicative 2026 prices in GBP. These are rough ranges to plan with, not quotes; check suppliers.
+Itemised list: [`P1_cost_estimate.csv`](P1_cost_estimate.csv).
+
+| Category | Indicative cost |
+|---|---|
+| Prototype parts (everything in the parts table, plus wire, adhesive, nuts) | **£45–125** |
+| Test equipment (HV supply, balance, ozone monitor, enclosure, meters) | £490–2,370, usually available in a university lab |
+
 ## Assembly sequence (all with no power connected)
 1. Print the PETG/ASA parts with at least 3 perimeters, so the walls are solid and leak-free. Check the bore is Ø40 ± 0.2.
 2. Press the 16 needles into each brass ring, tips all on one side, each sticking out 6.0 mm. Fix them with a drop of adhesive.

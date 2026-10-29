@@ -249,15 +249,17 @@ def coax_reference(V, wire_r, outer_R, E_on, air: Air = STANDARD_AIR):
 
 
 def device_solver(dev, air: Air = STANDARD_AIR, h_max=1.5e-3, h_far=8e-3, growth=0.1, box=0.25, emit_cells=5,
-                  housing=None, wall=3e-3, overhang=0.010):
+                  housing=None, wall=3e-3, overhang=0.010, extra=()):
     """Build a graded grid and solver for a device.Device (axisymmetric ring electrodes).
 
     housing: None (open rings in a large grounded box), "insulating" (charged-up dielectric bore
     wall: zero-flux), or "grounded" (metal bore wall at 0 V, an extra collector).
+    extra: additional csm.Electrode bodies (for example kind="guard" rings whose `potential`
+    is a fraction of the device voltage). Guards are blunt, so they do not inject charge.
     """
     from . import csm
     from .device import build_electrodes
-    els = build_electrodes(dev, 1.0)
+    els = build_electrodes(dev, 1.0) + list(extra)
     z0 = min(el.z_c - el.half_h for el in els) - overhang
     z1 = max(el.z_c + el.half_h for el in els) + overhang
     Rb = dev.duct_radius
@@ -266,6 +268,7 @@ def device_solver(dev, air: Air = STANDARD_AIR, h_max=1.5e-3, h_far=8e-3, growth
         h = (min(el.half_w, el.half_h) / emit_cells) if el.kind == "emitter" else min(el.half_w, el.half_h) / 3
         rr += [(el.r_c - el.half_w, h), (el.r_c + el.half_w, h), (el.r_c, h)]
         zr += [(el.z_c - el.half_h, h), (el.z_c + el.half_h, h), (el.z_c, h)]
+
     def axis(lo, hi, ref):
         x = graded_axis(lo, hi, ref, h_far, growth)
         return x
@@ -288,7 +291,12 @@ def run_device(dev, voltage, onset_device, air: Air = STANDARD_AIR, **kw):
     onset = {}
     for i, el in enumerate(els):
         st = dev.stages[el.stage - 1] if el.stage > 0 else None
-        volts[i] = voltage * st.voltage_scale if el.kind == "emitter" else 0.0
+        if el.kind == "emitter":
+            volts[i] = voltage * st.voltage_scale
+        elif el.kind == "guard":
+            volts[i] = voltage * el.potential
+        else:
+            volts[i] = 0.0
         if el.kind == "emitter":
             onset[i] = onset_device[el.stage - 1] * st.voltage_scale
     res = solver.solve(volts, onset)

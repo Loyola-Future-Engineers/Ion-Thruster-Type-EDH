@@ -1,9 +1,14 @@
 # Ion Thruster - Type EDH
 
+[![tests](https://github.com/roosterbrown14/Ion-Thruster-Type-EDH/actions/workflows/tests.yml/badge.svg)](https://github.com/roosterbrown14/Ion-Thruster-Type-EDH/actions/workflows/tests.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 A design study of a compact, **multi-stage electrohydrodynamic (EHD) ionic-wind thruster**.
 Ring-shaped emitters and collectors are stacked along a 40 mm tube. Each stage ionises air and
 pushes it through the bore, with no moving parts. The repository contains the physics, the
 simulation code, the results, 3-D models of every part, and a plan for testing a prototype safely.
+
+> **Full report (PDF, 11 pages):** [docs/report/Ion_Thruster_Type_EDH_report.pdf](docs/report/Ion_Thruster_Type_EDH_report.pdf)
 
 > **Status:** modelling and design are complete. **No prototype has been built and nothing has
 > been measured yet.** Every number below comes from simulation and should be treated as an
@@ -43,13 +48,15 @@ you wasting power on top of it.
 | 12 | **Air conditions** | Dense, cool air. Expect less in heat or at altitude. | About −24 % thrust at 90 kPa (about 1 km altitude). Humidity changes sparkover. | Medium |
 | 13 | **Electrode material** | Choose for durability (stainless needles, aluminium collectors), not conductivity | Electrode resistance wastes about 10⁻⁸ of the power. Sharp copper tips blunt and tarnish. | High |
 | 14 | **Inlet and obstructions** | Rounded inlet, thin spokes, nothing extra in the bore | Every obstruction converts thrust into pressure loss | Medium |
+| ★ | **Guard ring** (new idea) | A smooth ring wired to each later emitter, about 10–12 mm upstream of it | Removes back-flow completely in simulation: +40 % thrust and a 25 % shorter device, with no extra supply ([guard.md](docs/results/guard.md)) | Simulation only; the top candidate for prototype P2 |
 
 ### Two recipes
 
 | Goal | Configuration | Model estimate |
 |---|---|---|
 | **Most efficient** | 1 stage, 30–35 mm gap, 16 radial needles (needs a wider bore) or a fine wire ring, tube collector, run just above corona onset | About 3–10 mN/W, but under 1 mN of thrust |
-| **Best balance** (the recommended build) | 2 stages, 25 mm gaps, 75 mm stage spacing, 16 axial stainless needles, aluminium tube collectors, 40 mm plastic bore, one 30 kV supply run at about 19.5 kV (85 % of sparkover) | About 3 mN at about 1.3 W (about 2.3 mN/W) |
+| **Best balance** (recommended first build, P1) | 2 stages, 25 mm gaps, 75 mm stage spacing, 16 axial stainless needles, aluminium tube collectors, 40 mm plastic bore, one 30 kV supply run at about 19.5 kV (85 % of sparkover) | About 3 mN at about 1.3 W (about 2.3 mN/W) |
+| **Next step up** (P2, after P1 is tested) | As P1, plus a guard ring wired to emitter 2, 10 mm upstream, which lets the stage spacing shrink to 37.5 mm | About 3.7 mN at about 1.4 W (about 2.6 mN/W) |
 
 The full answers to all 16 original research questions are in
 **[docs/recommendations.md](docs/recommendations.md)**.
@@ -100,8 +107,9 @@ Navier–Stokes airflow is not simulated. Details: [physics](docs/physics.md) an
 
 | Read | For |
 |---|---|
+| [Project report (PDF)](docs/report/Ion_Thruster_Type_EDH_report.pdf) | The whole project in 11 pages |
 | [recommendations.md](docs/recommendations.md) | Answers to the research questions, build configurations, what to test |
-| [results/spacecharge.md](docs/results/spacecharge.md) | Most accurate results: back-flow, stage count, housing |
+| [results/spacecharge.md](docs/results/spacecharge.md) · [results/guard.md](docs/results/guard.md) | Most accurate results: back-flow, stage count, housing, guard ring |
 | [results/spacing.md](docs/results/spacing.md) · [geometry.md](docs/results/geometry.md) · [materials.md](docs/results/materials.md) · [stages.md](docs/results/stages.md) · [sensitivity_optimisation.md](docs/results/sensitivity_optimisation.md) | Detailed parameter studies |
 | [physics.md](docs/physics.md) · [methodology.md](docs/methodology.md) | Equations, assumptions, numerical methods, verification |
 | [literature_review.md](docs/literature_review.md) | 24 published sources, each checked against its DOI |
@@ -116,7 +124,7 @@ Navier–Stokes airflow is not simulated. Details: [physics](docs/physics.md) an
 | `src/ehd/` | Model code: corona laws, field solver, device model, 3-D pin model, space-charge solver |
 | `simulations/` | One script per study, plus verification and diagrams |
 | `cad/` | Part models, assemblies, viewers, bill of materials |
-| `prototypes/` | Prototype P1 build package: dimensioned assembled and exploded drawings, parts and materials, assembly steps, blank results sheet |
+| `prototypes/` | Prototype P1 build package: dimensioned assembled and exploded drawings, parts and materials, cost estimate, assembly steps, blank results sheet |
 | `data/`, `charts/`, `diagrams/` | Generated results and figures |
 | `docs/`, `experiments/`, `references/` | Write-ups, test plan, bibliography |
 | `tests/` | 14 automated verification tests |
@@ -127,10 +135,12 @@ Navier–Stokes airflow is not simulated. Details: [physics](docs/physics.md) an
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt   # see docs/environment.md if pip is missing
 .venv/bin/python -m pytest
 for s in phase_b_spacing phase_c_geometry phase_d_materials phase_e_pins phase_f_stages \
-         phase_g_sensitivity_pareto phase_h_spacecharge verification diagrams; do
+         phase_g_sensitivity_pareto phase_h_spacecharge phase_i_guard verification diagrams; do
   .venv/bin/python simulations/$s.py
 done
 .venv/bin/python cad/build.py
+.venv/bin/python prototypes/build_drawings.py
+.venv/bin/python docs/report/build_report.py
 ```
 About 25 minutes on an 8-core CPU. No GPU needed.
 
@@ -142,6 +152,13 @@ About 25 minutes on an 8-core CPU. No GPU needed.
 - Sparkover uses a simple average-field limit (0.7–1.4 MV/m), and it dominates the absolute numbers.
 - Airflow losses from electrodes use rough engineering correlations. These decide which collector shape ranks best.
 - Humidity is covered only through the uncertainty ranges.
+
+## Author and credits
+- **Author:** [roosterbrown14](https://github.com/roosterbrown14). Project concept, research brief and design direction.
+  The design log is in [docs/design_log.md](docs/design_log.md).
+- **AI assistance:** the modelling code, analysis, CAD and documentation were developed with the help of
+  Claude (Anthropic), an AI assistant.
+- **Licence:** [MIT](LICENSE).
 
 ## Key references
 Masuyama & Barrett 2013 ([doi](https://doi.org/10.1098/rspa.2012.0623)) ·

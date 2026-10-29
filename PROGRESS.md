@@ -17,7 +17,10 @@ Read this first when resuming work. Last updated 2026-10-28.
 | Recommendations answering all 16 research questions | `docs/recommendations.md` |
 | 3-D models of every part, assemblies, bill of materials | `cad/` |
 | Test plan, CSV templates, uncertainty script, high-voltage safety | `experiments/`, `docs/safety.md` |
-| 14 automated verification tests | `tests/` |
+| Guard-ring study: removes back-flow in simulation | `docs/results/guard.md` |
+| Prototype P1 build package and cost estimate | `prototypes/` |
+| 11-page project report (PDF) | `docs/report/` |
+| 14 automated verification tests, run on GitHub for every push | `tests/`, `.github/workflows/tests.yml` |
 
 ## Main findings (model-based, unvalidated)
 - Back-flow from each later emitter to the previous collector dominates multi-stage behaviour. Keep stage spacing ≥ 3× the gap.
@@ -26,6 +29,7 @@ Read this first when resuming work. Last updated 2026-10-28.
 - Pins: 12–16 on a 30 mm ring. Axial for thrust, radial for efficiency.
 - Single 25 mm stage at 19.5 kV (space-charge solver): about 34 µA, 1.9 mN. The reduced model is about 3× higher.
 - An insulating housing helps slightly. A grounded metal housing would arc.
+- A guard ring at emitter voltage upstream of each later emitter removes back-flow: +40 % thrust and a 25 % shorter device (simulation).
 
 ## Known limitations
 - The parameter sweeps (spacing, geometry, stages, sensitivity) use the reduced model. The space-charge solver corrects the key cases only.
@@ -38,3 +42,5 @@ Read this first when resuming work. Last updated 2026-10-28.
 2. Calibrate the current closure and sparkover field against those measurements.
 3. Read Rickard 2006/2007, Kim 2010 and Gomez-Vega 2023 in full and compare with the stage-count results.
 4. Extend the space-charge solver to 3-D discrete needles (a good use of a GPU).
+5. Airflow CFD (axisymmetric RANS with the EHD body force, for example OpenFOAM) to replace the 1-D duct model.
+6. Fill in `docs/design_log.md` (author's own account) and add photos and video once P1 is built.

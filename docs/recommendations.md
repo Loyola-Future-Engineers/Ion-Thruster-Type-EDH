@@ -26,7 +26,7 @@ There is no exact optimal design. There is a promising starting point and a list
 | 12 | Serrated copper emitters | Many small tips give low onset, but teeth shield each other like pins, are hard to make evenly, and copper teeth blunt. A commercial needle ring or a thin tungsten wire is more repeatable. | [Sim] + [Qual] |
 | 13 | Effect of a third stage | About +20 % thrust for +53 % power at the same voltage (space-charge solver), plus about 100 mm more length. | [Sim] |
 | 14 | Does a third stage improve efficiency? | **No. It mainly increases power consumption.** At equal power, thrust per watt falls slightly with each stage (100 % of Monte-Carlo samples). | [Sim] |
-| 15 | Field interaction between stages | **Back-flow:** ions from emitter k+1 drift to collector k, producing *negative* thrust over a lever arm of length s. That is about 49 % of the current at s = d, 16 % at s = 2d and 6 % at s = 3d (space-charge solver). Keep **s ≥ 3d**. Shielding between neighbouring pins is the other interaction. | [Sim] |
+| 15 | Field interaction between stages | **Back-flow:** ions from emitter k+1 drift to collector k, producing *negative* thrust over a lever arm of length s. That is about 49 % of the current at s = d, 16 % at s = 2d and 6 % at s = 3d (space-charge solver). Keep **s ≥ 3d**, or add a guard ring at emitter voltage upstream of each later emitter, which removes back-flow in simulation ([guard.md](results/guard.md)). Shielding between neighbouring pins is the other interaction. | [Sim] |
 | 16 | Best trade-off overall | See the configurations below. | [Sim] + [Qual] |
 
 ## Recommended starting configurations
@@ -46,6 +46,12 @@ There is no exact optimal design. There is a promising starting point and a list
   measured sparkover limit.
 - Adds supply complexity: two HV channels and two interlocks. Do this only after the common-supply
   build has confirmed the back-flow model.
+
+### Two-stage with guard ring (proposed P2)
+- As the common-supply build, plus a smooth 4 mm-section ring at Ø30, wired to emitter 2 and placed
+  10 mm upstream of it. Stage spacing can then shrink to 37.5 mm.
+- Simulation: back-flow 0 %, about 3.7 mN at about 1.4 W (+25 % thrust, 25 % shorter than P1).
+- Build only after P1 has measured back-flow. The guard-to-collector-1 gap must be checked for sparkover.
 
 ### Three-stage
 - Only worthwhile if **thrust or airflow at fixed voltage** matters more than efficiency or length.

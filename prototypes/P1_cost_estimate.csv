@@ -1,0 +1,17 @@
+category,item,quantity_needed,suggested_purchase,indicative_cost_gbp_low,indicative_cost_gbp_high,notes
+Prototype parts,PETG or ASA filament,about 110 g printed,1 kg spool (or part of one),3,20,Only about 110 g is used; a full spool covers many reprints
+Prototype parts,Stainless steel needles (Ø0.8 mm),32,pack of 50+,5,12,Sewing/dispensing needles; check tip sharpness under magnification
+Prototype parts,Brass wire or tube for 2 mounting rings,about 0.25 m,0.5 m of 3 mm brass rod/wire,4,10,Bend and solder into rings or machine from tube
+Prototype parts,Aluminium tube Ø31 OD × 1 mm wall,20 mm,300 mm length,5,12,Cut two 10 mm rings; deburr and round edges
+Prototype parts,Brass terminal pins,4,small pack,2,6,Or use brass M2 screws
+Prototype parts,Nylon M3 threaded rod and nuts,3 × 156 mm + 6 nuts,1 m rod + pack of nuts,4,8,
+Prototype parts,PTFE or acetal rod Ø12 mm,3 × 100 mm,0.5 m,8,20,For the insulating standoffs
+Prototype parts,Polycarbonate or acetal sheet 6 mm,140 × 140 mm,offcut,5,15,
+Prototype parts,Silicone HV wire (≥ 30 kV rated),about 0.5 m,1 m,5,15,
+Prototype parts,Adhesive and abrasive paper,,,4,8,
+Test equipment,Current-limited regulated HV supply (≤ 30 kV),1,lab module,150,1000,Usually available in a university lab; do not use improvised supplies
+Test equipment,Precision balance (0.001 g),1,,150,500,Usually available in a university lab
+Test equipment,Ozone monitor,1,,50,300,
+Test equipment,Interlocked enclosure,1,build or adapt,30,120,
+Test equipment,Multimeters / shunts / spark-gap protection,,,30,150,
+Test equipment,Rated HV divider probe,1,,80,300,Optional if the supply has a calibrated monitor output
