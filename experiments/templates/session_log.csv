@@ -1,0 +1,1 @@
+session_id,date,operator,configuration_id,ambient_temp_C,relative_humidity_pct,pressure_kPa,supply_model,supply_max_kV,supply_current_limit_mA,hv_probe_model,ammeter_model,balance_model,anemometer_model,notes

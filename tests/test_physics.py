@@ -99,3 +99,21 @@ def test_single_pin_tip_field_close_to_hyperboloid_formula():
     e = pins.solve(pr)["E_tip_per_V"]
     e_h = corona.tip_field_hyperboloid(1.0, pr.tip_radius, pr.tip_to_collector())
     assert 0.5 < e / e_h < 2.0
+
+
+def test_experiment_reduction_refuses_empty_template_and_propagates_uncertainty():
+    """Uses an in-memory synthetic table (not data) to check the arithmetic only."""
+    import importlib.util, pathlib, pandas as pd
+    root = pathlib.Path(__file__).resolve().parents[1]
+    spec = importlib.util.spec_from_file_location("analyse", root / "experiments" / "analyse.py")
+    mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
+    empty = pd.read_csv(root / "experiments" / "templates" / "iv_thrust_sweep.csv")
+    with pytest.raises(ValueError):
+        mod.reduce(empty)
+    synthetic = pd.DataFrame({"configuration_id": ["X"] * 3, "step": [1] * 3,
+                              "measured_voltage_kV": [20.0] * 3, "supply_current_uA": [100.0] * 3,
+                              "balance_zero_g": [50.0] * 3, "balance_reading_g": [49.9, 49.9, 49.9]})
+    out = mod.reduce(synthetic).iloc[0]
+    assert out.thrust_mN == pytest.approx(0.1 * 9.80665, rel=1e-6)
+    assert out.P_W == pytest.approx(2.0)
+    assert out.U_thrust_mN > 0

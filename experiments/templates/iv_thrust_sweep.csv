@@ -1,0 +1,1 @@
+session_id,configuration_id,run,step,timestamp,set_voltage_kV,measured_voltage_kV,supply_current_uA,collector1_current_uA,collector2_current_uA,collector3_current_uA,balance_zero_g,balance_reading_g,thrust_mN,air_speed_ms,air_speed_position,audible_or_visible_discharge,spark_event,notes
