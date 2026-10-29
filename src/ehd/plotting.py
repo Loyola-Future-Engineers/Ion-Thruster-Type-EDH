@@ -44,12 +44,11 @@ def footer(fig, source="sim", assumptions=""):
     text = SOURCE_TAGS[source]
     if assumptions:
         text += "\n" + assumptions
-    fig.text(0.01, 0.005, text, fontsize=7, color="#555", va="bottom", ha="left", wrap=True)
+    fig.text(0.01, -0.01, text, fontsize=7, color="#555", va="top", ha="left", wrap=True)
 
 
-def save(fig, name, source="sim", assumptions="", bottom=0.16):
+def save(fig, name, source="sim", assumptions=""):
     footer(fig, source, assumptions)
-    fig.subplots_adjust(bottom=bottom)
     CHARTS.mkdir(exist_ok=True)
     for ext in ("png", "svg"):
         fig.savefig(CHARTS / f"{name}.{ext}", bbox_inches="tight")

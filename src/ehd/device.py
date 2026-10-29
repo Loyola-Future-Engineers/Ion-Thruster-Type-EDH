@@ -155,21 +155,26 @@ def evaluate(geo: Geometry, voltage, air: Air = STANDARD_AIR, k_scale=1.0, itera
 def loss_coefficient(dev: Device):
     """Pressure-loss coefficient of all electrodes in the bore (ASSUMED correlations).
 
-    Rings: K = Cd * b / (1 - b)^2 with Cd = 1.2 (circular cross-section) and b the
-    blocked fraction of the duct area. Mesh: K = (1 - f) / f^2 with open-area
-    fraction f = 0.7 (an order-of-magnitude screen correlation).
+    Each annular obstruction: K = Cd * b / (1 - b)^2, with b the blocked fraction of the
+    bore area and Cd = 1.2 (round section), 2.0 (flat washer face-on) or 0.1 (tube
+    aligned with the flow). Mesh across the bore: K = (1 - f) / f^2 with open-area
+    fraction f = 0.7 (order-of-magnitude screen correlation).
     """
     A = np.pi * dev.duct_radius**2
+    cd = {"emitter": 1.2, "torus": 1.2, "flat": 2.0, "tube": 0.1}
     K = 0.0
-    for st in dev.stages:
-        for R, a in ((st.emitter_radius, st.emitter_wire), (st.collector_radius, st.collector_minor)):
-            inner = max(R - a, 0)
-            blocked = max(0.0, np.pi * (min(R + a, dev.duct_radius) ** 2 - inner**2)) / A
-            if R + a <= dev.duct_radius:
-                K += 1.2 * blocked / (1 - blocked) ** 2
-        if st.collector_kind == "mesh":
+    for el, st in zip(build_electrodes(dev), [s for s in dev.stages for _ in (0, 1)]):
+        kind = "emitter" if el.kind == "emitter" else st.collector_kind
+        if kind == "mesh":
             f = 0.7
             K += (1 - f) / f**2
+            continue
+        r_in = max(el.r_c - el.half_w, 0.0)
+        r_out = min(el.r_c + el.half_w, dev.duct_radius)
+        if r_out <= r_in:
+            continue
+        b = (r_out**2 - r_in**2) / dev.duct_radius**2
+        K += cd[kind] * b / (1 - b) ** 2
     return K
 
 

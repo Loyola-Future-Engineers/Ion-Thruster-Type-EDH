@@ -74,3 +74,28 @@ def test_sparkover_limit_includes_interstage_gap():
     st = device.Stage(gap=0.03)
     dev = device.Device([st, st], spacing=[0.01])
     assert device.spark_limits(dev) < device.spark_limits(device.Device([st]))
+
+
+def test_line_segment_reproduces_prolate_spheroid_capacitance():
+    from ehd import pins
+    c, rt = 0.003, 5e-5
+    b = np.sqrt(rt * c); f = np.sqrt(c * c - b * b)
+    phi = pins.segment_potential(np.array([[0, 0, -f]]), np.array([[0, 0, f]]), np.array([[0, 0, c]]))[0, 0]
+    C = 2 * f / phi
+    assert C == pytest.approx(4 * np.pi * EPS0 * f / np.arctanh(f / c), rel=1e-9)
+
+
+def test_pin_shielding_reduces_tip_field():
+    from ehd import pins
+    e1 = pins.solve(pins.PinRing(n_pins=1))["E_tip_per_V"]
+    e32 = pins.solve(pins.PinRing(n_pins=32))["E_tip_per_V"]
+    assert e32 < 0.8 * e1
+
+
+def test_single_pin_tip_field_close_to_hyperboloid_formula():
+    """Order-of-magnitude cross-check against the point-to-plane hyperboloid formula."""
+    from ehd import pins
+    pr = pins.PinRing(n_pins=1)
+    e = pins.solve(pr)["E_tip_per_V"]
+    e_h = corona.tip_field_hyperboloid(1.0, pr.tip_radius, pr.tip_to_collector())
+    assert 0.5 < e / e_h < 2.0
