@@ -18,7 +18,7 @@ COLORS = {
     "equal": "#2563eb",
     "decreasing": "#dc2626",
     "increasing": "#059669",
-    "optimised": "#7c3aed",
+    "optimized": "#7c3aed",
     "thrust": "#2563eb",
     "efficiency": "#dc2626",
     "power": "#d97706",

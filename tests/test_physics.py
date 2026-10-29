@@ -52,7 +52,7 @@ def test_townsend_zero_below_onset_and_quadratic_above():
 def test_drift_thrust_identity_single_stage():
     """With no flow (u = 0) the stage force equals sum(dI dz)/mu exactly."""
     dev = device.Device([device.Stage(gap=0.025)], duct_radius=0.02)
-    geo = device.analyse_geometry(dev, n_lines=32)
+    geo = device.analyze_geometry(dev, n_lines=32)
     V = 15e3
     r = device.evaluate(geo, V, iterate_flow=False)
     st = r["stages"][0]
@@ -65,7 +65,7 @@ def test_drift_thrust_identity_single_stage():
 def test_flow_energy_bound():
     """Kinetic power of the jet can never exceed electrical input power."""
     dev = device.Device([device.Stage(gap=0.03)], duct_radius=0.02)
-    geo = device.analyse_geometry(dev, n_lines=32)
+    geo = device.analyze_geometry(dev, n_lines=32)
     r = device.evaluate(geo, 20e3)
     assert 0 < r["jet_eff"] < 1
 
@@ -105,14 +105,14 @@ def test_experiment_reduction_refuses_empty_template_and_propagates_uncertainty(
     """Uses an in-memory synthetic table (not data) to check the arithmetic only."""
     import importlib.util, pathlib, pandas as pd
     root = pathlib.Path(__file__).resolve().parents[1]
-    spec = importlib.util.spec_from_file_location("analyse", root / "experiments" / "analyse.py")
+    spec = importlib.util.spec_from_file_location("analyze", root / "experiments" / "analyze.py")
     mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
     empty = pd.read_csv(root / "experiments" / "templates" / "iv_thrust_sweep.csv")
     with pytest.raises(ValueError):
         mod.reduce(empty)
     synthetic = pd.DataFrame({"configuration_id": ["X"] * 3, "step": [1] * 3,
                               "measured_voltage_kV": [20.0] * 3, "supply_current_uA": [100.0] * 3,
-                              "balance_zero_g": [50.0] * 3, "balance_reading_g": [49.9, 49.9, 49.9]})
+                              "balance_zero_g": [50.0] * 3, "balance_reading_g": [50.1, 50.1, 50.1]})
     out = mod.reduce(synthetic).iloc[0]
     assert out.thrust_mN == pytest.approx(0.1 * 9.80665, rel=1e-6)
     assert out.P_W == pytest.approx(2.0)

@@ -1,11 +1,11 @@
 """Self-consistent axisymmetric space-charge solver for unipolar (positive) corona drift.
 
-Solves, in the drift region outside the thin ionisation layer,
+Solves, in the drift region outside the thin ionization layer,
 
     div(eps0 grad phi) = -rho                (Poisson)
     div(rho mu E)      = 0,  E = -grad phi   (steady charge conservation, no wind, no diffusion)
 
-on a graded structured (r, z) grid with a node-centred finite-volume discretisation:
+on a graded structured (r, z) grid with a node-centred finite-volume discretization:
 axisymmetric face areas 2 pi r dz (radial faces) and pi (r+^2 - r-^2) (axial faces).
 Charge transport uses first-order upwinding, giving a sparse linear system in rho for a
 given field. The two equations are coupled by under-relaxed fixed-point iteration.
@@ -23,7 +23,7 @@ Because transport is linear in rho for a fixed field, the converged density is s
 exactly into contributions from each emitter. That gives per-emitter current to every
 collector, which is how back-flow is measured.
 
-Not included: ionisation-layer physics, ion diffusion, negative ions, wind convection of
+Not included: ionization-layer physics, ion diffusion, negative ions, wind convection of
 ions, and the neutral flow field. Thrust is the volume integral of rho E_z.
 """
 from dataclasses import dataclass

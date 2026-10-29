@@ -21,7 +21,12 @@ def dim(ax, x0, x1, y, text, above=True):
     ax.text((x0 + x1) / 2, y + (1.2 if above else -2.6), text, ha="center", fontsize=8)
 
 
+TIP = 7.5        # needle tip height above the emitter ring mid-plane (matches cad/build.py)
+COLL_LEN = 10.0  # collector tube length
+
+
 def section(n, gaps, spacings, name, title):
+    """gaps: needle tip -> collector leading edge; spacings: collector leading edge -> next emitter ring."""
     bore_r, ring_r = 20, 15
     fig, ax = plt.subplots(figsize=(11, 4.6))
     z = 0
@@ -29,23 +34,24 @@ def section(n, gaps, spacings, name, title):
     for k in range(n):
         if k:
             z += spacings[k - 1]
-        ze, zc = z, z + gaps[k]
+        ze, zc = z, z + TIP + gaps[k]
         zs.append((ze, zc))
         z = zc
-    length = z + 10
+    length = z + COLL_LEN + 10
     for sgn in (1, -1):
         ax.add_patch(Rectangle((-10, sgn * bore_r), length + 10, sgn * 3, color=HOUSE))
         for k, (ze, zc) in enumerate(zs):
-            ax.add_patch(Circle((ze, sgn * ring_r), 0.6, color=EMIT, zorder=3))
-            ax.plot([ze, ze], [sgn * ring_r, sgn * bore_r], color=EMIT, lw=0.8)              # support / HV feed
-            ax.add_patch(Circle((zc, sgn * ring_r), 2, color=COLL, zorder=3))
-            ax.plot([zc, zc], [sgn * (ring_r + 2), sgn * bore_r], color=COLL, lw=0.8)
+            ax.add_patch(Rectangle((ze - 1.5, sgn * ring_r - 1.25), 3, 2.5, color="#c99a2e", zorder=3))   # brass ring
+            ax.plot([ze, ze + TIP], [sgn * ring_r, sgn * ring_r], color=EMIT, lw=1.6, zorder=4)            # needle
+            ax.plot([ze, ze], [sgn * (ring_r + 1.25), sgn * bore_r], color="#888", lw=0.8)              # spoke
+            ax.add_patch(Rectangle((zc, sgn * ring_r - 0.5), COLL_LEN, 1.0, color=COLL, zorder=3))       # tube collector
+            ax.plot([zc + COLL_LEN / 2] * 2, [sgn * (ring_r + 0.5), sgn * bore_r], color="#888", lw=0.8)
             if sgn == 1:
                 ax.text(ze, ring_r + 7, f"E{k+1}\n+V", ha="center", fontsize=8, color=EMIT)
-                ax.text(zc, ring_r + 7, f"C{k+1}\n0 V", ha="center", fontsize=8, color=COLL)
+                ax.text(zc + COLL_LEN / 2, ring_r + 7, f"C{k+1}\n0 V", ha="center", fontsize=8, color=COLL)
     ax.axhline(0, color="#999", ls="-.", lw=0.7)
     for k, (ze, zc) in enumerate(zs):
-        dim(ax, ze, zc, -ring_r - 6, f"d{k+1} = {gaps[k]:.0f}", above=False)
+        dim(ax, ze + TIP, zc, -ring_r - 6, f"d{k+1} = {gaps[k]:.0f}", above=False)
         if k:
             dim(ax, zs[k - 1][1], ze, -ring_r - 11, f"s{k} = {spacings[k-1]:.0f}", above=False)
     ax.annotate("", xy=(length + 5, 0), xytext=(-12, 0), arrowprops=dict(arrowstyle="->", color="#059669", lw=2))
@@ -55,8 +61,8 @@ def section(n, gaps, spacings, name, title):
     ax.set_aspect("equal"); ax.set_xlim(-16, length + 8); ax.set_ylim(-bore_r - 14, bore_r + 14)
     ax.set_xlabel("axial position (mm)"); ax.set_ylabel("radius (mm)"); ax.set_title(title)
     ax.grid(False)
-    plotting.footer(fig, "illus", "Section through the axis, to scale. Emitter: 0.1 mm-edge ring or pin ring; "
-                    "collector: 4 mm rounded ring (or 10 mm tube). Dimensions in mm. Supports must be insulators.")
+    plotting.footer(fig, "illus", "Section through the axis, to scale (mm). Emitter: brass ring with 16 stainless needles "
+                    "(blue); d is measured from the needle tips. Collector: 10 mm aluminum tube. Grey lines: insulating spokes.")
     OUT.mkdir(exist_ok=True)
     for ext in ("png", "svg"):
         fig.savefig(OUT / f"{name}.{ext}", bbox_inches="tight")

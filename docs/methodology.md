@@ -38,7 +38,7 @@ electrostatic field (no space charge) to a 1-D momentum balance.
 
 - Field lines start just outside each emitter at `n_lines` points spaced evenly around its
   cross-section. Each carries a weight equal to its electric flux (`E_n × dA`).
-- **Integration:** vectorised fixed-step RK4 along the unit field direction. The step is
+- **Integration:** vectorized fixed-step RK4 along the unit field direction. The step is
   0.25 × distance to the nearest electrode, clipped to [0.002 mm, 1.5 mm]. Integration stops on entering
   any electrode (signed-distance test) or leaving a 300 mm × 800 mm box (counted as "escaped").
 - **Current:** each tube carries `f_i × I_coax(L_i)`, using Townsend's coaxial law with the
@@ -49,7 +49,7 @@ electrostatic field (no space charge) to a 1-D momentum balance.
 
 ## 3b. Space-charge solver (level 4)
 
-Graded structured (r, z) grid, node-centred finite volumes, sparse LU for Poisson (factorised once)
+Graded structured (r, z) grid, node-centred finite volumes, sparse LU for Poisson (factorized once)
 and an upwind sparse solve for ion transport, coupled by under-relaxed iteration until both the
 emitter-charge (Kaptsov) error and the density change fall below 10⁻³. Verification, grid and boundary
 studies: [results/spacecharge.md](results/spacecharge.md).
@@ -65,7 +65,7 @@ studies: [results/spacecharge.md](results/spacecharge.md).
 | 2-stage back-flow vs ion paths | 16 → 96 | 10.7 → 8.6 %. At 48 paths: 9.1 ± 0.3 percentage points |
 | 2-stage thrust vs charges per electrode | 16 → 72 | Unchanged to 4 significant figures |
 
-Discretisation error is therefore about 2 %, far smaller than the physical-model uncertainty
+Discretization error is therefore about 2 %, far smaller than the physical-model uncertainty
 (×3, Phase G). Path-count noise is the reason small differences (< 5 %) between
 configurations are treated as ties in the results documents.
 
@@ -82,7 +82,7 @@ statements in the abstract of [Masuyama & Barrett 2013](https://doi.org/10.1098/
 | More thrust per power | ✓ (4.7 → 7.1 → 9.1 mN/W) |
 
 This is a **qualitative consistency check, not a validation.** No published data points were
-digitised or fitted.
+digitized or fitted.
 
 ## 6. Validation status
 

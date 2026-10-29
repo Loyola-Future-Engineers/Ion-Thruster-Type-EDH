@@ -1,6 +1,6 @@
 # Progress log
 
-Read this first when resuming work. Last updated 2026-10-28.
+Read this first when resuming work. Last updated 2026-10-28. Units: SI metric (mm, kV, mN, L/s, g, °C, kPa); costs in CAD.
 
 ## Status
 - Modelling, design and documentation are complete for a first full pass.
@@ -19,8 +19,10 @@ Read this first when resuming work. Last updated 2026-10-28.
 | Test plan, CSV templates, uncertainty script, high-voltage safety | `experiments/`, `docs/safety.md` |
 | Guard-ring study: removes back-flow in simulation | `docs/results/guard.md` |
 | Prototype P1 build package and cost estimate | `prototypes/` |
-| 11-page project report (PDF) | `docs/report/` |
+| 10-page project report (PDF) | `docs/report/` |
 | 14 automated verification tests, run on GitHub for every push | `tests/`, `.github/workflows/tests.yml` |
+| P1x3 compact cluster (60 mm pitch) and 3-into-1 merge joint | `prototypes/` |
+| Canadian metric and spelling conventions; costs in CAD; Canadian safety references (CSA Z462, provincial OHS) | whole repository |
 
 ## Main findings (model-based, unvalidated)
 - Back-flow from each later emitter to the previous collector dominates multi-stage behaviour. Keep stage spacing ≥ 3× the gap.

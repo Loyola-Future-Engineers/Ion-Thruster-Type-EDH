@@ -2,13 +2,13 @@ part,qty,material,process,envelope_mm,volume_mm3,mass_each_g,mass_total_g,notes
 inlet_bellmouth,1,PETG or ASA,3-D print,74.8 x 73.5 x 16.0,8965.0,11.39,11.39,Rounded inlet; faces down on the test stand
 emitter_carrier,3,PETG or ASA,3-D print,74.8 x 66.0 x 6.0,4766.1,6.05,18.16,Holds the emitter ring on 3 spokes; HV wire runs through the spoke at 0 deg
 collector_carrier,3,PETG or ASA,3-D print,74.8 x 66.0 x 6.0,4797.1,6.09,18.28,Spokes offset 60 deg from emitter spokes to lengthen creepage
-spacer_gap,3,PETG or ASA,3-D print,46.0 x 46.0 x 24.0,9719.4,12.34,37.03,Sets gap d; print several lengths to test d
+spacer_gap,3,PETG or ASA,3-D print,46.0 x 46.0 x 31.5,12756.7,16.2,48.6,Sets gap d; print several lengths to test d
 spacer_stage,2,PETG or ASA,3-D print,46.0 x 46.0 x 64.0,25918.5,32.92,65.83,Sets inter-stage spacing s
 exit_ring,1,PETG or ASA,3-D print,74.8 x 66.0 x 6.0,4590.9,5.83,5.83,
-emitter_mount_ring,3,Brass,Machine or bend + solder,32.5 x 32.5 x 3.0,666.7,5.67,17.0,16 x 0.82 mm needle holes
-needle,48,Stainless steel 304,"Buy (0.8 mm needle, ~0.05 mm tip)",0.8 x 0.8 x 9.0,4.0,0.03,1.54,Press-fit or clamp; do not solder
-collector_tube,3,Aluminium 6061,"Cut from tube, deburr, round edges",31.0 x 31.0 x 10.0,921.0,2.49,7.46,Simulations used a 4 mm-thick rounded section; 1 mm wall is lighter
-terminal_pin,6,Brass,Buy/turn,3.0 x 3.0 x 10.0,22.8,0.19,1.16,HV feed (emitters) and ground return (collectors)
+emitter_mount_ring,3,Brass,"Laser/waterjet-cut from 3 mm brass sheet, or machine",32.5 x 32.5 x 3.0,666.7,5.67,17.0,16 x Ø0.82 needle holes (match the pin diameter)
+needle,48,Stainless steel 304,Buy: stainless insect pins Ø0.5–0.8 (tip ≈ 0.05),0.8 x 0.8 x 9.0,4.0,0.03,1.54,Glue into the ring; do not solder
+collector_tube,3,Aluminum 6061,"Cut from Ø30–32 × 1 tube, deburr, round edges",31.0 x 31.0 x 10.0,921.0,2.49,7.46,Simulations used a 4 mm-thick rounded section; 1 mm wall is lighter
+terminal_pin,6,Brass,Brass M2 screw or 2 mm banana jack,3.0 x 3.0 x 10.0,22.8,0.19,1.16,HV feed (emitters) and ground return (collectors)
 standoff,3,PTFE or acetal,Machine/buy,12.0 x 12.0 x 100.0,10578.7,23.27,69.82,Insulates the thruster from the balance
 base_plate,1,Polycarbonate or acetal,Laser cut / machine,140.0 x 140.0 x 6.0,98150.3,117.78,117.78,Sits on the balance; 64 mm hole lets air in
-tie_rod,3,Nylon M3,"Buy, cut to length",3.0 x 3.0 x 256.0,1789.0,2.06,6.17,Insulating; holds the stack together
+tie_rod,3,Nylon M3,"Buy, cut to length",3.0 x 3.0 x 278.5,1946.2,2.24,6.71,Insulating; holds the stack together

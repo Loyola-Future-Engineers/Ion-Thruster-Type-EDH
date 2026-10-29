@@ -95,6 +95,6 @@ downstream exit is nearly ion-free.
 
 ## Remaining limitations
 - Axisymmetric: emitters are continuous rings. Discrete pins need 3-D (where a GPU would help).
-- The wind does not convect ions (`u << mu E`, a few % error). No ion diffusion. No ionisation-layer physics.
+- The wind does not convect ions (`u << mu E`, a few % error). No ion diffusion. No ionization-layer physics.
 - The insulating wall is the fully-charged limit. The transient charging is not modelled.
 - Sparkover is still the mean-field criterion. The flow is still the 1-D duct model.

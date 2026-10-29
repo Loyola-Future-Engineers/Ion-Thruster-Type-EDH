@@ -1,6 +1,6 @@
 """Reduce a completed iv_thrust_sweep.csv to per-step means with GUM-style uncertainties.
 
-Usage: python experiments/analyse.py path/to/iv_thrust_sweep.csv [--res-g 0.001] [--acc-v 0.01] [--acc-i 0.02]
+Usage: python experiments/analyze.py path/to/iv_thrust_sweep.csv [--res-g 0.001] [--acc-v 0.01] [--acc-i 0.02]
 
 Uncertainty components:
   balance: Type A (repeat scatter) + Type B resolution res/sqrt(12)
@@ -19,9 +19,9 @@ G = 9.80665
 
 def reduce(df, res_g=0.001, acc_v=0.01, acc_i=0.02):
     if df.empty:
-        raise ValueError("No measurements in file: the template is empty. Nothing to analyse.")
+        raise ValueError("No measurements in file: the template is empty. Nothing to analyze.")
     df = df.copy()
-    df["dm_g"] = df.balance_zero_g - df.balance_reading_g          # exhaust up: thrust lowers the reading
+    df["dm_g"] = df.balance_reading_g - df.balance_zero_g          # exhaust up: the jet pushes the device down, so the reading rises
     rows = []
     for (cfg, step), g in df.groupby(["configuration_id", "step"]):
         n = len(g)

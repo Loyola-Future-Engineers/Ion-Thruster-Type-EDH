@@ -22,7 +22,7 @@ class Air:
     e_spark_ref: average field V/d at which a positive corona gap sparks over, V/m.
         ASSUMED 1.0e6 with a 0.7e6 to 1.4e6 band. Sparkover depends strongly on
         geometry, humidity and supply impedance and must be measured on the rig.
-    peek_m: Peek surface-irregularity factor (1.0 polished, ~0.8 rough/oxidised).
+    peek_m: Peek surface-irregularity factor (1.0 polished, ~0.8 rough/oxidized).
     """
     temperature_K: float = T_REF
     pressure_Pa: float = P_REF
@@ -62,7 +62,7 @@ STANDARD_AIR = Air()
 # irrelevant at corona currents.
 CONDUCTIVITY = {
     "copper": 5.96e7,
-    "aluminium": 3.77e7,
+    "aluminum": 3.77e7,
     "stainless_304": 1.39e6,
     "tungsten": 1.79e7,
 }

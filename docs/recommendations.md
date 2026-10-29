@@ -32,13 +32,13 @@ There is no exact optimal design. There is a promising starting point and a list
 ## Recommended starting configurations
 
 ### Two-stage, common supply (simplest electrically)
-- **Emitter:** 12–16 stainless steel needles (about 0.05 mm tip), 6 mm long, axial, on a 30 mm
-  mounting ring. Alternatively, a 0.1 mm tungsten wire ring.
-- **Collector:** aluminium tube, 30 mm diameter, 10 mm long, 1 mm wall, edges rounded to at least 0.5 mm.
-- **Gaps:** d1 = d2 = 25 mm. **Spacing s = 75 mm (3d).**
-- **Bore:** 40 mm insulating tube (wider if radial pins are used). Length 158 mm overall, including the inlet flare and exit ring.
+- **Emitter:** 12–16 stainless steel pins (about 0.05 mm tip, for example entomology pins), 6 mm exposed,
+  pointing downstream, on a Ø30 mm brass ring cut from 3 mm sheet. Alternatively, a 0.1 mm tungsten wire ring.
+- **Collector:** aluminum tube, 30 mm diameter, 10 mm long, 1 mm wall, edges rounded to at least 0.5 mm.
+- **Gaps:** d1 = d2 = 25 mm, measured from the needle tips to the collector. **Spacing s = 75 mm (3d).**
+- **Bore:** 40 mm insulating tube (wider if radial pins are used). Length 173 mm overall, including the inlet flare and exit ring.
 - **Parts:** every part is modelled in [`cad/`](../cad/README.md).
-- **Supply:** one 30 kV current-limited supply. Operate at ≤ 85 % of measured sparkover.
+- **Supply:** one 30 kV current-limited supply, run at about 19.5 kV. Never exceed 85 % of the measured sparkover voltage.
 - **Model expectation (space-charge solver):** about 3 mN net thrust at about 1.3 W and 19.5 kV. Treat this as an order of magnitude.
 
 ### Two-stage, per-stage supplies (best use of the d1 > d2 idea)
@@ -50,12 +50,12 @@ There is no exact optimal design. There is a promising starting point and a list
 ### Two-stage with guard ring (proposed P2)
 - As the common-supply build, plus a smooth 4 mm-section ring at Ø30, wired to emitter 2 and placed
   10 mm upstream of it. Stage spacing can then shrink to 37.5 mm.
-- Simulation: back-flow 0 %, about 3.7 mN at about 1.4 W (+25 % thrust, 25 % shorter than P1).
+- Simulation: back-flow 0 %, about 3.7 mN at about 1.4 W (+25 % thrust, with the stage spacing halved from 75 to 37.5 mm).
 - Build only after P1 has measured back-flow. The guard-to-collector-1 gap must be checked for sparkover.
 
 ### Three-stage
 - Only worthwhile if **thrust or airflow at fixed voltage** matters more than efficiency or length.
-- Identical stages, d = 25 mm, s = 75 mm, tube collectors. Length 258 mm overall.
+- Identical stages, d = 25 mm, s = 75 mm, tube collectors. Length 281 mm overall.
 - Per-stage supplies with decreasing gaps, for example 32/18/12 mm, if the electrical complexity is acceptable.
 
 ## Manufacturing notes [Qual]
@@ -63,7 +63,7 @@ There is no exact optimal design. There is a promising starting point and a list
   Keep the creepage path from emitter feed to collector at least 2–3× the air gap along any surface.
 - Commercial needles, press-fitted or clamped into a brass or stainless mounting ring.
   Avoid soldering stainless.
-- Collectors: cut aluminium tube, deburred and edge-rounded. A sharp collector edge can start
+- Collectors: cut aluminum tube, deburred and edge-rounded. A sharp collector edge can start
   its own (reverse) corona.
 - Make gaps adjustable with spacers, so one housing can test several d and s values.
 
@@ -74,7 +74,7 @@ There is no exact optimal design. There is a promising starting point and a list
 
 ## Safety
 See [`safety.md`](safety.md). Ozone and NOx ventilation, interlocked enclosure,
-current-limited commercial supply, and no energised adjustments.
+current-limited commercial supply, and no energized adjustments.
 
 ## What must be tested before choosing a final design
 1. **Back-flow fraction vs s/d**, using separate collector currents. This decides the stage count and spacing. Prediction to test: 49 / 27 / 16 / 6 % at s/d = 1 / 1.5 / 2 / 3.

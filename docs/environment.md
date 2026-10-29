@@ -18,7 +18,7 @@ Recorded on 2026-10-28 at the start of the project.
 The GPU is not used. The electrostatic solver is a charge-simulation method
 with a few hundred ring charges per geometry: a dense least-squares solve of
 roughly 500 x 250 takes milliseconds on the CPU, and field-line tracing is
-vectorised NumPy. A full parameter sweep finishes in minutes on the CPU. A
+vectorized NumPy. A full parameter sweep finishes in minutes on the CPU. A
 CUDA stack (CuPy or similar) would add install weight and a second code path
 without changing the accuracy, which is limited by the physics closures
 (Peek onset, Townsend current, no space charge), not by arithmetic.

@@ -28,14 +28,14 @@ KW = {"equal-geometry, tube collectors": {"collector_kind": "tube", "collector_l
 def curve(args):
     case, n, g, s = args
     dev = ref.device(n, gaps=[g / 1e3] * n, spacings=[s / 1e3] * (n - 1), **KW.get(case, {}))
-    geo = D.analyse_geometry(dev, n_lines=48)
+    geo = D.analyze_geometry(dev, n_lines=48)
     v_max = ref.operating_voltage(dev)
     rows = []
     for V in np.linspace(geo.onset.min() * 1.02, v_max, 24):
         r = D.evaluate(geo, V)
         rows.append({"case": case, "n": n, "gap_mm": g, "spacing_mm": s, "length_mm": dev.length() * 1e3,
                      "V_kV": V / 1e3, "P_W": r["P"], "thrust_mN": r["thrust"] * 1e3, "u_ms": r["u"],
-                     "Q_cfm": r["Q"] * 2118.88, "TP_mNW": r["T_per_P"] * 1e3, "K": r["K"],
+                     "Q_Ls": r["Q"] * 1000.0, "TP_mNW": r["T_per_P"] * 1e3, "K": r["K"],
                      "is_max": bool(np.isclose(V, v_max))})
     return rows
 
@@ -71,9 +71,9 @@ def main():
             for P in (0.5, 1.0, 2.0, 4.0):
                 if s.P_W.min() <= P <= s.P_W.max():
                     out.append({"case": case, "n": n, "P_W": P, **{k: np.interp(P, s.P_W, s[k])
-                                for k in ("thrust_mN", "Q_cfm", "u_ms", "TP_mNW", "V_kV")}})
+                                for k in ("thrust_mN", "Q_Ls", "u_ms", "TP_mNW", "V_kV")}})
             m = s[s.is_max].iloc[0]
-            out.append({"case": case, "n": n, "P_W": "max", "thrust_mN": m.thrust_mN, "Q_cfm": m.Q_cfm,
+            out.append({"case": case, "n": n, "P_W": "max", "thrust_mN": m.thrust_mN, "Q_Ls": m.Q_Ls,
                         "u_ms": m.u_ms, "TP_mNW": m.TP_mNW, "V_kV": m.V_kV, "P_at_max_W": m.P_W,
                         "length_mm": m.length_mm})
     od = pd.DataFrame(out)
@@ -81,7 +81,7 @@ def main():
 
     fig, axs = plt.subplots(1, 4, figsize=(15, 4))
     eg = od[(od.case == "equal-geometry")]
-    for ax, (col, lab) in zip(axs, [("thrust_mN", "Thrust (mN)"), ("Q_cfm", "Flow (CFM)"),
+    for ax, (col, lab) in zip(axs, [("thrust_mN", "Thrust (mN)"), ("Q_Ls", "Flow (L/s)"),
                                     ("TP_mNW", "Thrust/power (mN/W)"), ("V_kV", "Voltage (kV)")]):
         for j, n in enumerate((1, 2, 3)):
             s = eg[(eg.n == n) & (eg.P_W != "max")]

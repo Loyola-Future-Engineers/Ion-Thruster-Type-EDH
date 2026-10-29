@@ -53,7 +53,7 @@ def guard_checks(dev, g, frac):
 def case(args):
     label, s, g, frac = args
     dev = ref.device(2, gaps=[GAP] * 2, spacings=[s])
-    geo = D.analyse_geometry(dev, n_lines=48)
+    geo = D.analyze_geometry(dev, n_lines=48)
     extra = [guard_ring(dev, g, frac)] if g else []
     res = S.run_device(dev, V, geo.onset, housing="insulating", box=0.3, extra=extra)
     els = res["electrodes"]
@@ -92,7 +92,7 @@ def main():
 
     fig, axs = plt.subplots(1, 3, figsize=(15, 4.6))
     labels = df.label.tolist()
-    col = [COLORS["1-stage"] if "no guard" in l else COLORS["optimised"] for l in labels]
+    col = [COLORS["1-stage"] if "no guard" in l else COLORS["optimized"] for l in labels]
     x = np.arange(len(df))
     axs[0].bar(x, df.backflow_s2 * 100, color=col)
     axs[0].set_ylabel("Stage-2 current drifting back to collector 1 (%)"); axs[0].set_title("Back-flow")

@@ -10,8 +10,8 @@ model's **structural assumptions**, in priority order:
 
 | # | Model claim | Measurement that tests it | Why it matters |
 |---|---|---|---|
-| 1 | About 49 / 16 / 6 % of a later stage's current flows back to the previous collector at s/d = 1 / 2 / 3 (space-charge solver) | Current to **each collector measured separately**, at several d/s ratios. Energise emitter 2 alone (emitter 1 at ground through a 10 MΩ resistor) so C1 current is purely stage-2 back-flow, then repeat with both energised | Drives every multi-stage conclusion |
-| 2 | Maximum safe operating voltage is set by mean-field sparkover of about 1 kV/mm | Sparkover voltage vs clearance for the real electrodes (`sparkover_test.csv`) | Sets the optimum gap (about 35 mm at 30 kV) |
+| 1 | About 49 / 16 / 6 % of a later stage's current flows back to the previous collector at s/d = 1 / 2 / 3 (space-charge solver) | Current to **each collector measured separately**, at several d/s ratios. Energize emitter 2 alone (emitter 1 at ground through a 10 MΩ resistor) so C1 current is purely stage-2 back-flow, then repeat with both energized | Drives every multi-stage conclusion |
+| 2 | Maximum safe operating voltage is set by mean-field sparkover of about 1 kV/mm | Sparkover voltage vs clearance for the real electrodes (`sparkover_test.csv`) | Sets the optimum gap (about 25–35 mm at 30 kV) |
 | 3 | Onset follows Peek's law with the CSM field | Onset voltage per emitter type (I–V knee) | Sets the operating window |
 | 4 | Current follows I ∝ V(V − V0) with a closure factor in 0.5–2 | Full I–V sweep | Absolute thrust scale |
 | 5 | Thrust = I·⟨dz⟩/μ minus flow losses | Thrust vs current at fixed geometry. The slope gives an effective `<dz>/mu` | Tests the drift identity and the mobility |
@@ -26,15 +26,16 @@ model's **structural assumptions**, in priority order:
 - **Enclosure:** grounded metal-mesh or acrylic enclosure with a door interlock that cuts the
   HV supply enable line (see `docs/safety.md`).
 - **Thrust:** the thruster sits on insulating standoffs (at least 100 mm, PTFE or acetal) on a
-  precision balance (0.001 g resolution; 1 mg ≈ 9.8 µN), **exhaust pointing up**, so thrust
-  reads as a weight reduction. A grounded metal shield plate between the HV parts and the
+  precision balance (0.01 g readability or better, **at least 1 kg capacity**; 0.01 g ≈ 98 µN,
+  about 3 % of the expected 3 mN), **exhaust pointing up**, so the jet blows away from the
+  balance. The thrust then pushes the device **down**: it reads as a weight *increase*. A grounded metal shield plate between the HV parts and the
   balance pan blocks electrostatic forces on the balance. The HV lead is a light, slack
   flexible silicone HV wire, routed so it cannot pull on the device.
 - **Current:** measure on the **ground side** of each collector (low voltage relative to earth)
   using a series shunt resistor and meter. Add a protective spark gap or gas-discharge
   tube across each shunt. One shunt per collector gives the back-flow fraction.
 - **Voltage:** the supply's calibrated monitor output, cross-checked once with a rated HV divider
-  probe while the device is de-energised and set up for measurement.
+  probe while the device is de-energized and set up for measurement.
 - **Airflow:** vane anemometer or pitot tube with a micromanometer, at least 100 mm downstream of
   the exit, on an insulated positioning arm. The probe must be grounded or fully insulated, and
   is only repositioned with the supply off and discharged.
@@ -60,7 +61,7 @@ model's **structural assumptions**, in priority order:
 |---|---|---|
 | No-corona control | Apply voltage just below onset (current < 0.1 µA) | Electrostatic attraction between device and surroundings or balance. Should read zero thrust. |
 | Reversed device | Mount the thruster with exhaust down | Sign of the thrust reading. Rules out balance artefacts. |
-| HV lead only | Energise with the emitter disconnected | Force from the lead or field on the balance |
+| HV lead only | Energize with the emitter disconnected | Force from the lead or field on the balance |
 | Drafts | Record balance noise with everything off, doors closed | Baseline noise floor |
 | Ozone / heat | Long run at fixed V. Watch for creeping readings | Thermal plumes, ozone changing air properties |
 | Leakage | Supply current minus the sum of collector currents | Current leaking over insulator surfaces |
@@ -79,7 +80,7 @@ Derived quantities (propagated):
 - Thrust/power: `u_TP/TP = sqrt((u_T/T)^2 + (u_P/P)^2)`.
 - Back-flow fraction `b = I_upstream / (I_upstream + I_own)`, propagated from both shunt readings.
 
-`experiments/analyse.py` implements these formulas and fills a summary table from
+`experiments/analyze.py` implements these formulas and fills a summary table from
 a completed `iv_thrust_sweep.csv`. It refuses to run on the empty templates.
 
 ## 6. Model comparison

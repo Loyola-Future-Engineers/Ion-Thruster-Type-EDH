@@ -30,7 +30,7 @@ spec = importlib.util.spec_from_file_location("cadbuild", ROOT / "cad" / "build.
 cad = importlib.util.module_from_spec(spec); spec.loader.exec_module(cad)
 
 C = cad.Cfg(n_stages=2)
-MAT_COLOR = {"Brass": "#c99a2e", "Stainless steel 304": "#6b7785", "Aluminium 6061": "#aeb9c6",
+MAT_COLOR = {"Brass": "#c99a2e", "Stainless steel 304": "#6b7785", "Aluminum 6061": "#aeb9c6",
              "PETG or ASA": "#dbe4f0", "Nylon M3": "#f1efe6", "PTFE or acetal": "#fafafa",
              "Polycarbonate or acetal": "#bfe0f2"}
 LABEL = {"inlet_bellmouth": "Inlet bellmouth", "emitter_carrier": "Emitter carrier", "collector_carrier":
@@ -114,16 +114,18 @@ def assembled(parts, placed):
     for name, m in placed:
         fill(ax, section(m), color(name), 0.35)
     t = C.carrier_t
-    z_e = [0.0, C.gap + C.spacing]
-    z_c = [z + C.gap for z in z_e]
+    z_c0 = C.tip_z() + C.gap
+    z_e = [0.0, z_c0 + C.spacing]
+    z_c = [z + C.tip_z() + C.gap for z in z_e]
     thr = [cad.to_trimesh(m).bounds for n, m in placed if n not in ("standoff", "base_plate", "tie_rod")]
     zlo = min(b[0, 2] for b in thr); zhi = max(b[1, 2] for b in thr)
     # dimensions (right side)
     xr = 52
     dim(ax, (xr, zlo), (xr, zhi), f"{zhi - zlo:.0f}\noverall", off=(7, 0))
-    dim(ax, (34, z_e[0]), (34, z_c[0]), f"d = {C.gap:.0f}", off=(7, 0))
+    tz = C.tip_z()
+    dim(ax, (34, z_e[0] + tz), (34, z_c[0]), f"d = {C.gap:.0f}\n(tip to\ncollector)", off=(9, 0))
     dim(ax, (34, z_c[0]), (34, z_e[1]), f"s = {C.spacing:.0f}", off=(7, 0))
-    dim(ax, (34, z_e[1]), (34, z_c[1]), f"d = {C.gap:.0f}", off=(7, 0))
+    dim(ax, (34, z_e[1] + tz), (34, z_c[1]), f"d = {C.gap:.0f}", off=(7, 0))
     dim(ax, (-C.bore_r, z_c[0] + 50), (C.bore_r, z_c[0] + 50), "Ø40 bore", off=(0, 3))
     dim(ax, (-C.bore_r - C.wall, zhi + 8), (C.bore_r + C.wall, zhi + 8), "Ø46 housing", off=(0, 3))
     dim(ax, (-C.ring_r, z_c[0] + 22), (C.ring_r, z_c[0] + 22), "Ø30 rings", off=(0, 3), fs=6.5)
@@ -286,7 +288,10 @@ def parts_sheet(parts, counts):
 
 
 if __name__ == "__main__":
-    parts, placed, _, _ = cad.build(C)
+    parts, placed, spacers, _ = cad.build(C)
+    KEY_DIMS["spacer_gap"] = f"Ø40 / Ø46 tube, {spacers['spacer_gap']:.1f} long"
+    KEY_DIMS["spacer_stage"] = f"Ø40 / Ø46 tube, {spacers['spacer_stage']:.1f} long"
+    KEY_DIMS["tie_rod"] = f"M3 × {cad.to_trimesh(parts['tie_rod']).extents[2]:.0f}"
     counts = {}
     for n, _ in placed:
         counts[n] = counts.get(n, 0) + 1

@@ -28,14 +28,14 @@ def single_stage_sweep():
     fixed = []
     for g in gaps:
         dev = ref.device(1, gaps=[g])
-        geo = D.analyse_geometry(dev, n_lines=48)
+        geo = D.analyze_geometry(dev, n_lines=48)
         for V in (15e3, 20e3, 25e3):
             vsp = D.spark_limits(dev)
             r = D.evaluate(geo, V) if (V > geo.onset[0] and V < vsp) else None
             fixed.append({"gap_mm": g * 1e3, "V_kV": V / 1e3,
                           "thrust_mN": r["thrust"] * 1e3 if r else np.nan,
                           "TP_mNW": r["T_per_P"] * 1e3 if r else np.nan,
-                          "P_W": r["P"] if r else np.nan, "Q_cfm": r["Q"] * 2118.88 if r else np.nan,
+                          "P_W": r["P"] if r else np.nan, "Q_Ls": r["Q"] * 1000.0 if r else np.nan,
                           "V_onset_kV": geo.onset[0] / 1e3, "V_spark_kV": vsp / 1e3})
     fx = pd.DataFrame(fixed)
     df.to_csv(DATA / "phase_b_single_stage.csv", index=False)
@@ -46,7 +46,7 @@ def single_stage_sweep():
 def plot_single(df, fx):
     fig, axs = plt.subplots(2, 2, figsize=(11, 7.5))
     specs = [("thrust_mN", "Thrust (mN)", "B1 Gap vs thrust"),
-             ("Q_cfm", "Volumetric flow (CFM)", "B2 Gap vs airflow"),
+             ("Q_Ls", "Volumetric flow (L/s)", "B2 Gap vs airflow"),
              ("P_W", "Electrical power (W)", "B3 Gap vs power"),
              ("TP_mNW", "Thrust-to-power (mN/W)", "B4 Gap vs thrust-to-power")]
     for ax, (col, lab, title) in zip(axs.flat, specs):

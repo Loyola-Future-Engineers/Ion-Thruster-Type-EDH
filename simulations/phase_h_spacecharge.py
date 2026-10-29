@@ -43,7 +43,7 @@ def case(args):
     """One space-charge run. Returns flat metrics, including per-emitter collector currents."""
     label, n, gap, spacing, V, housing, keep = args
     dev = ref.device(n, gaps=[gap] * n, spacings=[spacing] * (n - 1))
-    geo = D.analyse_geometry(dev, n_lines=48)
+    geo = D.analyze_geometry(dev, n_lines=48)
     res = S.run_device(dev, V, geo.onset, housing=housing, box=0.3)
     els, cur = res["electrodes"], res["currents"]
     out = {"label": label, "n": n, "gap_mm": gap * 1e3, "spacing_mm": spacing * 1e3, "V_kV": V / 1e3,
@@ -76,7 +76,7 @@ def case(args):
     F = res["force_z"]
     u = np.sign(F) * np.sqrt(abs(F) / (STANDARD_AIR.density * area * (1 + K / 2)))
     out["thrust_mN"] = np.sign(u) * STANDARD_AIR.density * area * u**2 * 1e3
-    out["u_ms"] = u; out["Q_cfm"] = area * u * 2118.88
+    out["u_ms"] = u; out["Q_Ls"] = area * u * 1000.0
     out["TP_mNW"] = out["thrust_mN"] / out["P_W"] if out["P_W"] > 0 else np.nan
     if keep:
         s = res["solver"]

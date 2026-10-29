@@ -8,7 +8,7 @@ Writes:
   diagrams/cad_<n>stage_*.png      section drawing and exterior render
 
 Geometry follows docs/recommendations.md (common-supply build): 40 mm insulating bore, 16 axial
-stainless needles on a 30 mm brass ring, 30 mm aluminium tube collectors, d = 25 mm, s = 75 mm.
+stainless needles on a 30 mm brass ring, 30 mm aluminum tube collectors, d = 25 mm, s = 75 mm.
 The parts are a design proposal. They have not been printed, machined or tested.
 
 Run: .venv/bin/python cad/build.py
@@ -31,7 +31,7 @@ class Cfg:
     n_stages: int = 2
     bore_r: float = 20.0            # mm, inner radius of the housing
     wall: float = 3.0
-    gap: float = 25.0               # emitter ring plane -> collector leading edge
+    gap: float = 25.0               # needle tip -> collector leading edge (the air gap the simulations use)
     spacing: float = 75.0           # collector leading edge -> next emitter plane (s = 3d)
     ring_r: float = 15.0            # emitter / collector mean radius
     n_pins: int = 16
@@ -43,6 +43,10 @@ class Cfg:
     lug_r: float = 38.0             # tie-rod pitch radius (clears the inlet flare and standoffs)
     standoff_len: float = 100.0
     lugs: bool = True               # False for clustered builds clamped by shared plates
+
+    def tip_z(self):
+        """Needle-tip height above the emitter ring mid-plane (half ring thickness + exposed length)."""
+        return 1.5 + self.pin_len
 
 
 # --------------------------------------------------------------------------- helpers
@@ -170,10 +174,10 @@ PART_INFO = {  # name: (material, density g/mm3, process, notes)
     "spacer_gap": ("PETG or ASA", 1.27e-3, "3-D print", "Sets gap d; print several lengths to test d"),
     "spacer_stage": ("PETG or ASA", 1.27e-3, "3-D print", "Sets inter-stage spacing s"),
     "exit_ring": ("PETG or ASA", 1.27e-3, "3-D print", ""),
-    "emitter_mount_ring": ("Brass", 8.5e-3, "Machine or bend + solder", "16 x 0.82 mm needle holes"),
-    "needle": ("Stainless steel 304", 8.0e-3, "Buy (0.8 mm needle, ~0.05 mm tip)", "Press-fit or clamp; do not solder"),
-    "collector_tube": ("Aluminium 6061", 2.7e-3, "Cut from tube, deburr, round edges", "Simulations used a 4 mm-thick rounded section; 1 mm wall is lighter"),
-    "terminal_pin": ("Brass", 8.5e-3, "Buy/turn", "HV feed (emitters) and ground return (collectors)"),
+    "emitter_mount_ring": ("Brass", 8.5e-3, "Laser/waterjet-cut from 3 mm brass sheet, or machine", "16 x Ø0.82 needle holes (match the pin diameter)"),
+    "needle": ("Stainless steel 304", 8.0e-3, "Buy: stainless insect pins Ø0.5–0.8 (tip ≈ 0.05)", "Glue into the ring; do not solder"),
+    "collector_tube": ("Aluminum 6061", 2.7e-3, "Cut from Ø30–32 × 1 tube, deburr, round edges", "Simulations used a 4 mm-thick rounded section; 1 mm wall is lighter"),
+    "terminal_pin": ("Brass", 8.5e-3, "Brass M2 screw or 2 mm banana jack", "HV feed (emitters) and ground return (collectors)"),
     "tie_rod": ("Nylon M3", 1.15e-3, "Buy, cut to length", "Insulating; holds the stack together"),
     "standoff": ("PTFE or acetal", 2.2e-3, "Machine/buy", "Insulates the thruster from the balance"),
     "base_plate": ("Polycarbonate or acetal", 1.2e-3, "Laser cut / machine", "Sits on the balance; 64 mm hole lets air in"),
@@ -207,7 +211,7 @@ def build(c: Cfg):
         placed.append(("emitter_mount_ring", parts["emitter_mount_ring"].translate([0, 0, ze])))
         for th in np.linspace(0, 360, c.n_pins, endpoint=False):
             placed.append(("needle", parts["needle"].translate([c.ring_r, 0, ze]).rotate([0, 0, th])))
-        zc0 = ze + c.gap                               # collector leading edge
+        zc0 = ze + c.tip_z() + c.gap                   # collector leading edge, d beyond the needle tips
         zcc = zc0 + c.coll_len / 2                     # collector carrier mid-plane
         L = zcc - t / 2 - (ze + t / 2)
         spacer_lengths["spacer_gap"] = L

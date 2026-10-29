@@ -219,7 +219,7 @@ def main():
             mm = m.rotate([0, 0, phi]).translate([c[0], c[1], 0])     # HV terminal (0 deg) now points outward
             if n == "terminal_pin":
                 zc = cad.to_trimesh(mm).bounds[:, 2].mean()
-                n = "terminal_pin_hv" if any(abs(zc - ze) < 1 for ze in (0.0, C.gap + C.spacing)) else "terminal_pin_gnd"
+                n = "terminal_pin_hv" if any(abs(zc - ze) < 1 for ze in (0.0, C.tip_z() + C.gap + C.spacing)) else "terminal_pin_gnd"
             tagged.append((i, n, mm))
     plate_in, z_plate_bot = inlet_plate(z_stack_bot)
     plate_top = top_plate(z_top)
@@ -309,7 +309,7 @@ def main():
     a2.set_aspect("equal"); a2.grid(alpha=0.2); a2.set_xlabel("mm"); a2.set_ylabel("mm (air flows upward)")
     a2.set_title("Section through the cluster axis and thruster #1\n(shared inlet plate at the bottom, top plate "
                  "and merge joint at the top)", fontsize=10)
-    mats = ["Brass", "Stainless steel 304", "Aluminium 6061", "PETG or ASA", "Nylon M3", "PTFE or acetal",
+    mats = ["Brass", "Stainless steel 304", "Aluminum 6061", "PETG or ASA", "Nylon M3", "PTFE or acetal",
             "Polycarbonate or acetal"]
     fig.legend(handles=[Patch(fc=drw.MAT_COLOR[m], ec="#333", lw=0.5, label=m) for m in mats], loc="lower center",
                ncol=7, fontsize=8, frameon=False)

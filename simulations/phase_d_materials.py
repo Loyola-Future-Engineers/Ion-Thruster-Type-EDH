@@ -19,7 +19,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from ehd.constants import CONDUCTIVITY  # noqa: E402
 from ehd.plotting import DATA, save  # noqa: E402
 
-DENSITY = {"copper": 8960, "aluminium": 2700, "stainless_304": 8000, "tungsten": 19300}  # kg/m^3, handbook
+DENSITY = {"copper": 8960, "aluminum": 2700, "stainless_304": 8000, "tungsten": 19300}  # kg/m^3, handbook
 
 COMBOS = {  # label: (emitter, collector)
     "A": ("Copper ring/wire", "Smooth copper ring"),
@@ -28,11 +28,11 @@ COMBOS = {  # label: (emitter, collector)
     "D": ("Serrated copper ring", "Smooth copper ring"),
     "E": ("Stainless needles", "Copper mesh"),
     "F": ("Copper needles", "Copper mesh"),
-    "G": ("Stainless needles", "Aluminium ring"),
-    "H": ("Copper ring/wire", "Aluminium ring"),
+    "G": ("Stainless needles", "Aluminum ring"),
+    "H": ("Copper ring/wire", "Aluminum ring"),
     "I": ("Stainless needles", "Stainless ring"),
-    "J1": ("Tungsten wire ring", "Aluminium tube"),
-    "J2": ("Stainless needles", "Aluminium tube"),
+    "J1": ("Tungsten wire ring", "Aluminum tube"),
+    "J2": ("Stainless needles", "Aluminum tube"),
 }
 
 # Qualitative 1 (poor) - 5 (good) scores. Reasons for every score: docs/results/materials.md.
@@ -47,9 +47,9 @@ EMITTER = {
 COLLECTOR = {
     "Smooth copper ring": {"oxidation": 3, "erosion": 4, "manufacture": 4, "cost": 4, "stability": 4},
     "Copper mesh":        {"oxidation": 2, "erosion": 3, "manufacture": 3, "cost": 4, "stability": 3},
-    "Aluminium ring":     {"oxidation": 4, "erosion": 4, "manufacture": 4, "cost": 5, "stability": 4},
+    "Aluminum ring":     {"oxidation": 4, "erosion": 4, "manufacture": 4, "cost": 5, "stability": 4},
     "Stainless ring":     {"oxidation": 5, "erosion": 5, "manufacture": 3, "cost": 4, "stability": 4},
-    "Aluminium tube":     {"oxidation": 4, "erosion": 4, "manufacture": 5, "cost": 5, "stability": 4},
+    "Aluminum tube":     {"oxidation": 4, "erosion": 4, "manufacture": 5, "cost": 5, "stability": 4},
 }
 CRITERIA = ["oxidation", "erosion", "manufacture", "cost", "stability"]
 
@@ -105,7 +105,7 @@ def plot_scores():
 def plot_mass(mdf):
     fig, ax = plt.subplots(figsize=(9, 4))
     parts = mdf.part.unique(); mats = list(DENSITY)
-    cols = {"copper": "#b45309", "aluminium": "#9ca3af", "stainless_304": "#475569", "tungsten": "#1f2937"}
+    cols = {"copper": "#b45309", "aluminum": "#9ca3af", "stainless_304": "#475569", "tungsten": "#1f2937"}
     for j, m in enumerate(mats):
         s = mdf[mdf.material == m]
         ax.bar(np.arange(len(parts)) + (j - 1.5) * 0.2, s.mass_g, 0.2, color=cols[m], label=m)

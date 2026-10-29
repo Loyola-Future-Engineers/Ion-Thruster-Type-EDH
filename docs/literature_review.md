@@ -40,7 +40,7 @@ than guess. Nothing here was measured by this project.
 
 | Ref | Relevance |
 |---|---|
-| [Rickard et al. 2006](https://doi.org/10.1016/j.elstat.2005.09.005) | Ion-driven gas flows maximised by staging. Directly relevant to stage count and stage spacing. No abstract in Crossref, so details are not summarised here. |
+| [Rickard et al. 2006](https://doi.org/10.1016/j.elstat.2005.09.005) | Ion-driven gas flows maximized by staging. Directly relevant to stage count and stage spacing. No abstract in Crossref, so details are not summarized here. |
 | [Rickard & Dunn-Rankin 2007](https://doi.org/10.1016/j.elstat.2007.04.003) | Numerical simulation of a **tubular** ion-driven wind generator. Closest geometry to a cylindrical thruster. |
 | [Kim et al. 2010](https://doi.org/10.1016/j.elstat.2009.09.001) | Velocity and energy-conversion efficiency of a multistage ionic wind generator. Relevant to two- versus three-stage comparisons. |
 | [Moreau & Touchard 2008](https://doi.org/10.1016/j.elstat.2007.08.006) | Methods for enhancing the mechanical efficiency of electric wind. |
@@ -63,7 +63,7 @@ model. Reading them is the first follow-up task in `PROGRESS.md`.
 |---|---|---|
 | Longer gap → better thrust per watt | Established experimentally (Masuyama & Barrett 2013) | Literature |
 | Thrust density vs efficiency trade-off | Established (Gilmore & Barrett 2015; Xu et al. 2019) | Literature |
-| Stage spacing must avoid back-flow to the previous collector | Follows from the drift identity (section 3.3 of physics.md). Gilmore & Barrett 2015 varied stage spacing experimentally; their detailed results were not accessed here | Analysed here (`docs/results/spacing.md`) |
+| Stage spacing must avoid back-flow to the previous collector | Follows from the drift identity (section 3.3 of physics.md). Gilmore & Barrett 2015 varied stage spacing experimentally; their detailed results were not accessed here | Analyzed here (`docs/results/spacing.md`) |
 | Ring-to-ring axisymmetric multi-stage geometry with pins | No direct published dataset found in this session | Open: requires testing |
 | Copper vs stainless emitters | No quantitative comparison found. Bulk conductivity is irrelevant at µA–mA currents. Surface condition and erosion dominate. | Qualitative only |
 | Mesh vs ring collectors | No direct dataset found for this geometry | Modelled here; open |

@@ -1,4 +1,4 @@
-"""Phase C: ring diameters, collector shape and field visualisation (axisymmetric model).
+"""Phase C: ring diameters, collector shape and field visualization (axisymmetric model).
 
 Outputs: data/phase_c_*.csv, charts/C*.png|svg.
 Run: .venv/bin/python simulations/phase_c_geometry.py
@@ -71,7 +71,7 @@ def plot_diameters(df):
     e = df[df.study == "equal_dia"]
     ax = axs[2]
     ax.plot(e.De_mm.astype(float), e.op_thrust_mN, "o-", color=COLORS["thrust"], label="Thrust (mN)")
-    ax.plot(e.De_mm.astype(float), e.op_Q_cfm, "s-", color=COLORS["flow"], label="Flow (CFM)")
+    ax.plot(e.De_mm.astype(float), e.op_Q_Ls, "s-", color=COLORS["flow"], label="Flow (L/s)")
     ax.set_xlabel("Emitter = collector diameter (mm), bore 40 mm"); ax.set_title("Ring diameter (1 stage)")
     ax2 = ax.twinx(); ax2.plot(e.De_mm.astype(float), e.op_P_W, "^--", color=COLORS["power"]); ax2.grid(False)
     ax2.set_ylabel("Power (W)", color=COLORS["power"]); ax.legend(fontsize=8, loc="upper left")
@@ -105,7 +105,7 @@ def plot_shapes(df):
 
 def field_map():
     dev = ref.device(2, gaps=[GAP] * 2, spacings=[S])
-    geo = D.analyse_geometry(dev, n_lines=40)
+    geo = D.analyze_geometry(dev, n_lines=40)
     V = 20e3
     r = np.linspace(0.0005, 0.04, 220); z = np.linspace(-0.02, 0.12, 600)
     R, Z = np.meshgrid(r, z)

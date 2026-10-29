@@ -32,7 +32,7 @@ power supply**.
    (2.3 → 4.7 mN). Net thrust rises about 40 % over the unguarded device of the same length, and
    thrust per watt rises about 35 %.
 2. **It allows a shorter device.** With a guard, a 37.5 mm stage spacing outperforms the unguarded
-   75 mm design. That is 25 % shorter, with 25 % more thrust and 11 % better efficiency.
+   75 mm design: the electrode stack is 29 % shorter (92 vs 129 mm), with 25 % more thrust and 11 % better efficiency.
 3. **A guard below emitter voltage is counter-productive.** Ions land on it instead, which wastes power.
 4. **Checks** (Laplace field at 19.5 kV):
 

@@ -2,13 +2,13 @@
 
 This document states the physics the models rely on, and the simplifying
 assumptions used to reduce it to something computable. Sections marked
-**[literature]** summarise established theory; sections marked **[this
+**[literature]** summarize established theory; sections marked **[this
 project]** are derivations or choices made here.
 
 ## 1. Mechanism [literature]
 
 A positive DC corona forms in the thin region around a sharp emitter where the
-field is high enough for electron-impact ionisation to sustain itself
+field is high enough for electron-impact ionization to sustain itself
 (roughly a few hundred micrometres thick for thin wires). Outside it, the gap
 is a *unipolar drift region*: positive ions drift toward the grounded collector
 at velocity `w = mu E`. They collide with neutral molecules, which receive the
@@ -126,7 +126,7 @@ idea, in much greater depth, by [Gomez-Vega et al. 2023](https://doi.org/10.2514
 |---|---|---|
 | Laplace field (no space charge) for ion paths, in the reduced model | Checked with the space-charge solver (Phase H). The reduced model under-predicts back-flow (9 % vs 16 % at s = 2d) and over-predicts current about 2.2× | Now quantified |
 | Coaxial-equivalent Townsend closure for non-coaxial shapes | Current magnitude uncertain to roughly a factor of 2 | Treated as uncertainty band `k_scale` |
-| Peek onset with `m = 1` | Rough or oxidised electrodes start corona earlier | Onset overestimated for real parts |
+| Peek onset with `m = 1` | Rough or oxidized electrodes start corona earlier | Onset overestimated for real parts |
 | Mean-field sparkover `E_sp = 1 kV/mm` | Real sparkover depends on geometry, humidity and supply | ±40 % band in sensitivity runs |
 | Axisymmetric emitter (wire ring) | Discrete pins are handled by a separate 3-D model | See `docs/results/pins.md` |
 | 1-D duct flow, fully mixed | Real ionic wind is an annular jet near the ring | Volumetric flow probably overestimated |

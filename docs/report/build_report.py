@@ -102,21 +102,21 @@ def build():
         ["Stage spacing dominates multi-stage design", "Ions from a later emitter drift back to the previous collector: 49 % of its "
          "current at spacing = gap, 16 % at 2×, 6 % at 3×. Keep spacing ≥ 3× the gap."],
         ["A guard ring removes back-flow", "A smooth ring wired to the later emitter, 10–12 mm upstream, cuts back-flow to 0 %: "
-         "+40 % thrust, and a 25 % shorter device. No extra supply needed."],
+         "+25 % thrust while halving the stage spacing (75 → 37.5 mm). No extra supply needed."],
         ["Gap", "Use the largest gap the supply can drive to about 85 % of sparkover (about 30–35 mm at 30 kV)."],
         ["Stage count", "More stages = more thrust at a fixed voltage, but lower thrust per watt. A third stage gave "
          "+20 % thrust for +53 % power."],
         ["Pins", "Neighbouring needles shield each other: best at spacing ≈ pin length (12–16 pins on a 30 mm ring)."],
-        ["Collector", "A thin, smooth aluminium tube aligned with the flow. Collector types differ little electrically."],
+        ["Collector", "A thin, smooth aluminum tube aligned with the flow. Collector types differ little electrically."],
         ["Materials", "Conductivity is irrelevant (losses about 10⁻⁸ of input). Stainless needles keep their tips."],
-        ["Absolute performance", "Recommended two-stage build: about 3 mN at about 1.3 W (about 2.3 mN/W) at 19.5 kV."],
+        ["Absolute performance", "Recommended two-stage build: about 3 mN at about 1.3 W (about 2.3 mN/W) and 1.8 L/s at 19.5 kV. 173 mm long, about 129 g, parts about CAD $106–305."],
     ], [48 * mm, W - 48 * mm]))
     s.append(PageBreak())
 
     s += [P("2. Concept and design", H1),
-          img("diagrams/two_stage_section.png", caption="Recommended two-stage layout: 25 mm gaps, 75 mm stage "
-              "spacing, 30 mm rings, 40 mm insulating bore."),
-          P("Each stage carries 16 stainless needles on a brass ring (emitter) and a thin aluminium tube "
+          img("diagrams/two_stage_section.png", caption="Recommended two-stage layout: 25 mm gaps (needle tip to collector), "
+              "75 mm stage spacing, 30 mm rings, 40 mm insulating bore."),
+          P("Each stage carries 16 stainless needles on a brass ring (emitter) and a thin aluminum tube "
             "(collector). Both are held on three thin insulating spokes inside a 3-D-printed PETG/ASA housing, "
             "clamped by nylon tie rods. A rounded inlet reduces entry loss. One current-limited 30 kV supply "
             "feeds both emitters; collectors return to ground through separate current shunts, so back-flow can "
@@ -147,8 +147,7 @@ def build():
               "values about 2–3× high)."),
           img("charts/E1_pin_count_shielding.png", caption="Needle count, shielding and orientation (3-D model)."),
           img("charts/G1_sensitivity_tornado.png", caption="Sensitivity: sparkover field and current scale dominate "
-              "the absolute numbers; gap and spacing dominate among design choices."),
-          PageBreak()]
+              "the absolute numbers; gap and spacing dominate among design choices.")]
 
     s += [P("5. Recommendations", H1)]
     s.append(table([
@@ -157,7 +156,7 @@ def build():
         ["Electrode gap", "Largest the supply can drive to 85 % of sparkover (≈ 30–35 mm at 30 kV)"],
         ["Number of stages", "1 for efficiency, 2 for balance, 3 only for maximum thrust"],
         ["Emitter", "12–16 stainless needles (tip ≈ 0.05 mm) on a Ø30 ring; axial for thrust, radial for efficiency"],
-        ["Collector", "Thin aluminium tube, same diameter as the emitter ring, edges rounded"],
+        ["Collector", "Thin aluminum tube, same diameter as the emitter ring, edges rounded"],
         ["Housing", "Insulating tube (PETG/ASA). Never metal: it would arc."],
         ["Supply", "One current-limited supply, unless per-stage gaps differ"],
     ], [40 * mm, W - 40 * mm]))
@@ -165,7 +164,7 @@ def build():
     s.append(table([
         ["Build", "Configuration", "Simulated performance"],
         ["P1 (first build)", "2 stages, d = 25 mm, s = 75 mm, 16 axial needles, Al tube collectors, 19.5 kV",
-         "≈ 3.0 mN, 1.3 W, 2.3 mN/W"],
+         "≈ 3.0 mN, 1.3 W, 2.3 mN/W, 1.8 L/s"],
         ["P2 (after P1)", "As P1 + guard ring wired to emitter 2, 10 mm upstream, s = 37.5 mm",
          "≈ 3.7 mN, 1.4 W, 2.6 mN/W"],
         ["Most efficient", "1 stage, 30–35 mm gap, run just above onset", "≈ 3–10 mN/W, under 1 mN"],
@@ -173,22 +172,27 @@ def build():
     s.append(PageBreak())
 
     s += [P("6. Prototype P1", H1),
-          img("prototypes/P1_assembled_section.png", width=135 * mm, caption="Fully assembled P1 on its test "
-              "stand, section through the axis, coloured by material (design dimensions in mm).")]
-    s += [PageBreak(), img("prototypes/P1_parts_sheet.png", caption="Every P1 part, separated, with material, "
-                           "quantity and dimensions.")]
+          img("prototypes/P1_assembled_section.png", width=118 * mm, caption="Fully assembled P1 on its test "
+              "stand, section through the axis, coloured by material (design dimensions in mm)."),
+          P("Thruster mass about 129 g (173 mm long). Indicative parts cost CAD $106–305; test equipment is "
+            "normally available in a university lab.", BODY), PageBreak(),
+          img("prototypes/P1_parts_sheet.png", width=150 * mm, caption="Every P1 part, separated, with material, "
+              "quantity and dimensions.")]
     s.append(KeepTogether([P("Parts and materials", H2), table([
         ["Part", "Qty", "Material", "Key dimensions (mm)"],
-        ["Emitter needle", "32", "Stainless steel 304", "Ø0.8 × 9, 6 exposed, tip ≈ 0.05"],
+        ["Emitter needle", "32", "Stainless steel (insect pins)", "Ø0.5–0.8 × 9, 6 exposed, tip ≈ 0.05"],
         ["Emitter mounting ring", "2", "Brass", "Ø30, 2.5 × 3 section, 16 holes"],
-        ["Collector tube", "2", "Aluminium 6061", "Ø30, 1 wall, 10 long"],
+        ["Collector tube", "2", "Aluminum", "Ø30–32 OD, 1 wall, 10 long"],
         ["Carriers, spacers, inlet, exit ring", "9", "PETG or ASA (printed)", "Ø40 bore / Ø46 outside"],
-        ["Terminal pins", "4", "Brass", "Ø1.2 × 8"],
-        ["Tie rods", "3", "Nylon", "M3 × 156"],
+        ["Terminal pins", "4", "Brass", "M2 screw or 2 mm banana jack"],
+        ["Tie rods", "3", "Nylon", "M3 × 171"],
         ["Standoffs / base plate", "3 / 1", "PTFE or acetal / polycarbonate", "Ø12 × 100 / 140 × 140 × 6"],
     ], [50 * mm, 12 * mm, 50 * mm, W - 112 * mm])]))
-    s += [Spacer(1, 4), P("Thruster mass about 121 g. Indicative parts cost CAD $80–230; test equipment is "
-                          "normally available in a university lab.", BODY), Spacer(1, 8)]
+    s += [PageBreak(),
+          KeepTogether([P("P1x3 cluster", H2), img("prototypes/P1x3_exterior_with_joint.png", width=42 * mm),
+                        P("Three P1 thrusters 60 mm apart in a triangle, clamped between shared plates, with a "
+                          "printed 3-into-1 merge joint (Ø69.3 mm outlet, equal area). Merging gives one jet but "
+                          "slightly less total thrust than three separate thrusters.", BODY)]), Spacer(1, 6)]
 
     s += [P("7. Testing plan and safety", H1),
           P("The models are unvalidated. The tests are ranked by how much they would change the conclusions:"),
@@ -196,12 +200,12 @@ def build():
                  ["1", "Current to each collector separately, at several spacing/gap ratios", "Back-flow decides stage count and spacing"],
                  ["2", "Sparkover voltage vs clearance", "Sets the optimum gap and the operating voltage"],
                  ["3", "I–V curve per emitter type", "Calibrates the current scale"],
-                 ["4", "Thrust on a precision balance (exhaust up, insulated stand)", "Direct check of the main output"],
+                 ["4", "Thrust on a balance (0.01 g, ≥ 1 kg capacity; exhaust up, insulated stand)", "Direct check of the main output"],
                  ["5", "Needle count 8/12/16/24; collector type", "Checks shielding and flow-loss assumptions"]],
                 [8 * mm, 85 * mm, W - 93 * mm]),
           Spacer(1, 6),
           P("<b>Safety.</b> 10–30 kV DC can kill. Testing must be supervised, using a commercial current-limited "
-            "supply inside an interlocked, grounded enclosure, with a grounding stick and no energised adjustments. "
+            "supply inside an interlocked, grounded enclosure, with a grounding stick and no energized adjustments. "
             "Corona produces ozone and nitrogen oxides, so ventilation and an ozone monitor are required. Full "
             "procedure: docs/safety.md."),
           P("8. Limitations", H1),

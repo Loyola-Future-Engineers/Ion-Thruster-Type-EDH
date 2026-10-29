@@ -27,12 +27,12 @@ def make(n=2, gap=0.025, spacing=0.050, **kw):
 
 
 def metrics(dev, air=STANDARD_AIR, k_scale=1.0, geo=None):
-    geo = geo or D.analyse_geometry(dev, air, n_lines=48)
+    geo = geo or D.analyze_geometry(dev, air, n_lines=48)
     v = min(ref.V_SUPPLY_MAX, ref.SPARK_MARGIN * D.spark_limits(dev, air))
     if v <= geo.onset.min():
-        return {"thrust_mN": 0.0, "TP_mNW": np.nan, "Q_cfm": 0.0, "P_W": 0.0}
+        return {"thrust_mN": 0.0, "TP_mNW": np.nan, "Q_Ls": 0.0, "P_W": 0.0}
     r = D.evaluate(geo, v, air, k_scale)
-    return {"thrust_mN": r["thrust"] * 1e3, "TP_mNW": r["T_per_P"] * 1e3, "Q_cfm": r["Q"] * 2118.88, "P_W": r["P"]}
+    return {"thrust_mN": r["thrust"] * 1e3, "TP_mNW": r["T_per_P"] * 1e3, "Q_Ls": r["Q"] * 1000.0, "P_W": r["P"]}
 
 
 # ---------------------------------------------------------------- one-at-a-time sensitivity
@@ -105,7 +105,7 @@ def monte_carlo(n_samples=600, seed=1):
     for n_st in (1, 2, 3):
         rng = np.random.default_rng(seed)        # common random numbers: paired samples across designs
         dev = make(n=n_st)
-        geo0 = D.analyse_geometry(dev, n_lines=48)
+        geo0 = D.analyze_geometry(dev, n_lines=48)
         peek0 = corona.peek_field_wire(dev.stages[0].emitter_wire, STANDARD_AIR)
         for i in range(n_samples):
             air = STANDARD_AIR.with_(mobility_ref=rng.uniform(1.8e-4, 2.2e-4),
@@ -131,7 +131,7 @@ def monte_carlo(n_samples=600, seed=1):
     summ.to_csv(DATA / "phase_g_monte_carlo_summary.csv")
     fig, axs = plt.subplots(1, 3, figsize=(13, 4))
     for ax, (col, lab) in zip(axs, [("thrust_mN", "Thrust (mN)"), ("TP_mNW", "Thrust/power (mN/W)"),
-                                    ("Q_cfm", "Flow (CFM)")]):
+                                    ("Q_Ls", "Flow (L/s)")]):
         data = [df[df.n == n][col].dropna() for n in (1, 2, 3)]
         parts = ax.violinplot(data, positions=[1, 2, 3], showmedians=True, quantiles=[[0.05, 0.95]] * 3)
         for pc, n in zip(parts["bodies"], (1, 2, 3)):
@@ -152,7 +152,7 @@ def pareto_case(args):
     if kind == "tube":
         kw["collector_len"] = 0.010
     dev = make(n=n, gap=g, spacing=g * ratio, **kw)
-    geo = D.analyse_geometry(dev, n_lines=40)
+    geo = D.analyze_geometry(dev, n_lines=40)
     vmax = min(ref.V_SUPPLY_MAX, ref.SPARK_MARGIN * D.spark_limits(dev))
     rows = []
     if vmax <= geo.onset.min():
@@ -161,12 +161,12 @@ def pareto_case(args):
         r = D.evaluate(geo, V)
         rows.append({"n": n, "gap_mm": g * 1e3, "s_over_d": ratio, "dia_mm": dia * 1e3, "collector": kind,
                      "V_kV": V / 1e3, "P_W": r["P"], "thrust_mN": r["thrust"] * 1e3, "TP_mNW": r["T_per_P"] * 1e3,
-                     "Q_cfm": r["Q"] * 2118.88, "length_mm": dev.length() * 1e3})
+                     "Q_Ls": r["Q"] * 1000.0, "length_mm": dev.length() * 1e3})
     return rows
 
 
 def pareto_mask(x, y):
-    """Points not dominated when maximising both x and y."""
+    """Points not dominated when maximizing both x and y."""
     order = np.argsort(-x)
     best_y, mask = -np.inf, np.zeros(len(x), bool)
     for i in order:
@@ -199,18 +199,18 @@ def pareto():
     axs[0].set_title("Thrust vs efficiency trade-off"); axs[0].legend(fontsize=8, markerscale=3)
     for n in (1, 2, 3):
         s = df[df.n == n]
-        axs[1].scatter(s.length_mm, s.Q_cfm, s=6, alpha=0.35, color=COLORS[f"{n}-stage"], label=f"{n}-stage")
-    mask2 = pareto_mask(-df.length_mm.values, df.Q_cfm.values)
+        axs[1].scatter(s.length_mm, s.Q_Ls, s=6, alpha=0.35, color=COLORS[f"{n}-stage"], label=f"{n}-stage")
+    mask2 = pareto_mask(-df.length_mm.values, df.Q_Ls.values)
     f2 = df[mask2].sort_values("length_mm")
-    axs[1].step(f2.length_mm, f2.Q_cfm, "k-", where="post", lw=1.5, label="Pareto front (short + high flow)")
-    axs[1].set_xlabel("Device length (mm)"); axs[1].set_ylabel("Volumetric flow (CFM)")
+    axs[1].step(f2.length_mm, f2.Q_Ls, "k-", where="post", lw=1.5, label="Pareto front (short + high flow)")
+    axs[1].set_xlabel("Device length (mm)"); axs[1].set_ylabel("Volumetric flow (L/s)")
     axs[1].set_title("Flow vs device length"); axs[1].legend(fontsize=8, markerscale=3)
     fig.suptitle(f"Design-space search: {len(jobs)} geometries x 10 voltages", fontweight="bold")
     fig.tight_layout()
     save(fig, "G3_pareto_fronts", assumptions=A + " Gaps 15-35 mm, s/d 1.5-3, ring 24-36 mm, torus or 10 mm tube "
          "collectors, voltage onset..max safe.")
     pd.set_option("display.width", 200)
-    print(front[["n", "gap_mm", "s_over_d", "dia_mm", "collector", "V_kV", "P_W", "thrust_mN", "TP_mNW", "Q_cfm",
+    print(front[["n", "gap_mm", "s_over_d", "dia_mm", "collector", "V_kV", "P_W", "thrust_mN", "TP_mNW", "Q_Ls",
                  "length_mm"]].round(2).to_string())
     return front
 

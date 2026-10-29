@@ -9,7 +9,7 @@ Script: `simulations/phase_g_sensitivity_pareto.py`. Data: `data/phase_g_*.csv`.
 
 ## G1: one-at-a-time sensitivity (2-stage reference, d = 25 mm, s = 50 mm)
 
-Base values at the maximum safe voltage: thrust 9.8 mN, T/P 2.96 mN/W, flow 6.8 CFM, power 3.3 W.
+Base values at the maximum safe voltage: thrust 9.8 mN, T/P 2.96 mN/W, flow 3.2 L/s, power 3.3 W.
 
 ![tornado](../../charts/G1_sensitivity_tornado.png)
 
@@ -74,12 +74,12 @@ collectors) × 10 voltages from onset to the maximum safe value.
     device length (right panel).
 - Example front points (model values, ×3 uncertainty applies):
 
-| Stages | V (kV) | P (W) | Thrust (mN) | T/P (mN/W) | Flow (CFM) | Length (mm) |
+| Stages | V (kV) | P (W) | Thrust (mN) | T/P (mN/W) | Flow (L/s) | Length (mm) |
 |---|---|---|---|---|---|---|
-| 1 | 10.9 | 0.05 | 0.75 | 14.5 | 1.9 | 39 |
-| 2 | 17.4 | 1.0 | 8.3 | 8.2 | 6.2 | 179 |
-| 3 | 19.5 | 2.5 | 16.9 | 6.8 | 8.9 | 319 |
-| 3 | 28.0 | 9.0 | 42.6 | 4.7 | 14.1 | 319 |
+| 1 | 10.9 | 0.05 | 0.75 | 14.5 | 0.9 | 39 |
+| 2 | 17.4 | 1.0 | 8.3 | 8.2 | 2.9 | 179 |
+| 3 | 19.5 | 2.5 | 16.9 | 6.8 | 4.2 | 319 |
+| 3 | 28.0 | 9.0 | 42.6 | 4.7 | 6.7 | 319 |
 
 The thrust-versus-efficiency trade-off has the same form as the one reported
 experimentally for corona EHD by [Gilmore & Barrett 2015](https://doi.org/10.1098/rspa.2014.0912)

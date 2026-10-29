@@ -90,7 +90,7 @@ class Geometry:
     residual: float
 
 
-def analyse_geometry(dev: Device, air: Air = STANDARD_AIR, n_lines=64, n_per=40):
+def analyze_geometry(dev: Device, air: Air = STANDARD_AIR, n_lines=64, n_per=40):
     els = build_electrodes(dev, 1.0)
     sol = csm.solve(els, n_per)
     onset, lines = [], []

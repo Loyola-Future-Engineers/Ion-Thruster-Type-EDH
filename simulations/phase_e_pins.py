@@ -45,18 +45,19 @@ def count_and_orientation():
         e1 = s[s.n_pins == 1].E_tip_per_V.iloc[0]
         axs[0].plot(s.n_pins, s.E_tip_per_V / e1, "o-", color=OCOL[o], label=o)
         axs[1].plot(s.n_pins, s.V0_kV, "o-", color=OCOL[o], label=o)
-        axs[2].plot(s.n_pins, s.T_mN, "o-", color=OCOL[o], label=o)
+        t_ref = df[(df.orientation == "axial") & (df.n_pins == 16)].T_mN.iloc[0]
+        axs[2].plot(s.n_pins, s.T_mN / t_ref, "o-", color=OCOL[o], label=o)
     axs[0].set_ylabel("Tip field / single-pin tip field"); axs[0].set_title("Mutual shielding")
     axs[1].set_ylabel("Corona onset voltage (kV)"); axs[1].set_title("Onset vs pin count")
-    axs[2].set_ylabel(f"Thrust at {V/1e3:.0f} kV (mN, single stage, no flow losses)")
+    axs[2].set_ylabel(f"Relative thrust at {V/1e3:.0f} kV (16 axial pins = 1)")
     axs[2].set_title("Thrust vs pin count")
     for ax in axs:
         ax.set_xscale("log", base=2); ax.set_xlabel("Number of pins on the ring")
         ax.set_xticks([1, 2, 4, 8, 16, 32, 64]); ax.get_xaxis().set_major_formatter(plt.ScalarFormatter())
     axs[0].legend(fontsize=8)
     fig.tight_layout()
-    save(fig, "E1_pin_count_shielding", assumptions=A + " Current = min(N x Sigmond pin current, ring Townsend "
-         "ceiling): HEURISTIC; read trends, not absolute values.")
+    save(fig, "E1_pin_count_shielding", assumptions=A + " Thrust shown relative: the pin current closure is a "
+         "HEURISTIC, so read trends, not absolute values.")
 
     s16 = df[df.n_pins == 16].set_index("orientation").loc[ORIENT]
     ref = s16.loc["axial"]
@@ -91,11 +92,12 @@ def sharpness():
     for n, col in ((1, COLORS["1-stage"]), (16, COLORS["2-stage"])):
         s = df[df.n_pins == n]
         axs[0].plot(s.tip_mm, s.V0_kV, "o-", color=col, label=f"3-D CSM, {n} pin(s)")
-        axs[1].plot(s.tip_mm, s.T_mN, "o-", color=col, label=f"{n} pin(s)")
+        t_ref = df[(df.n_pins == 16) & np.isclose(df.tip_mm, 0.05)].T_mN.iloc[0]
+        axs[1].plot(s.tip_mm, s.T_mN / t_ref, "o-", color=col, label=f"{n} pin(s)")
     s = df[df.n_pins == 1]
     axs[0].plot(s.tip_mm, s.V0_hyperboloid_kV, "k--", label="Hyperboloid point-plane formula (1 pin)")
     axs[0].set_ylabel("Corona onset voltage (kV)"); axs[0].set_title("Tip sharpness vs onset")
-    axs[1].set_ylabel(f"Thrust at {V/1e3:.0f} kV (mN)"); axs[1].set_title("Tip sharpness vs thrust")
+    axs[1].set_ylabel(f"Relative thrust at {V/1e3:.0f} kV (16 pins, 0.05 mm = 1)"); axs[1].set_title("Tip sharpness vs thrust")
     for ax in axs:
         ax.set_xscale("log"); ax.set_xlabel("Tip radius of curvature (mm)"); ax.legend(fontsize=8)
     ax2 = axs[0].twinx(); ax2.plot(s.tip_mm, s.E_peek_kV_per_mm, ":", color=COLORS["efficiency"]); ax2.grid(False)

@@ -11,15 +11,15 @@ from .constants import STANDARD_AIR
 def _metrics(prefix, r):
     if r is None:
         return {f"{prefix}{k}": np.nan for k in ("V_kV", "I_uA", "P_W", "thrust_mN", "u_ms",
-                                                    "Q_m3s", "Q_cfm", "TP_mNW")}
+                                                    "Q_m3s", "Q_Ls", "TP_mNW")}
     return {f"{prefix}V_kV": r["V"] / 1e3, f"{prefix}I_uA": r["I"] * 1e6, f"{prefix}P_W": r["P"],
             f"{prefix}thrust_mN": r["thrust"] * 1e3, f"{prefix}u_ms": r["u"],
-            f"{prefix}Q_m3s": r["Q"], f"{prefix}Q_cfm": r["Q"] * 2118.88,
+            f"{prefix}Q_m3s": r["Q"], f"{prefix}Q_Ls": r["Q"] * 1000.0,
             f"{prefix}TP_mNW": r["T_per_P"] * 1e3}
 
 
 def run(dev, air=STANDARD_AIR, p_target=ref.P_COMPARE, n_lines=48, k_scale=1.0, label=None):
-    geo = D.analyse_geometry(dev, air, n_lines=n_lines)
+    geo = D.analyze_geometry(dev, air, n_lines=n_lines)
     v_sp = D.spark_limits(dev, air)
     v_op = min(ref.V_SUPPLY_MAX, ref.SPARK_MARGIN * v_sp)
     row = {"label": label, "n_stages": len(dev.stages),

@@ -18,13 +18,13 @@ at 2 W with the same 85 % cap.
 
 ![single stage](../../charts/B1_single_stage_gap_sweep.png)
 
-| Gap (mm) | Onset (kV) | Operating V (kV) | Thrust (mN) | Flow (CFM) | Power (W) | T/P (mN/W) |
+| Gap (mm) | Onset (kV) | Operating V (kV) | Thrust (mN) | Flow (L/s) | Power (W) | T/P (mN/W) |
 |---|---|---|---|---|---|---|
-| 15.7 | 7.5 | 11.6 | 3.2 | 3.9 | 0.71 | 4.5 |
-| 27.1 | 8.1 | 21.3 | 6.9 | 5.7 | 1.59 | 4.3 |
-| 35.5 | 8.2 | 28.4 | 8.0 | 6.1 | 1.93 | 4.1 |
-| 46.5 | 8.4 | 30.0 (supply limit) | 5.2 | 4.9 | 1.06 | 4.9 |
-| 80.0 | 8.5 | 30.0 (supply limit) | 1.6 | 2.7 | 0.27 | 6.0 |
+| 15.7 | 7.5 | 11.6 | 3.2 | 1.8 | 0.71 | 4.5 |
+| 27.1 | 8.1 | 21.3 | 6.9 | 2.7 | 1.59 | 4.3 |
+| 35.5 | 8.2 | 28.4 | 8.0 | 2.9 | 1.93 | 4.1 |
+| 46.5 | 8.4 | 30.0 (supply limit) | 5.2 | 2.3 | 1.06 | 4.9 |
+| 80.0 | 8.5 | 30.0 (supply limit) | 1.6 | 1.3 | 0.27 | 6.0 |
 
 Findings:
 1. **At a fixed voltage**, thrust per watt rises with the gap (`T/P = <dz>/(mu V)`) while

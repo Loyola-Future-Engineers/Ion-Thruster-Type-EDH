@@ -3,131 +3,145 @@
 [![tests](https://github.com/roosterbrown14/Ion-Thruster-Type-EDH/actions/workflows/tests.yml/badge.svg)](https://github.com/roosterbrown14/Ion-Thruster-Type-EDH/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-A design study of a compact, **multi-stage electrohydrodynamic (EHD) ionic-wind thruster**.
-Ring-shaped emitters and collectors are stacked along a 40 mm tube. Each stage ionises air and
-pushes it through the bore, with no moving parts. The repository contains the physics, the
-simulation code, the results, 3-D models of every part, and a plan for testing a prototype safely.
+A design study of a small **ionic-wind (electrohydrodynamic, EHD) thruster**: a 40 mm tube that
+pushes air using high voltage and no moving parts. The repository covers the physics, the
+simulations, the recommended design, 3-D models of every part, a costed build plan in Canadian
+dollars, and a safe test plan. All units are SI metric (mm, kV, mN, L/s, g, °C, kPa).
 
-> **Full report (PDF, 11 pages):** [docs/report/Ion_Thruster_Type_EDH_report.pdf](docs/report/Ion_Thruster_Type_EDH_report.pdf)
-
-> **Status:** modelling and design are complete. **No prototype has been built and nothing has
-> been measured yet.** Every number below comes from simulation and should be treated as an
-> estimate, with real hardware possibly differing by 2–3×.
+> **Status:** design and simulation are complete. **Nothing has been built or measured yet.**
+> Every performance number is a simulation estimate; real hardware may differ by 2–3×.
+> Full report (PDF, 10 pages): [docs/report/Ion_Thruster_Type_EDH_report.pdf](docs/report/Ion_Thruster_Type_EDH_report.pdf)
 
 ![Recommended two-stage layout](diagrams/two_stage_section.png)
 
-## Summary: what makes the best and most efficient EHD thruster
+## Summary
+
+### How it works
+A ring of sharp needles at about +20 kV (the **emitter**) ionizes the air next to the tips. The ions
+are pulled toward a grounded ring (the **collector**). On the way they bump into air molecules
+and drag the air along. That makes a jet and a small thrust. Stacking two or three of these
+emitter–collector **stages** along the tube adds more push.
 
 ### The one rule behind everything
-For every ion that crosses the gap, the push on the air is fixed by how far it travels along the
-axis. The power it costs is fixed by the voltage it falls through:
-
 ```
-thrust / power  =  (axial distance the ions travel) / (ion mobility × voltage)
+thrust per watt  =  (distance the ions travel along the tube) ÷ (ion mobility × voltage)
 ```
+Long gaps at low voltage are efficient. High voltage gives more thrust. You cannot maximize both,
+and ions that travel the **wrong way** (backwards) subtract thrust.
 
-So **efficiency wants long gaps at low voltage, and thrust wants high voltage and high current.**
-You cannot maximise both. Every design choice below either moves you along that trade-off or stops
-you wasting power on top of it.
+### What the simulations found
+1. **Spacing between stages matters most.** Ions from the second emitter can drift *backwards*
+   to the first collector. That happens to 49 % of its current if the stages are as close as the gap,
+   16 % at 2× the gap, and 6 % at 3× the gap. **Keep stages at least 3× the gap apart.**
+2. **A guard ring fixes it.** A smooth ring wired to the second emitter, placed just upstream of it,
+   stops back-flow completely: about **+25 % thrust while cutting the stage spacing from 75 to
+   37.5 mm**, with no extra power supply. This is the suggested upgrade (P2).
+3. **Use the largest gap your supply can drive.** With a 30 kV supply that is about 25–35 mm. The
+   sparkover limit (about 1 kV/mm) sets the voltage.
+4. **More stages = more thrust, less efficiency.** A third stage adds about 20 % thrust for about
+   53 % more power.
+5. **12–16 needles per ring** is the sweet spot (needles closer together than their length shield
+   each other). **Thin aluminum tube collectors** block the least air. **Material conductivity
+   doesn't matter**; choose stainless needles because they stay sharp.
+6. **Expected performance of the recommended build: about 3 mN of thrust at about 1.3 W and
+   19.5 kV, with about 1.8 L/s of airflow.** For scale, 3 mN is the weight of about 0.3 g.
 
-### The factors, in order of importance
+### Recommended first build (P1)
 
-| # | Factor | Best choice | Why it matters | Confidence |
-|---|---|---|---|---|
-| 1 | **Spacing between stages** | At least **3× the electrode gap** | Ions from a later emitter drift *backwards* to the previous collector and push the air the wrong way. Back-flow is 49 % of the current at 1× the gap, 16 % at 2×, 6 % at 3×. | Medium–high: both models agree on the trend; the numbers need measurement |
-| 2 | **Electrode gap** | The **largest gap your supply can drive to about 85 % of sparkover**. About 30–35 mm for a 30 kV supply. | A longer gap gives more thrust per watt. Beyond what the supply can drive, thrust collapses. | High for the trend; the exact value depends on the measured sparkover |
-| 3 | **Operating voltage** | Lower voltage for efficiency, up to the 85 %-of-sparkover limit for thrust | Sets where you sit on the thrust/efficiency trade-off | Physics |
-| 4 | **Number of stages** | **1 stage** for best efficiency. **2 stages** for the best balance. **3 only if thrust matters more than power and length.** | Extra stages add thrust at the same voltage, but each costs more power than it returns (third stage: +20 % thrust for +53 % power) | High in the models |
-| 5 | **Emitter sharpness** | Fine tips or wire (about 0.05 mm radius or less) | Sharper tips start the corona at lower voltage, which widens the usable voltage window | High (Peek's law) |
-| 6 | **Pin count** | Pin spacing about equal to pin length. That is **12–16 pins on a 30 mm ring**. | More pins add current until neighbouring pins shield each other. Beyond that, more pins make it worse. | Medium (trend robust, optimum approximate) |
-| 7 | **Pin direction** | **Axial** (pointing downstream) for thrust. **Radial** for about 30 % better thrust per watt, but outward pins need a wider bore. Never pointing inward. | Radial tips keep the full axial travel distance. Axial tips are closer to the collector, so they draw more current. | Medium |
-| 8 | **Collector shape** | A **thin, smooth tube aligned with the flow**, edges well rounded | Electrically, collector types differ by only about 12 %. What matters is how much they block the air. A mesh gains nothing electrically. | Medium (flow-loss values assumed) |
-| 9 | **Ring diameters** | Emitter ring as large as the bore allows, with wall clearance. Collector the same size or slightly smaller. | A bigger ring means more emitting length and more current. A larger collector only blocks more flow. | Medium |
-| 10 | **Housing** | An **insulating** (plastic) tube. **Never a metal one.** | The plastic tube adds about 7 % force and makes behaviour predictable. A grounded metal tube would arc to the emitter. | High |
-| 11 | **Gap per stage** | Equal gaps on one shared supply. Decreasing gaps (for example 32/18/12 mm) only with a separate supply per stage. | With one supply, the smallest gap limits every stage's voltage | Medium |
-| 12 | **Air conditions** | Dense, cool air. Expect less in heat or at altitude. | About −24 % thrust at 90 kPa (about 1 km altitude). Humidity changes sparkover. | Medium |
-| 13 | **Electrode material** | Choose for durability (stainless needles, aluminium collectors), not conductivity | Electrode resistance wastes about 10⁻⁸ of the power. Sharp copper tips blunt and tarnish. | High |
-| 14 | **Inlet and obstructions** | Rounded inlet, thin spokes, nothing extra in the bore | Every obstruction converts thrust into pressure loss | Medium |
-| ★ | **Guard ring** (new idea) | A smooth ring wired to each later emitter, about 10–12 mm upstream of it | Removes back-flow completely in simulation: +40 % thrust and a 25 % shorter device, with no extra supply ([guard.md](docs/results/guard.md)) | Simulation only; the top candidate for prototype P2 |
-
-### Two recipes
-
-| Goal | Configuration | Model estimate |
-|---|---|---|
-| **Most efficient** | 1 stage, 30–35 mm gap, 16 radial needles (needs a wider bore) or a fine wire ring, tube collector, run just above corona onset | About 3–10 mN/W, but under 1 mN of thrust |
-| **Best balance** (recommended first build, P1) | 2 stages, 25 mm gaps, 75 mm stage spacing, 16 axial stainless needles, aluminium tube collectors, 40 mm plastic bore, one 30 kV supply run at about 19.5 kV (85 % of sparkover) | About 3 mN at about 1.3 W (about 2.3 mN/W) |
-| **Next step up** (P2, after P1 is tested) | As P1, plus a guard ring wired to emitter 2, 10 mm upstream, which lets the stage spacing shrink to 37.5 mm | About 3.7 mN at about 1.4 W (about 2.6 mN/W) |
-
-The full answers to all 16 original research questions are in
-**[docs/recommendations.md](docs/recommendations.md)**.
-
-## 3-D design
-
-Every part of the recommended build is modelled in [`cad/`](cad/README.md): printed housing
-sections, electrode carriers, a brass emitter ring, stainless needles, aluminium collector tubes,
-terminals, tie rods and an insulating test stand. Each part is a watertight STL. There are 2- and 3-stage
-assemblies, interactive 3-D viewers (`cad/viewer_2stage.html`), a bill of materials, and an
-interference check (no clashes). The two-stage thruster is 158 mm long overall (including the inlet flare) and weighs about 121 g.
-
-| Section through the axis | Exterior on the test stand |
+| | |
 |---|---|
-| ![](diagrams/cad_2stage_section.png) | ![](diagrams/cad_2stage_exterior.png) |
+| Layout | 2 stages in a Ø40 mm plastic tube; needle-tip-to-collector gap 25 mm; 75 mm between stages |
+| Emitters | 2 brass rings (Ø30 mm), each with 16 stainless steel pins, 6 mm exposed, pointing downstream |
+| Collectors | 2 aluminum tubes, Ø30–32 mm × 1 mm wall × 10 mm long, edges rounded |
+| Housing | 3-D-printed PETG or ASA, clamped by 3 nylon M3 tie rods |
+| Supply | One current-limited 30 kV supply, run at about 19.5 kV (about 78 % of sparkover) |
+| Size and mass | 173 mm long, about 129 g (without test stand) |
+| Parts cost | **CAD $106–305** (test equipment is usually available in a university lab) |
+| Simulated result | ≈ 3 mN thrust, ≈ 1.3 W, ≈ 2.3 mN/W, ≈ 1.8 L/s airflow |
+
+Next steps: build P1, then measure **sparkover voltage** and the **current to each collector separately**
+(this measures back-flow directly). See [experiments/test_plan.md](experiments/test_plan.md) and
+**[docs/safety.md](docs/safety.md)** first. High voltage can kill.
+
+### What matters most
+
+| Factor | Best choice | Confidence |
+|---|---|---|
+| Spacing between stages | ≥ 3× the gap, or a guard ring at emitter voltage | Medium–high: both models agree on the trend; numbers need measuring |
+| Electrode gap | Largest the supply can drive to about 85 % of sparkover | High (trend matches published experiments) |
+| Number of stages | 1 for efficiency, 2 for balance, 3 only for maximum thrust | High in the models |
+| Needles | 12–16 sharp stainless pins per Ø30 mm ring; axial for thrust | Medium |
+| Collector | Thin aluminum tube, same diameter as the emitter ring | Medium (airflow losses are estimated) |
+| Housing | Insulating plastic tube. **Never metal** (it would arc to the emitter) | High |
+| Supply | One supply unless the stage gaps differ | Medium |
+| Air | Cool, dense air helps; expect about −25 % thrust at 1 km altitude | Medium |
+
+All 16 research questions are answered in **[docs/recommendations.md](docs/recommendations.md)**.
+
+## Designs
+
+| | Design | Where |
+|---|---|---|
+| **P1** | Two-stage thruster, recommended first build | [prototypes/](prototypes/README.md): drawings, parts, materials, cost, assembly, blank results sheet |
+| **P2** | P1 plus a guard ring, shorter stage spacing (37.5 mm) | [docs/results/guard.md](docs/results/guard.md) (simulation only) |
+| **P1x3** | Three P1s in a triangle, 60 mm apart, with a 3-into-1 merge joint | [prototypes/](prototypes/README.md#p1x3-compact-triangular-cluster-with-a-3-into-1-merge-joint) |
+
+| P1 assembled (section) | P1 on its test stand | P1x3 with merge joint |
+|---|---|---|
+| ![](prototypes/P1_assembled_section.png) | ![](diagrams/cad_2stage_exterior.png) | ![](prototypes/P1x3_exterior_with_joint.png) |
+
+Every part is a watertight STL in [`cad/stl/`](cad/stl/), with interactive 3-D viewers
+([`cad/viewer_2stage.html`](cad/viewer_2stage.html), [`prototypes/P1x3_viewer.html`](prototypes/P1x3_viewer.html)).
 
 ## Key charts
 
 | | |
 |---|---|
-| ![](charts/H2_spacecharge_backflow.png) **Back-flow vs stage spacing** (space-charge solver) | ![](charts/H4_charge_density_map.png) **Ion cloud and equipotentials**, two stages |
-| ![](charts/B1_single_stage_gap_sweep.png) **Gap sweep**, one stage* | ![](charts/F1_stage_count_thrust_vs_power.png) **1 vs 2 vs 3 stages**, thrust vs power* |
-| ![](charts/E1_pin_count_shielding.png) **Pin count and shielding** | ![](charts/G1_sensitivity_tornado.png) **What the results are most sensitive to*** |
+| ![](charts/H2_spacecharge_backflow.png) **Back-flow vs stage spacing** | ![](charts/I1_guard_electrode.png) **Guard ring vs no guard** |
+| ![](charts/H4_charge_density_map.png) **Ion cloud inside the thruster** | ![](charts/E1_pin_count_shielding.png) **Needle count and shielding** |
+| ![](charts/B1_single_stage_gap_sweep.png) **Gap sweep, one stage*** | ![](charts/G1_sensitivity_tornado.png) **What the results depend on most*** |
 
-\*Reduced-order model: the trends are reliable, but absolute values are about 2–3× high (see [space-charge results](docs/results/spacecharge.md)).
-All 27 charts are in `charts/` as PNG and SVG. An interactive design-space explorer is in `charts/interactive_pareto.html`.
+\*Fast reduced model: trends are reliable, absolute values about 2–3× high (see [space-charge results](docs/results/spacecharge.md)).
+All charts are in `charts/` as PNG and SVG.
 
 ## How the models work
 
-Positive corona at the emitter creates ions. In the drift region they move at velocity `mu E` and
-pass their momentum to the air. For each stream of ions, the force on the air is exactly
-`current × axial distance / mobility`. That is where the "one rule" above comes from, and why ions that
-land *upstream* subtract thrust.
+Two levels of simulation, both in [`src/ehd/`](src/ehd/):
 
-Two levels of model are used:
+1. **Fast reduced model** for the large parameter sweeps. It uses an exact electrostatic field
+   solver, Peek's law for corona onset, Townsend's current law along traced ion paths, and a
+   simple duct model for the airflow. A separate 3-D model handles the individual needles.
+2. **Self-consistent space-charge solver** for the key results. It solves the electric field and the
+   ion cloud together. It matches the exact textbook solution for a wire inside a cylinder within
+   2 %, and it corrected the fast model's thrust (about 3× too high) and back-flow (too low).
 
-1. **Reduced-order model** (fast; used for the large parameter sweeps). An exact axisymmetric
-   electrostatic solver (charge simulation method) gives the field. Peek's law gives corona onset.
-   Townsend's current law is applied along traced ion paths. A 1-D duct momentum balance gives airflow.
-   A separate 3-D model handles discrete needles.
-2. **Self-consistent space-charge solver** (slower; used to check and correct the key results). It
-   solves Poisson's equation and ion drift together, with the standard Kaptsov corona condition. It
-   matches the exact solution for a wire inside a cylinder to within 2 %.
-
-Navier–Stokes airflow is not simulated. Details: [physics](docs/physics.md) and [methodology](docs/methodology.md).
+Not simulated: detailed airflow (CFD) and individual needles with space charge. Details are in
+[physics.md](docs/physics.md) and [methodology.md](docs/methodology.md).
 
 ## Documents
 
 | Read | For |
 |---|---|
-| [Project report (PDF)](docs/report/Ion_Thruster_Type_EDH_report.pdf) | The whole project in 11 pages |
-| [recommendations.md](docs/recommendations.md) | Answers to the research questions, build configurations, what to test |
-| [results/spacecharge.md](docs/results/spacecharge.md) · [results/guard.md](docs/results/guard.md) | Most accurate results: back-flow, stage count, housing, guard ring |
-| [results/spacing.md](docs/results/spacing.md) · [geometry.md](docs/results/geometry.md) · [materials.md](docs/results/materials.md) · [stages.md](docs/results/stages.md) · [sensitivity_optimisation.md](docs/results/sensitivity_optimisation.md) | Detailed parameter studies |
+| [Project report (PDF)](docs/report/Ion_Thruster_Type_EDH_report.pdf) | The whole project in 10 pages |
+| [recommendations.md](docs/recommendations.md) | Answers to all research questions, build options, what to test |
+| [results/spacecharge.md](docs/results/spacecharge.md) · [results/guard.md](docs/results/guard.md) | The most accurate results |
+| [spacing](docs/results/spacing.md) · [geometry](docs/results/geometry.md) · [materials](docs/results/materials.md) · [stages](docs/results/stages.md) · [sensitivity](docs/results/sensitivity_optimization.md) | Detailed parameter studies |
 | [physics.md](docs/physics.md) · [methodology.md](docs/methodology.md) | Equations, assumptions, numerical methods, verification |
 | [literature_review.md](docs/literature_review.md) | 24 published sources, each checked against its DOI |
-| [prototypes/README.md](prototypes/README.md) | Prototype P1 drawings, parts, materials and assembly steps; P1x3 triangular cluster and merge joint |
-| [experiments/test_plan.md](experiments/test_plan.md) | How to test a prototype, with CSV templates and an uncertainty script |
-| [safety.md](docs/safety.md) | **Read before any high-voltage work** |
+| [prototypes/README.md](prototypes/README.md) · [cad/README.md](cad/README.md) | Build package and 3-D models |
+| [experiments/test_plan.md](experiments/test_plan.md) | How to test, with CSV templates and an uncertainty script |
+| [safety.md](docs/safety.md) | **Read before any high-voltage work** (Canadian requirements included) |
 
 ## Repository layout
 
 | Path | Contents |
 |---|---|
-| `src/ehd/` | Model code: corona laws, field solver, device model, 3-D pin model, space-charge solver |
+| `src/ehd/` | Model code |
 | `simulations/` | One script per study, plus verification and diagrams |
-| `cad/` | Part models, assemblies, viewers, bill of materials |
-| `prototypes/` | Prototype P1 build package (dimensioned assembled and exploded drawings, parts and materials, cost estimate, assembly steps, blank results sheet), plus P1x3: three thrusters in a triangle with a 3-into-1 merge joint |
+| `cad/`, `prototypes/` | 3-D models, drawings, parts lists, cost estimate |
 | `data/`, `charts/`, `diagrams/` | Generated results and figures |
 | `docs/`, `experiments/`, `references/` | Write-ups, test plan, bibliography |
-| `tests/` | 14 automated verification tests |
+| `tests/` | 14 automated verification tests (run on every push) |
 
 ## Reproduce
 
@@ -146,17 +160,16 @@ done
 About 25 minutes on an 8-core CPU. No GPU needed.
 
 ## Limitations
-- **Nothing is validated against measurements yet.** The two most important tests are
-  back-flow (measure each collector's current separately) and sparkover voltage.
-- The space-charge solver treats emitters as continuous rings. Discrete needles are modelled
-  only without space charge.
-- Sparkover uses a simple average-field limit (0.7–1.4 kV/mm), and it dominates the absolute numbers.
-- Airflow losses from electrodes use rough engineering correlations. These decide which collector shape ranks best.
+- **Nothing is validated against measurements yet.**
+- The space-charge solver treats each needle ring as a continuous ring.
+- Sparkover uses a simple average-field limit (0.7–1.4 kV/mm). It sets the operating voltage, so it
+  dominates the absolute numbers. Measure it on the real parts.
+- Airflow losses from the electrodes are engineering estimates.
 - Humidity is covered only through the uncertainty ranges.
 
 ## Author and credits
 - **Author:** [roosterbrown14](https://github.com/roosterbrown14). Project concept, research brief and design direction.
-  The design log is in [docs/design_log.md](docs/design_log.md).
+  Design log: [docs/design_log.md](docs/design_log.md).
 - **AI assistance:** the modelling code, analysis, CAD and documentation were developed with the help of
   Claude (Anthropic), an AI assistant.
 - **Licence:** [MIT](LICENSE).

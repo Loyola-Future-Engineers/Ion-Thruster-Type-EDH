@@ -31,12 +31,12 @@ def device_convergence():
     dev = ref.device(2, gaps=[0.025] * 2, spacings=[0.05])
     rows = []
     for n_lines in (16, 24, 32, 48, 64, 96):
-        geo = D.analyse_geometry(dev, n_lines=n_lines, n_per=40)
+        geo = D.analyze_geometry(dev, n_lines=n_lines, n_per=40)
         r = D.evaluate(geo, 19e3)
         rows.append({"kind": "n_lines", "value": n_lines, "thrust_mN": r["thrust"] * 1e3,
                      "backflow": D.stage_current_split(geo, 1)["upstream"], "V0_kV": geo.onset[0] / 1e3})
     for n_per in (16, 24, 32, 40, 56, 72):
-        geo = D.analyse_geometry(dev, n_lines=48, n_per=n_per)
+        geo = D.analyze_geometry(dev, n_lines=48, n_per=n_per)
         r = D.evaluate(geo, 19e3)
         rows.append({"kind": "n_per", "value": n_per, "thrust_mN": r["thrust"] * 1e3,
                      "backflow": D.stage_current_split(geo, 1)["upstream"], "V0_kV": geo.onset[0] / 1e3})
@@ -49,7 +49,7 @@ def trend_checks():
     out = []
     for g in (0.02, 0.03, 0.04):
         dev = ref.device(1, gaps=[g])
-        geo = D.analyse_geometry(dev, n_lines=48)
+        geo = D.analyze_geometry(dev, n_lines=48)
         r = D.evaluate(geo, 20e3, iterate_flow=False)
         cur = {"gap_mm": g * 1e3, "onset_kV": geo.onset[0] / 1e3, "T_per_V": r["F_ehd"] / 20e3,
                "T_per_I": r["F_ehd"] / r["I"], "T_per_P": r["F_ehd"] / r["P"]}
@@ -70,7 +70,7 @@ def interactive_pareto():
     df = pd.read_csv(p)
     df["stages"] = df.n.astype(str) + "-stage"
     fig = px.scatter(df, x="thrust_mN", y="TP_mNW", color="stages", symbol="collector",
-                     hover_data=["gap_mm", "s_over_d", "dia_mm", "V_kV", "P_W", "Q_cfm", "length_mm"],
+                     hover_data=["gap_mm", "s_over_d", "dia_mm", "V_kV", "P_W", "Q_Ls", "length_mm"],
                      color_discrete_map={f"{n}-stage": COLORS[f"{n}-stage"] for n in (1, 2, 3)},
                      labels={"thrust_mN": "Net thrust (mN)", "TP_mNW": "Thrust/power (mN/W)"},
                      title="EHD design space (numerical simulation, unvalidated reduced-order model)")

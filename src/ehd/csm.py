@@ -190,7 +190,7 @@ def trace_field_lines(sol, emitter_index, n_lines=64, r_max=0.3, z_span=(-0.3, 0
 
     Returns dict with per-line flux weight, end electrode index (-1 = escaped),
     axial displacement dz and path length. All lines are advanced together with
-    a vectorised RK4 whose step scales with distance to the nearest electrode.
+    a vectorized RK4 whose step scales with distance to the nearest electrode.
     """
     pts, nrm, en, area = surface_field(sol, emitter_index, n_lines)
     w = np.maximum(en, 0) * area

@@ -1,17 +1,18 @@
 category,item,quantity_needed,suggested_purchase,indicative_cost_cad_low,indicative_cost_cad_high,notes
-Prototype parts,PETG or ASA filament,about 110 g printed,1 kg spool (or part of one),5,35,Only about 110 g is used; a full spool covers many reprints
-Prototype parts,Stainless steel needles (Ø0.8 mm),32,pack of 50+,10,20,Sewing/dispensing needles; check tip sharpness under magnification
-Prototype parts,Brass wire or tube for 2 mounting rings,about 250 mm,500 mm of 3 mm brass rod/wire,5,20,Bend and solder into rings or machine from tube
-Prototype parts,Aluminium tube Ø31 OD × 1 mm wall,20 mm,300 mm length,10,20,Cut two 10 mm rings; deburr and round edges
-Prototype parts,Brass terminal pins,4,small pack,5,10,Or use brass M2 screws
-Prototype parts,Nylon M3 threaded rod and nuts,3 × 156 mm + 6 nuts,1000 mm rod + pack of nuts,5,15,
-Prototype parts,PTFE or acetal rod Ø12 mm,3 × 100 mm,500 mm,15,35,For the insulating standoffs
+Prototype parts,PETG or ASA filament,about 110 g printed,part of a 1 kg spool,5,45,Low end = filament actually used; high end = a full spool
+Prototype parts,Stainless steel insect (entomology) pins Ø0.5–0.8 mm,32,pack of 100,10,25,Sharp stainless pins; drill the ring holes 0.02 mm over the pin diameter
+Prototype parts,Emitter mounting rings (3 mm brass),2,laser- or waterjet-cut from 3 mm brass sheet,20,60,Online cutting services ship in Canada; or machine from brass plate
+Prototype parts,Aluminum tube Ø30–32 mm OD × 1 mm wall,20 mm,300 mm length,10,25,Metric 30 × 1 or 32 × 1; imperial 1-1/4 in OD also works
+Prototype parts,Bare copper wire Ø0.8 mm,about 200 mm,small spool,5,10,Runs inside the spoke from the terminal pin to the emitter ring
+Prototype parts,Brass terminal pins (M2 screws or 2 mm banana jacks),4,small pack,5,10,
+Prototype parts,Nylon M3 threaded rod and nuts,3 × 156 mm + 6 nuts,1000 mm rod + pack of nuts,8,15,
+Prototype parts,PTFE or acetal rod Ø12 mm,3 × 100 mm,500 mm,15,40,For the insulating standoffs
 Prototype parts,Polycarbonate or acetal sheet 6 mm,140 × 140 mm,offcut,10,30,
-Prototype parts,Silicone HV wire (≥ 30 kV rated),about 500 mm,1000 mm,10,30,
-Prototype parts,Adhesive and abrasive paper,,,5,15,
-Test equipment,Current-limited regulated HV supply (≤ 30 kV),1,lab module,280,1850,Usually available in a university lab; do not use improvised supplies
-Test equipment,Precision balance (0.001 g),1,,280,920,Usually available in a university lab
-Test equipment,Ozone monitor,1,,90,560,
-Test equipment,Interlocked enclosure,1,build or adapt,55,220,
-Test equipment,Multimeters / shunts / spark-gap protection,,,55,280,
-Test equipment,Rated HV divider probe,1,,150,560,Optional if the supply has a calibrated monitor output
+Prototype parts,Silicone HV lead wire (rated ≥ 30 kV DC),about 1000 mm,1000 mm,10,30,From the supply to the outside terminal pin
+Prototype parts,Adhesive and abrasive paper,,,8,15,
+Test equipment,Current-limited regulated HV supply (≤ 30 kV),1,lab module,300,1850,Usually available in a university lab; never use an improvised supply
+Test equipment,Balance (0.01 g readability or better; ≥ 1 kg capacity),1,,150,600,Usually available in a university lab
+Test equipment,Ozone monitor,1,,100,550,
+Test equipment,Interlocked enclosure,1,build or adapt,60,220,
+Test equipment,Meters / shunts / spark-gap protection,,,60,280,
+Test equipment,Rated HV divider probe,1,,150,550,Optional if the supply has a calibrated monitor output

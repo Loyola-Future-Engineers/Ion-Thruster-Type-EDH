@@ -12,13 +12,13 @@ Scripts: `simulations/phase_c_geometry.py` (axisymmetric ring model) and
 
 ![diameters](../../charts/C1_ring_diameter_and_ratio.png)
 
-| Configuration | Thrust at max safe V (mN) | T/P (mN/W) | Flow (CFM) | Loss K |
+| Configuration | Thrust at max safe V (mN) | T/P (mN/W) | Flow (L/s) | Loss K |
 |---|---|---|---|---|
-| 1 stage, Dc/De = 20/30 | 5.5 | 5.0 | 5.1 | 0.39 |
-| 1 stage, Dc/De = 30/30 | 6.4 | 4.3 | 5.5 | 0.75 |
-| 1 stage, Dc/De = 36/30 | 6.2 | 3.9 | 5.4 | 1.07 |
-| 2 stage, Dc/De = 24/30 | 9.9 | 3.4 | 6.8 | 1.03 |
-| 2 stage, Dc/De = 30/30 | 9.8 | 3.0 | 6.8 | 1.51 |
+| 1 stage, Dc/De = 20/30 | 5.5 | 5.0 | 2.4 | 0.39 |
+| 1 stage, Dc/De = 30/30 | 6.4 | 4.3 | 2.6 | 0.75 |
+| 1 stage, Dc/De = 36/30 | 6.2 | 3.9 | 2.5 | 1.07 |
+| 2 stage, Dc/De = 24/30 | 9.9 | 3.4 | 3.2 | 1.03 |
+| 2 stage, Dc/De = 30/30 | 9.8 | 3.0 | 3.2 | 1.51 |
 
 - **Collector larger than emitter:** current rises (+9 % from 30 to 36 mm) because the collector
   presents more area to the corona, but thrust does not, because the extra ring
