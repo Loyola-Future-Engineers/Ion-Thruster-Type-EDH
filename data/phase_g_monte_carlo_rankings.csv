@@ -1,0 +1,5 @@
+,0
+P(TP 1st > 2st),1.0
+P(TP 2st > 3st),1.0
+P(thrust 2st > 1st),1.0
+P(thrust 3st > 2st),1.0
