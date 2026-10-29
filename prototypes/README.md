@@ -105,11 +105,14 @@ predictions treat each needle ring as a continuous ring, so expect differences. 
 | Thrust at 19.5 kV | ≈ 3 mN | |
 | Thrust/power at 19.5 kV | ≈ 2.3 mN/W | |
 
-## P1x3: triangular cluster with a 3-into-1 merge joint
+## P1x3: compact triangular cluster with a 3-into-1 merge joint
 
 Three identical P1 thrusters stand side by side with their axes on the corners of an
-equilateral triangle, on one shared base plate. A printed **merge joint** bolts onto all three
-exit rings through the existing tie rods and blends the three jets into a single outlet.
+equilateral triangle, **60 mm apart**. That leaves 14 mm between neighbouring housings. To pack
+them this close, the single-thruster tie-rod lugs are removed, and all three stacks are clamped
+between two shared plates by three nylon tie rods running through the gaps between the
+thrusters. Each thruster is turned so its high-voltage terminals face **outward**, away from its
+neighbours. A printed **merge joint** bolts onto the top plate and blends the three jets into one outlet.
 Design only: not built or tested. Regenerate with `.venv/bin/python prototypes/build_cluster.py`.
 
 | Cluster | With merge joint | Merge joint on its own |
@@ -120,27 +123,33 @@ Design only: not built or tested. Regenerate with `.venv/bin/python prototypes/b
 
 | Key dimension | Value (mm) |
 |---|---|
-| Distance between thruster axes | 92 (triangle circumradius 53.1) |
-| Joint inlets | 3 × Ø40, matching each thruster bore |
-| Joint outlet | Ø69.3, the same area as the three Ø40 bores combined, so the air neither speeds up nor slows down |
-| Joint height (flange + merge section + outlet) | 5 + 90 + 25 = 120 |
-| Joint wall | 2.5 |
-| Shared base plate | rounded triangle, 6 thick, three Ø64 air holes |
+| Distance between thruster axes | 60 (housings 14 apart) |
+| Shared inlet plate | 12 thick, three Ø40 inlets with R4 rounded entries |
+| Shared top plate | 6 thick |
+| Merge joint | 3 × Ø40 inlets → Ø69.3 outlet (same area as the three bores combined); 5 flange + 60 merge + 25 outlet = 90 tall; 2.5 wall |
+| Tie rods | 3 × M3 × 175, midway between neighbouring thrusters |
+| Base plate footprint | 140 × 132 |
 
-| Part | Qty | Material | Notes |
-|---|---|---|---|
-| P1 thruster (complete, without its own base plate) | 3 | as P1 | Each has its own supply connection and current measurement |
-| Merge joint | 1 | PETG or ASA (printed) | About 204 g. Print upright, with supports under the three flanges. |
-| Cluster base plate | 1 | Polycarbonate or acetal | Replaces the three single P1 base plates |
-| Tie rods | 9 | Nylon M3 | 7.4 mm longer than for a single P1, to pass through the joint flange |
-| Nuts | 9 | Nylon M3 | On top of the joint flange |
+| Part | Qty | Material | Mass (g) | Notes |
+|---|---|---|---|---|
+| P1 thruster stack (lug-free carriers and exit ring, plain inlet ring) | 3 | as P1 | — | Same internals as P1. Each keeps its own HV feed and current measurement. |
+| Shared inlet plate | 1 | PETG or ASA | 90 | Rounded inlets built in. M3 threads tapped for the tie rods. |
+| Shared top plate | 1 | PETG or ASA | 46 | |
+| Merge joint | 1 | PETG or ASA | 113 | Print upright, flange down |
+| Tie rods + nuts | 3 + 3 | Nylon M3 | — | |
+| Standoffs | 3 | PTFE or acetal | — | Ø10 × 100, under the tie rods |
+| Base plate | 1 | Polycarbonate or acetal | — | Three Ø48 air holes |
+
+**Checks** ([`P1x3_checks.txt`](P1x3_checks.txt)): no part overlaps. The closest high-voltage metal of
+one thruster is **34.6 mm** from grounded metal of another, above the 25 mm target for 19.5 kV
+(about 1 kV/mm sparkover with margin).
 
 Files: [`P1x3_cluster.stl`](P1x3_cluster.stl), [`P1x3_merge_joint.stl`](P1x3_merge_joint.stl),
+[`P1x3_inlet_plate.stl`](P1x3_inlet_plate.stl), [`P1x3_top_plate.stl`](P1x3_top_plate.stl),
 [`P1x3_cluster_with_joint.stl`](P1x3_cluster_with_joint.stl), interactive [`P1x3_viewer.html`](P1x3_viewer.html).
-Interference check: [`P1x3_interference.txt`](P1x3_interference.txt) (none found).
 
-**What to expect (not modelled).** Merging adds the three mass flows into one jet, but the
-joint's walls and the mixing of the three streams cost some thrust. The combined thrust will be
-somewhat **less than three times** a single P1. Use the joint when a single jet is needed, for
-example to feed a duct, rather than to gain thrust. Test each thruster alone first, then the
-cluster without the joint, then with it, so the joint's loss can be measured directly.
+**What to expect (not modelled).** Merging adds the three mass flows into one jet, but the joint's
+walls and the mixing of the streams cost some thrust. The combined thrust will be somewhat **less
+than three times** a single P1. Use the joint when a single jet is needed, for example to feed a
+duct, rather than to gain thrust. With the inlets 14 mm apart, the three thrusters also draw air
+from a shared region, so test each thruster alone first, then the cluster without the joint, then with it.

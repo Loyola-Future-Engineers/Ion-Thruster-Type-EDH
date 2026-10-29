@@ -42,6 +42,7 @@ class Cfg:
     carrier_t: float = 6.0          # axial thickness of carrier rings
     lug_r: float = 38.0             # tie-rod pitch radius (clears the inlet flare and standoffs)
     standoff_len: float = 100.0
+    lugs: bool = True               # False for clustered builds clamped by shared plates
 
 
 # --------------------------------------------------------------------------- helpers
@@ -76,6 +77,8 @@ def polar(m, n, phase=0.0):
 
 
 def lugs(c: Cfg, z0, z1, phase=90.0):
+    if not c.lugs:
+        return Manifold(), Manifold()
     lug = Manifold.cylinder(z1 - z0, 4.5, 4.5, 48).translate([c.lug_r, 0, z0])
     web = Manifold.cube([c.lug_r - c.bore_r, 6.0, z1 - z0]).translate([c.bore_r + c.wall - 1, -3.0, z0])
     hole = Manifold.cylinder(z1 - z0 + 2, 1.7, 1.7, 32).translate([c.lug_r, 0, z0 - 1])

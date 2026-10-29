@@ -1,2 +1,0 @@
-Pairwise overlap check of 168 placed parts (tolerance 0.5 mm3)
-No interferences found.
