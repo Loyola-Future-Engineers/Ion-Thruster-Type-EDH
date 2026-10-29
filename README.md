@@ -14,6 +14,52 @@ air is accelerated through the middle.
 
 ![two-stage section](diagrams/two_stage_section.png)
 
+## Summary: what makes the best and most efficient EHD thruster
+
+All of this comes from this project's models (not yet tested on hardware) and the cited literature.
+
+### The one rule behind everything
+For every ion that crosses the gap, the push on the air is fixed by how far it travels along the
+axis. The power it costs is fixed by the voltage it falls through:
+
+```
+thrust / power  =  (axial distance the ions travel) / (ion mobility × voltage)
+```
+
+So **efficiency wants long gaps at low voltage, and thrust wants high voltage and high current.**
+You cannot maximise both. Every design choice below either moves you along that trade-off or stops
+you wasting power on top of it.
+
+### The factors, in order of importance
+
+| # | Factor | Best choice | Why it matters | Confidence |
+|---|---|---|---|---|
+| 1 | **Spacing between stages** | At least **3× the electrode gap** | Ions from a later emitter drift *backwards* to the previous collector and push the air the wrong way. Back-flow is 49 % of the current at 1× the gap, 16 % at 2×, 6 % at 3×. | High (space-charge solver), needs measurement |
+| 2 | **Electrode gap** | The **largest gap your supply can drive to about 85 % of sparkover**. About 30–35 mm for a 30 kV supply. | A longer gap gives more thrust per watt. Beyond what the supply can drive, thrust collapses. | High for the trend; the exact value depends on the measured sparkover |
+| 3 | **Operating voltage** | Lower voltage for efficiency, up to the 85 %-of-sparkover limit for thrust | Sets where you sit on the thrust/efficiency trade-off | Physics |
+| 4 | **Number of stages** | **1 stage** for best efficiency. **2 stages** for the best balance. **3 only if thrust matters more than power and length.** | Extra stages add thrust at the same voltage, but each costs more power than it returns (third stage: +20 % thrust for +53 % power) | High in the models |
+| 5 | **Emitter sharpness** | Fine tips or wire (about 50 µm radius or less) | Sharper tips start the corona at lower voltage, which widens the usable voltage window | High (Peek's law) |
+| 6 | **Pin count** | Pin spacing about equal to pin length. That is **12–16 pins on a 30 mm ring**. | More pins add current until neighbouring pins shield each other. Beyond that, more pins make it worse. | Medium (trend robust, optimum approximate) |
+| 7 | **Pin direction** | **Axial** (pointing downstream) for thrust. **Radial** for about 30 % better thrust per watt. Never pointing inward. | Radial tips keep the full axial travel distance. Axial tips are closer to the collector, so they draw more current. | Medium |
+| 8 | **Collector shape** | A **thin, smooth tube aligned with the flow**, edges well rounded | Electrically, collector types differ by only about 12 %. What matters is how much they block the air. A mesh gains nothing electrically. | Medium (flow-loss values assumed) |
+| 9 | **Ring diameters** | Emitter ring as large as the bore allows, with wall clearance. Collector the same size or slightly smaller. | A bigger ring means more emitting length and more current. A larger collector only blocks more flow. | Medium |
+| 10 | **Housing** | An **insulating** (plastic) tube. **Never a metal one.** | The plastic tube adds about 7 % force and makes behaviour predictable. A grounded metal tube would arc to the emitter. | High |
+| 11 | **Gap per stage** | Equal gaps on one shared supply. Decreasing gaps (for example 32/18/12 mm) only with a separate supply per stage. | With one supply, the smallest gap limits every stage's voltage | Medium |
+| 12 | **Air conditions** | Dense, cool air. Expect less in heat or at altitude. | About −24 % thrust at 90 kPa (about 1 km altitude). Humidity changes sparkover. | Medium |
+| 13 | **Electrode material** | Choose for durability (stainless needles, aluminium collectors), not conductivity | Electrode resistance wastes about 10⁻⁸ of the power. Sharp copper tips blunt and tarnish. | High |
+| 14 | **Inlet and obstructions** | Rounded inlet, thin spokes, nothing extra in the bore | Every obstruction converts thrust into pressure loss | Medium |
+
+### Two recipes
+
+| Goal | Configuration | Model estimate* |
+|---|---|---|
+| **Most efficient** | 1 stage, 30–35 mm gap, 16 radial needles (wider bore needed) or a fine wire ring, tube collector, run just above corona onset | About 3–10 mN/W (the two models disagree most near onset), but very little thrust (under 1 mN) |
+| **Best balance** (recommended build) | 2 stages, 25 mm gaps, 75 mm stage spacing, 16 axial stainless needles, aluminium tube collectors, 40 mm plastic bore, one 30 kV supply at 85 % of sparkover | About 3 mN at about 1.3 W (about 2 mN/W) |
+
+\*Space-charge-corrected where available. Real hardware could differ by 2–3×. The first two tests
+to run are back-flow (current measured on each collector separately) and sparkover voltage
+(`experiments/test_plan.md`).
+
 ## Engineering objectives
 Maximise useful airflow and thrust while keeping thrust per watt reasonable. Choose between
 two and three stages. Pick electrode spacing, diameters, pin layout and materials. Do this
