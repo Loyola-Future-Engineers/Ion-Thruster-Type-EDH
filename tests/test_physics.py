@@ -117,3 +117,18 @@ def test_experiment_reduction_refuses_empty_template_and_propagates_uncertainty(
     assert out.thrust_mN == pytest.approx(0.1 * 9.80665, rel=1e-6)
     assert out.P_W == pytest.approx(2.0)
     assert out.U_thrust_mN > 0
+
+
+def test_spacecharge_solver_matches_exact_coaxial_solution():
+    from ehd import spacecharge as S
+    a, R, L, V = 2e-4, 0.02, 0.004, 20e3
+    E_on = float(corona.peek_field_wire(a)); v0 = E_on * a * np.log(R / a)
+    r = S.graded_axis(0, R * 1.05, [(0, a / 8), (a, a / 8), (R, R / 200)], h_max=R / 60, growth=0.08)
+    g = S.Grid(r, np.linspace(0, L, 9))
+    els = [csm.Electrode("W", a / 2, L / 2, a / 2, L, 0, 1.0, "emitter"),
+           csm.Electrode("O", R + 0.5 * (r[-1] - R), L / 2, 0.5 * (r[-1] - R) + 1e-9, L, 0, 0.0, "collector")]
+    res = S.SpaceChargeSolver(g, els, neumann_z=True).solve({0: V, 1: 0.0}, {0: v0})
+    I = res["currents"][("emit", 0)] / L
+    assert I == pytest.approx(S.coax_reference(V, a, R, E_on), rel=0.03)
+    # charge conservation: everything emitted is collected
+    assert res["currents"][("recv", 1)] == pytest.approx(res["currents"][("emit", 0)], rel=1e-6)

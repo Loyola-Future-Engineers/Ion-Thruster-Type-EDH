@@ -28,6 +28,7 @@ COLORS = {
 
 SOURCE_TAGS = {
     "sim": "Source: numerical simulation, reduced-order CSM + Townsend model (unvalidated)",
+    "sc": "Source: numerical simulation, self-consistent axisymmetric space-charge solver (verified vs exact coax; not validated by experiment)",
     "analytic": "Source: analytical calculation",
     "qual": "Source: qualitative engineering assessment (not measured data)",
     "illus": "Source: illustrative hypothetical example",
