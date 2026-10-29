@@ -47,6 +47,17 @@ Full answers to all 16 research questions, with starting configurations:
 Every chart is in `charts/` as PNG and SVG. An interactive design-space explorer is in
 `charts/interactive_pareto.html`.
 
+## 3-D design
+
+Every part of the recommended build is modelled in [`cad/`](cad/README.md): printed housing
+sections, electrode carriers, brass emitter ring, stainless needles, aluminium collector tubes,
+terminals, tie rods and an insulating test stand. Each part is a watertight STL, with 2- and 3-stage
+assemblies, interactive viewers and a bill of materials. It is a design proposal and has not been built.
+
+| | |
+|---|---|
+| ![](diagrams/cad_2stage_section.png) | ![](diagrams/cad_2stage_exterior.png) |
+
 ## Physics and models in one paragraph
 Positive corona at the emitter creates ions. In the drift region they move at `mu E` and pass
 their momentum to neutral air. For each ion flux tube, the force is exactly `dI · dz / mu`, where
@@ -68,6 +79,7 @@ checks the reduced model. Navier–Stokes flow is **not** modelled. See [physics
 | `data/` | CSV output of every study |
 | `charts/`, `diagrams/` | Generated figures (PNG + SVG) |
 | `docs/` | Physics, literature review, methodology, results per phase, recommendations, safety, environment |
+| `cad/` | Parametric 3-D models of every part (STL), assemblies, interactive viewers, bill of materials |
 | `experiments/` | Test plan, CSV templates, uncertainty-reduction script (no data yet) |
 | `references/` | Crossref-generated BibTeX and its build script |
 | `tests/` | Verification tests (`pytest`) |

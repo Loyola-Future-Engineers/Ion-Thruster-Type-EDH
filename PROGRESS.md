@@ -24,6 +24,7 @@ Read this first when resuming. Last updated 2026-10-28.
 10. Verification and convergence (V1). Trend check against Masuyama & Barrett 2013.
 11. Experimental test plan, CSV templates, GUM reduction script. HV safety document.
 12. Engineering diagrams, recommendations, README.
+14. 3-D CAD (`cad/build.py`): 13 unique parts as STL, 2- and 3-stage assemblies, viewers, BOM, interference check (none).
 13. Phase H: self-consistent axisymmetric space-charge solver. Verified vs exact coax. Back-flow, stage count, housing, charge-density map. Corrected the spacing rule to s ≥ 3d and absolute numbers (about 3× lower).
 
 ## Important findings (model-based, unvalidated)
